@@ -19,7 +19,6 @@ By the end of Week 9, this app will, at a minimum, satisfy the following criteri
   10. Bonus: full-text editing
 
 
-
 ## Design Docs
 * [View Wireframes][wireframes]
 * [React Components][components]
@@ -27,11 +26,11 @@ By the end of Week 9, this app will, at a minimum, satisfy the following criteri
 * [DB schema][schema]
 * [Sample State][sample-state]
 
-[wireframes]: docs/wireframes
-[components]: docs/component-hierarchy.md
-[sample-state]: docs/sample-state.md
-[api-endpoints]: docs/api-endpoints.md
-[schema]: docs/schema.md
+[wireframes]: wireframes
+[components]: component-hierarchy.md
+[sample-state]: sample-state.md
+[api-endpoints]: api-endpoints.md
+[schema]: schema.md
 
 ## Implementation Timeline
 
