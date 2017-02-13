@@ -17,6 +17,7 @@ By the end of Week 9, this app will, at a minimum, satisfy the following criteri
   8. Bonus: SEARCH
   9. Bonus: TAGS
   10. Bonus: full-text editing
+  11. Bonus: user display
 
 
 ## Design Docs
@@ -37,3 +38,31 @@ By the end of Week 9, this app will, at a minimum, satisfy the following criteri
 ### Phase 1: Backend setup and Front End User Authentication (2 days)
 
 **Objective:** Functioning rails project with front-end Authentication and great style!
+
+### Phase 2: adding tracks/storis (1 day)
+
+**Objective** can add and view tracks through api.
+
+### Phase 3: annotations (2 days)
+
+**Objective** can create, update, and destroy annotations through api.
+
+### Phase 4: comments (1 day)
+
+**Objective** can create, update, and destroy comments through api.
+
+### Phase 5: upvotes (1 day)
+
+**Objective** can create upvotes on comments and annotations
+
+### Phase 6: top tracks(1 day)
+
+**Objective** can view toptracks on table on front page
+
+## Bonus Features:
+
+- [ ] User display
+- [ ] SEARCH
+- [ ] TAGS
+- [ ] full-text editing
+- [ ] Artist display
