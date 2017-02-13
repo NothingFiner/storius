@@ -41,7 +41,7 @@ user_id         | integer   | not null, indexed, foreign key(users)
 annotation_id   | integer   | not null, indexed, foreign key(annotations)
 
 
-not sure if there should be two kinds of upvotes?
+not sure if there should be two kinds of upvotes: one for annotations and one for comments? Genius has pyongs which function as upvotes for tracks/storis. Shoud I do that too?
 
 ## upvotes
 column name     | data type | details
