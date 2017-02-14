@@ -3,10 +3,11 @@ module.exports = {
     "plugins": [
         "react",
         "jsx-a11y",
-        "import"
+        "import",
     ],
     "globals": {
       "window": true,
       "document": true,
+      "$": true,
     }
 };
