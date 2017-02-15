@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import AuthForm from './auth_form';
 
 const customStyles = {
   content: {
@@ -16,22 +17,24 @@ class AuthModal extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      modalIsOpen: false,
-    };
-
     Modal.setAppElement('#root');
-
     this.afterOpenModal = this.afterOpenModal.bind(this);
   }
 
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.refs.subtitle.style.color = '#f00';
+  }
+
+  submitHandler() {
+    return this.props.formType === 'login' ? this.props.login : this.props.signup;
   }
 
   render() {
+    if (this.props.currentUser !== null) {
+      return null;
+    }
+    const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <div>
         <Modal
@@ -41,14 +44,30 @@ class AuthModal extends React.Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
-          <h2 ref="subtitle">Hello</h2>
           <button onClick={this.props.toggleAuthModal}>close</button>
-          <div>{this.props.formType}</div>
+          <h3>{ this.props.formType }</h3>
+          <ul>
+            { errors }
+          </ul>
+          <AuthForm
+            formType={this.props.formType}
+            setAuthFormType={this.props.setAuthFormType}
+            submitHandler={this.submitHandler()}
+          />
         </Modal>
       </div>
     );
   }
 }
+
+AuthModal.propTypes = {
+  formType: React.PropTypes.string.isRequired,
+  errors: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  setAuthFormType: React.PropTypes.func.isRequired,
+  toggleAuthModal: React.PropTypes.func.isRequired,
+  modalIsOpen: React.PropTypes.bool.isRequired,
+  login: React.PropTypes.func.isRequired,
+  signup: React.PropTypes.func.isRequired,
+};
 
 export default AuthModal;
