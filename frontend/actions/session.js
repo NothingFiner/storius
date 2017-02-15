@@ -3,6 +3,7 @@ import * as APISessionUtil from '../util/session_api';
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const TOGGLE_AUTH_MODAL = 'TOGGLE_AUTH_MODAL';
+export const SET_AUTH_FORM_TYPE = 'SET_AUTH_FORM_TYPE';
 
 export const receiveErrors = errors => ({
   type: RECEIVE_ERRORS,
@@ -14,9 +15,13 @@ export const receiveCurrentUser = currentUser => ({
   currentUser,
 });
 
-export const toggleAuthModal = modalIsOpen => ({
+export const toggleAuthModal = () => ({
   type: TOGGLE_AUTH_MODAL,
-  modalIsOpen,
+});
+
+export const setAuthFormType = formType => ({
+  type: SET_AUTH_FORM_TYPE,
+  formType,
 });
 
 export const login = user => dispatch => (

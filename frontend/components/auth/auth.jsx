@@ -44,7 +44,7 @@ class AuthModal extends React.Component {
 
           <h2 ref="subtitle">Hello</h2>
           <button onClick={this.props.toggleAuthModal}>close</button>
-          <div>I am a modal</div>
+          <div>{this.props.formType}</div>
         </Modal>
       </div>
     );
