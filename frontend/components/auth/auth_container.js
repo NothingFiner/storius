@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Auth from './auth';
-import { toggleAuthModal, setAuthFormType } from '../../actions/session';
+import { toggleAuthModal, setAuthFormType, signup, login } from '../../actions/session';
 
 
 const mapStateToProps = ({ session }) => ({
@@ -12,7 +12,9 @@ const mapStateToProps = ({ session }) => ({
 
 const mapDispatchToProps = dispatch => ({
   toggleAuthModal: () => dispatch(toggleAuthModal()),
-  setAuthFormType: () => dispatch(setAuthFormType()),
+  setAuthFormType: formType => dispatch(setAuthFormType(formType)),
+  login: user => dispatch(login(user)),
+  signup: user => dispatch(signup(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
