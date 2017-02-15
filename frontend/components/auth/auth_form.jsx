@@ -45,9 +45,9 @@ class AuthForm extends React.Component {
     if (this.props.formType === 'signup') {
       return (
         <div className="form-group">
-          <label htmlFor="email">email</label>
           <input
-            className="form-control"
+            placeholder="Email"
+            className="width-full margin-bottom-1rem"
             onChange={this.update('email')}
             type="email"
             id="email"
@@ -64,9 +64,9 @@ class AuthForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">username</label>
             <input
-              className="form-control"
+              placeholder="Username"
+              className="width-full margin-top-1rem  margin-bottom-1rem"
               onChange={this.update('username')}
               type="text"
               id="username"
@@ -75,18 +75,25 @@ class AuthForm extends React.Component {
           </div>
           { this.signupField() }
           <div className="form-group">
-            <label htmlFor="password">password</label>
             <input
-              className="form-control"
+              placeholder="Password"
+              className="width-full margin-bottom-1rem"
               onChange={this.update('password')}
               type="password"
               id="password"
               value={this.state.password}
             />
           </div>
-          <button className="btn btn-square">{this.props.formType}</button>
+          <button className="btn btn-square">
+            {this.props.formType === 'login' ? 'Log In' : 'Sign Up'}
+          </button>
         </form>
-        <button onClick={this.switchForm}>{this.otherAuth()}</button>
+        <button
+          className="margin-top-1rem text-lbl-btn"
+          onClick={this.switchForm}
+        >
+          {this.otherAuth() === 'login' ? 'ALREADY HAVE AN ACCOUNT? SIGN IN HERE' : 'CREATE AN ACCOUNT'}
+        </button>
       </div>
     );
   }

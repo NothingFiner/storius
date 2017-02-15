@@ -14,8 +14,8 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
   };
   const AuthActions = () => (
     <div>
-      <button className="header-action" onClick={openLogin}>Log In</button>
-      <button className="header-action" onClick={openSignup}>Sign Up</button>
+      <a className="header-action" onClick={openLogin}>Log In</a>
+      <a className="header-action" onClick={openSignup}>Sign Up</a>
     </div>
   );
   const UserActions = () => (
@@ -24,6 +24,7 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
   return (
     <div className="header">
       <header className="header-primary">
+        <input className="header-searchbar" type="text" placeholder="SEARCH" />
         <div className="logo-link">
           <Link to="/" className="logo-link">
             STORIUS
