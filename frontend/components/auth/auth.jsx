@@ -3,13 +3,24 @@ import Modal from 'react-modal';
 import AuthForm from './auth_form';
 
 const customStyles = {
+  overlay : {
+    position          : 'fixed',
+    top               : 0,
+    left              : 0,
+    right             : 0,
+    bottom            : 0,
+    backgroundColor   : 'rgba(0, 0, 0, 0.65)'
+  },
   content: {
-    top: '50%',
+    top: '25%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    background: '#e9e9e9',
+    width: '450px',
+    'border-radius': '0',
   },
 };
 
@@ -44,8 +55,7 @@ class AuthModal extends React.Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <button onClick={this.props.toggleAuthModal}>close</button>
-          <h3>{ this.props.formType }</h3>
+          <h3 className="form-header">{ this.props.formType === 'login' ? 'LOG IN TO ' : 'SIGN UP FOR ' }STORIUS</h3>
           <ul>
             { errors }
           </ul>
