@@ -1,9 +1,10 @@
 import { merge } from 'lodash';
-import { RECEIVE_ERRORS, RECEIVE_CURRENT_USER } from '../actions/session';
+import { RECEIVE_ERRORS, RECEIVE_CURRENT_USER, TOGGLE_AUTH_MODAL } from '../actions/session';
 
 const defaultSession = {
   currentUser: null,
   errors: [],
+  modalIsOpen: false,
 };
 
 const SessionReducer = (state = defaultSession, action) => {
@@ -15,6 +16,9 @@ const SessionReducer = (state = defaultSession, action) => {
       return newState;
     case RECEIVE_ERRORS:
       newState.errors = action.errors.responseJSON;
+      return newState;
+    case TOGGLE_AUTH_MODAL:
+      newState.modalIsOpen = !state.modalIsOpen;
       return newState;
     default:
       return state;
