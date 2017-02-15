@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { logout, toggleAuthModal } from '../../actions/session';
+import { logout, toggleAuthModal, setAuthFormType } from '../../actions/session';
 import Header from './header';
 
 const mapStateToProps = ({ session }) => ({
@@ -11,6 +11,7 @@ const mapStateToProps = ({ session }) => ({
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   toggleAuthModal: () => dispatch(toggleAuthModal()),
+  setAuthFormType: formType => dispatch(setAuthFormType(formType)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
