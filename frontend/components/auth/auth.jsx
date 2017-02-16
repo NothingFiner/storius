@@ -70,7 +70,7 @@ class AuthModal extends React.Component {
             className="margin-top-1rem btn btn-square btn-auth"
           >
             <i className="fa fa-user-circle-o" />
-            Login As Guest
+            Guest Login
           </button>
           <ul className="form-header">
             { errors }
