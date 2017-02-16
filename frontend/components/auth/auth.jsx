@@ -30,16 +30,22 @@ class AuthModal extends React.Component {
 
     Modal.setAppElement('#root');
     this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.onRequestClose = this.onRequestClose.bind(this);
   }
 
+  onRequestClose() {
+    this.close.style.display = 'none';
+    this.props.toggleAuthModal();
+  }
 
   afterOpenModal() {
-    // references are now sync'd and can be accessed.
+    this.close.style.display = 'block';
   }
 
   submitHandler() {
     return this.props.formType === 'login' ? this.props.login : this.props.signup;
   }
+
 
   render() {
     if (this.props.currentUser !== null) {
@@ -48,10 +54,15 @@ class AuthModal extends React.Component {
     const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <div>
+        <button
+          ref={(c) => { this.close = c; }}
+          onClick={this.onRequestClose}
+          className="fa fa-close modal-close"
+        />
         <Modal
           isOpen={this.props.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.props.toggleAuthModal}
+          onRequestClose={this.onRequestClose}
           style={customStyles}
           contentLabel="Example Modal"
         >
