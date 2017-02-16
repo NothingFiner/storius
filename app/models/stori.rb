@@ -1,0 +1,2 @@
+class Stori < ApplicationRecord
+end
