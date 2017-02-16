@@ -15,12 +15,23 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
   const AuthActions = () => (
     <div>
       <span className="header-action" onClick={openLogin}>Log In</span>
-      <p className="header-action" onClick={openSignup}>Sign Up</p>
+      <span className="header-action" onClick={openSignup}>Sign Up</span>
     </div>
   );
   const UserActions = () => (
-    <a className="header-action" onClick={logout}>Sign Out</a>
+    <span className="header-action" onClick={logout}>Sign Out</span>
   );
+  const UserNav = () => {
+    if (currentUser !== null) {
+      return (
+        <div>
+          <Link to="/new">add a stori</Link>
+          <span>|</span>
+        </div>
+      );
+    }
+    return null;
+  };
   return (
     <div className="header">
       <header className="header-primary">
@@ -35,7 +46,13 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
         </div>
       </header>
       <header className="header-nav">
-
+        <a>top songs</a>
+        <span>|</span>
+        { UserNav() }
+        <i className="fa fa-facebook" />
+        <i className="fa fa-twitter" />
+        <i className="fa fa-instagram" />
+        <i className="fa fa-youtube-play" />
       </header>
     </div>
   );
