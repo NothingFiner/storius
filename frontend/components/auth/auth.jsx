@@ -29,21 +29,16 @@ class AuthModal extends React.Component {
     super();
 
     Modal.setAppElement('#root');
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.onRequestClose = this.onRequestClose.bind(this);
-  }
-
-  onRequestClose() {
-    this.close.style.display = 'none';
-    this.props.toggleAuthModal();
-  }
-
-  afterOpenModal() {
-    this.close.style.display = 'block';
+    this.loginGuest = this.loginGuest.bind(this);
   }
 
   submitHandler() {
     return this.props.formType === 'login' ? this.props.login : this.props.signup;
+  }
+
+  loginGuest() {
+    const guest = { username: 'guest', password: 'elierules' };
+    this.props.login(guest).then(this.props.toggleAuthModal());
   }
 
 
@@ -51,23 +46,33 @@ class AuthModal extends React.Component {
     if (this.props.currentUser !== null) {
       return null;
     }
+    const buttonStyle = {
+      display: this.props.modalIsOpen ? 'block' : 'none',
+    };
     const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <div>
         <button
-          ref={(c) => { this.close = c; }}
-          onClick={this.onRequestClose}
+          style={buttonStyle}
+          onClick={this.props.toggleAuthModal}
           className="fa fa-close modal-close"
         />
         <Modal
           isOpen={this.props.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.onRequestClose}
+          onRequestClose={this.props.toggleAuthModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
           <h3 className="form-header">{ this.props.formType === 'login' ? 'LOG IN TO ' : 'SIGN UP FOR ' }STORIUS</h3>
-          <ul>
+          <button
+            onClick={this.loginGuest}
+            className="margin-top-1rem btn btn-square btn-auth"
+          >
+            <i className="fa fa-user-circle-o" />
+            Login As Guest
+          </button>
+          <ul className="form-header">
             { errors }
           </ul>
           <AuthForm

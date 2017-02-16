@@ -19,7 +19,10 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
     </div>
   );
   const UserActions = () => (
-    <span className="header-action" onClick={logout}>Sign Out</span>
+    <div>
+      <span>{currentUser.username}</span>
+      <span className="header-action" onClick={logout}>Sign Out</span>
+    </div>
   );
   const UserNav = () => {
     if (currentUser !== null) {
