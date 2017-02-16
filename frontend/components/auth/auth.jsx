@@ -3,13 +3,13 @@ import Modal from 'react-modal';
 import AuthForm from './auth_form';
 
 const customStyles = {
-  overlay : {
-    position          : 'fixed',
-    top               : 0,
-    left              : 0,
-    right             : 0,
-    bottom            : 0,
-    backgroundColor   : 'rgba(0, 0, 0, 0.65)'
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.65)',
   },
   content: {
     top: '25%',
@@ -20,7 +20,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     background: '#e9e9e9',
     width: '450px',
-    'border-radius': '0',
+    borderRadius: '0',
   },
 };
 
@@ -63,6 +63,7 @@ class AuthModal extends React.Component {
             formType={this.props.formType}
             setAuthFormType={this.props.setAuthFormType}
             submitHandler={this.submitHandler()}
+            toggleAuthModal={this.props.toggleAuthModal}
           />
         </Modal>
       </div>
@@ -78,6 +79,16 @@ AuthModal.propTypes = {
   modalIsOpen: React.PropTypes.bool.isRequired,
   login: React.PropTypes.func.isRequired,
   signup: React.PropTypes.func.isRequired,
+  currentUser: React.PropTypes.shape({
+    id: React.PropTypes.integer,
+    username: React.PropTypes.string,
+    email: React.PropTypes.string,
+    bio: React.PropTypes.string,
+  }),
+};
+
+AuthModal.defaultProps = {
+  currentUser: null,
 };
 
 export default AuthModal;

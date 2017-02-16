@@ -14,12 +14,12 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
   };
   const AuthActions = () => (
     <div>
-      <a className="header-action" onClick={openLogin}>Log In</a>
-      <a className="header-action" onClick={openSignup}>Sign Up</a>
+      <span className="header-action" onClick={openLogin}>Log In</span>
+      <p className="header-action" onClick={openSignup}>Sign Up</p>
     </div>
   );
   const UserActions = () => (
-    <button onClick={logout}>Sign Out</button>
+    <a className="header-action" onClick={logout}>Sign Out</a>
   );
   return (
     <div className="header">
@@ -34,6 +34,9 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
           { currentUser === null ? AuthActions() : UserActions() }
         </div>
       </header>
+      <header className="header-nav">
+
+      </header>
     </div>
   );
 };
@@ -42,6 +45,16 @@ Header.propTypes = {
   logout: React.PropTypes.func.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
   setAuthFormType: React.PropTypes.func.isRequired,
+  currentUser: React.PropTypes.shape({
+    id: React.PropTypes.integer,
+    username: React.PropTypes.string,
+    email: React.PropTypes.string,
+    bio: React.PropTypes.string,
+  }),
+};
+
+Header.defaultProps = {
+  currentUser: null,
 };
 
 export default Header;

@@ -19,12 +19,14 @@ class AuthForm extends React.Component {
     if (this.isSignup()) {
       user.email = this.state.email;
     }
-    this.props.submitHandler(user);
+    this.props.submitHandler(user).then(() => {
+      this.props.toggleAuthModal();
+    });
   }
 
   update(field) {
     return e => this.setState({
-      [field]: e.currentTarget.value
+      [field]: e.currentTarget.value,
     });
   }
 
@@ -103,6 +105,7 @@ AuthForm.propTypes = {
   formType: React.PropTypes.string.isRequired,
   setAuthFormType: React.PropTypes.func.isRequired,
   submitHandler: React.PropTypes.func.isRequired,
+  toggleAuthModal: React.PropTypes.func.isRequired,
 };
 
 export default AuthForm;
