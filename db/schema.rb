@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214191920) do
+ActiveRecord::Schema.define(version: 20170216194523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "storis", force: :cascade do |t|
+    t.string   "title",                         null: false
+    t.string   "author",                        null: false
+    t.text     "content",                       null: false
+    t.string   "image_url"
+    t.string   "header_image_url"
+    t.text     "tags",             default: [],              array: true
+    t.json     "audio_video",      default: {}
+    t.json     "metadata",         default: {}
+    t.integer  "user_id",                       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["author"], name: "index_storis_on_author", using: :btree
+    t.index ["title", "author"], name: "index_storis_on_title_and_author", unique: true, using: :btree
+    t.index ["title"], name: "index_storis_on_title", using: :btree
+    t.index ["user_id"], name: "index_storis_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
