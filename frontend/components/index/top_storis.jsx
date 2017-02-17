@@ -44,7 +44,7 @@ const TopStoris = ({ storis }) => {
     ))
   );
   return (
-    <div className="top-stori-container">
+    <div id="topStoris" className="top-stori-container">
       <div className="column">
         <h3 className="margin-bottom-1rem">Top Storis</h3>
       </div>
