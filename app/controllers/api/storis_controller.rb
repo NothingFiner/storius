@@ -31,6 +31,6 @@ class Api::StorisController < ApplicationController
 
   private
   def stori_params
-    params.require(:stori).permit(:title, :author, :content, :metadata, { audio_video: :soundcloud, :youtube }, :image_url, :header_image_url, :tags )
+    params.require(:stori).permit(:title, :author, :content, :metadata, { audio_video: [:soundcloud, :youtube] }, :image_url, :header_image_url, :tags )
   end
 end
