@@ -2,4 +2,22 @@
   display: flex
   justify-content: flex-start
   padding-left: 1rem
-  padding-right: 1rem 
+  padding-right: 1rem
+
+.column
+  max-width: 1000px
+  width: 100%
+  margin: 0 auto
+  display: flex
+  &:first-child
+    padding-left: 0
+  .three-quarter
+    width: 75%
+  .quarter
+    width: 75%
+  .half
+    width: 50%
+
+.row
+  display: flex
+  align-items: center

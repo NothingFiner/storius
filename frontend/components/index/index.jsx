@@ -9,10 +9,10 @@ class Index extends React.Component {
   render() {
     return (
       <div>
-        <section className="container">
+        <section className="container bg-white">
           <h1>Every Song is a Stori, everything is a Stori!</h1>
         </section>
-        <section className="container">
+        <section>
           <TopStoris storis={this.props.storis} />
         </section>
       </div>
