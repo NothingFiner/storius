@@ -25,7 +25,7 @@ const TopStoris = ({ storis }) => {
       classNames = classNames.concat(' big-border-top');
     }
     return (
-      <Link className={classNames}>
+      <Link className={classNames} to={`storis/${stori.id}`}>
         <div className="stori-number">
           <h3>{i + 1}</h3>
         </div>
