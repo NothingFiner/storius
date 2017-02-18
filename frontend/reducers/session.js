@@ -22,6 +22,7 @@ const SessionReducer = (state = defaultSession, action) => {
       newState.modalIsOpen = !state.modalIsOpen;
       return newState;
     case SET_AUTH_FORM_TYPE:
+      newState.errors = [];
       newState.formType = action.formType;
       return newState;
     default:
