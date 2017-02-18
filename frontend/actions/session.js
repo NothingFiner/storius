@@ -1,14 +1,9 @@
 import * as APISessionUtil from '../util/session_api';
+import { receiveErrors } from './errors';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
-export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const TOGGLE_AUTH_MODAL = 'TOGGLE_AUTH_MODAL';
 export const SET_AUTH_FORM_TYPE = 'SET_AUTH_FORM_TYPE';
-
-export const receiveErrors = errors => ({
-  type: RECEIVE_ERRORS,
-  errors,
-});
 
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,

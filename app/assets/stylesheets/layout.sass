@@ -1,0 +1,64 @@
+.container
+  display: flex
+  justify-content: flex-start
+  padding-left: 1rem
+  padding-right: 1rem
+
+.column
+  max-width: 1000px
+  width: 100%
+  margin: 0 auto
+  display: flex
+  flex-wrap: wrap
+  &:first-child
+    padding-left: 0
+  .three-quarter
+    width: 75%
+  .quarter
+    width: 75%
+  .half
+    width: 50%
+  .primary
+    width: 58%
+    padding: 0 1rem
+  .secondary
+    width: 42%
+    padding-right: 1rem
+
+.row
+  display: flex
+  align-items: center
+
+//stori
+.stori-header
+  background-color: $black-font
+  color: $white
+  .inner
+    padding: 2.25rem 0 1.5rem 0
+    background: rgba(0,0,0,.35)
+    h1
+      color: $brand-yellow
+      font-size: 2.25rem
+    h2
+      font-size: 1.5rem
+    .art
+      width: 40%
+      background: $black
+      margin-left: -2.25rem
+      margin-right: 1rem
+      border: 1px solid #333
+      height: 217px
+      float: left
+
+.stori-content
+  h3
+    color: $brand-md-gray
+    margin-top: 1rem
+    user-select: none
+    cursor:default
+  .text
+    margin-top: 1.5rem
+    font-size: 1.125rem
+    word-wrap: break-word
+    word-break: break-word
+    line-height: 1.7
