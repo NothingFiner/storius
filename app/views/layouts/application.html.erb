@@ -3,9 +3,14 @@
   <head>
     <title>Storius</title>
     <%= csrf_meta_tags %>
-
+    <link href="https://fonts.googleapis.com/css?family=Rubik|Space+Mono" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <% if logged_in? %>
+      <script type="text/javascript">
+        window.currentUser = <%= current_user.to_json.html_safe %>
+      </script>
+    <% end %>
   </head>
 
   <body>

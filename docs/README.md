@@ -3,6 +3,7 @@
 Stori.us is a full-stack web application inspired by Genius. It utilizes a Ruby on Rails backend with a PostgreSQL database. The front end is composed of React.js with a Redux architectural framework.  
 
 trello: https://trello.com/b/kwQFYxQe/stori-us
+heroku: http://storius.herokuapp.com/
 
 ## MVP checklist
 
