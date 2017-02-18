@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactQuill from 'react-quill';
+import Quill from 'quill';
 import { withRouter } from 'react-router';
 
 class StoriForm extends React.Component {
@@ -11,13 +11,20 @@ class StoriForm extends React.Component {
       author: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onTextChange = this.onTextChange.bind(this);
   }
 
-
-  onTextChange(value) {
-    this.setState({ content: value });
+  componentDidMount() {
+    this.quill = new Quill('#contentQuill');
+    this.quill.on('text-change', () => {
+      if (this.quill.getText() !== '\n') {
+        const text = JSON.stringify(this.quill.getContents());
+        this.setState({ content: text });
+      } else {
+        this.setState({ content: '' });
+      }
+    });
   }
+
 
   update(field) {
     return e => this.setState({
@@ -58,11 +65,7 @@ class StoriForm extends React.Component {
                 />
                 <label htmlFor="title">Title*</label>
                 <input id="title" onChange={this.update('title')} placeholder="Title" type="text" />
-                <ReactQuill
-                  value={this.state.content}
-                  onChange={this.onTextChange}
-                  theme="snow"
-                />
+                <div id="contentQuill" />
               </div>
               <div className="column">
                 <h3 className="width-full display-flex-between header-label">

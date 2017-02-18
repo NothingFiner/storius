@@ -1,11 +1,16 @@
 import React from 'react';
+import StoriBodyContainer from './stori_body_container';
 
 class Stori extends React.Component {
   componentDidMount() {
     this.props.fetchStori();
   }
 
+
   render() {
+    if (!this.props.stori.content) {
+      return <div>Loading</div>;
+    }
     return (
       <div>
         <header className="stori-header">
@@ -20,19 +25,7 @@ class Stori extends React.Component {
             </section>
           </section>
         </header>
-        <section className="stori-content column bg-white">
-          <div className="primary">
-            <h3>Text for {this.props.stori.title}</h3>
-            <div className="text">
-              { this.props.stori.content }
-            </div>
-          </div>
-          <div className="secondary margin-top-1rem">
-            <p className="annotation-label">
-              About {`"${this.props.stori.title}"`}
-            </p>
-          </div>
-        </section>
+        <StoriBodyContainer />
       </div>
     );
   }
@@ -40,6 +33,10 @@ class Stori extends React.Component {
 
 Stori.propTypes = {
   fetchStori: React.PropTypes.func.isRequired,
+  stori: React.PropTypes.shape({
+    title: React.PropTypes.string,
+    author: React.PropTypes.string,
+  }).isRequired,
 };
 
 export default Stori;
