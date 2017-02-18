@@ -8,6 +8,12 @@ class StoriBody extends React.Component {
     this.quill.disable();
   }
 
+  componentWillReceiveProps(newProps) {
+    if (this.props.stori.content !== newProps.stori.content) {
+      this.quill.setContents(JSON.parse(newProps.stori.content));
+    }
+  }
+
   render() {
     return (
       <div>

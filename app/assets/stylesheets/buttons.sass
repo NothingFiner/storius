@@ -1,4 +1,5 @@
 .btn
+  border-radius: 3px
   transition: background-color .3s,border-color .3s
   padding: 0.25rem 0.5rem
   margin: 0
@@ -8,12 +9,23 @@
 
 
 .btn-square
+  border-radius: 0
   border: .15rem solid $black
   color: $black
   font-size: 1rem
   background: transparent
   &:hover
     background-color: rgba(204,204,204,.2)
+
+.btn-dark
+  background: $brand-darker-gray
+  color: $gray
+  border: 1px solid #444
+  &:hover
+    color: $brand-storm-gray
+    background: $dark-gray
+
+
 
 .btn-auth
   background: $brand-purple

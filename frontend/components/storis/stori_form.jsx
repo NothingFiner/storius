@@ -50,12 +50,12 @@ class StoriForm extends React.Component {
         <section>
           <h1 className="column header-text">Add Stori</h1>
           <div className="column">
-            <form onSubmit={this.handleSubmit}>
+            <form className="width-full" onSubmit={this.handleSubmit}>
               <div className="width-full display-flex-between header-label">
                 <h3>Primary Info</h3>
                 <small>*required</small>
               </div>
-              <div className="form-primary column flex-column">
+              <div className="form-primary primary display-flex flex-column">
                 <label htmlFor="author">By*</label>
                 <input
                   id="author"
@@ -65,6 +65,7 @@ class StoriForm extends React.Component {
                 />
                 <label htmlFor="title">Title*</label>
                 <input id="title" onChange={this.update('title')} placeholder="Title" type="text" />
+                <label>Text*</label>
                 <div id="contentQuill" />
               </div>
               <div className="column">
@@ -72,7 +73,7 @@ class StoriForm extends React.Component {
                   Additional Metadata
                 </h3>
               </div>
-              <button className="btn btn-square bg-white">Submit</button>
+              <button className="btn btn-dark">Submit</button>
             </form>
           </div>
         </section>
