@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import { withRouter } from 'react-router';
 
 class StoriForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       content: '',
       title: '',
       author: '',
     };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
   }
@@ -32,10 +32,11 @@ class StoriForm extends React.Component {
       title: this.state.title,
       content: this.state.content,
     };
-    this.props.createStori(stori).then((data) => {
-      this.router.push(`storis/${data.id}`);
-    });
+    this.props.createStori(stori).then(data => (
+       this.props.router.push(`storis/${data.stori.id}`)
+    ));
   }
+
   render() {
     return (
       <div className="stori-form">
@@ -47,17 +48,16 @@ class StoriForm extends React.Component {
                 <h3>Primary Info</h3>
                 <small>*required</small>
               </div>
-              <div className="form-primary column">
+              <div className="form-primary column flex-column">
                 <label htmlFor="author">By*</label>
                 <input
                   id="author"
                   placeholder="The primary author, artist, or creator"
-                  className="half"
                   onChange={this.update('author')}
                   type="text"
                 />
                 <label htmlFor="title">Title*</label>
-                <input id="title" onChange={this.update('title')} placeholder="Title" className="half" type="text" />
+                <input id="title" onChange={this.update('title')} placeholder="Title" type="text" />
                 <ReactQuill
                   value={this.state.content}
                   onChange={this.onTextChange}
@@ -78,4 +78,11 @@ class StoriForm extends React.Component {
   }
 }
 
-export default StoriForm;
+StoriForm.propTypes = {
+  createStori: React.PropTypes.func.isRequired,
+  router: React.PropTypes.shape({
+    push: React.PropTypes.func,
+  }).isRequired,
+};
+
+export default withRouter(StoriForm);
