@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
-import { RECEIVE_ERRORS, RECEIVE_CURRENT_USER, TOGGLE_AUTH_MODAL, SET_AUTH_FORM_TYPE } from '../actions/session';
+import { RECEIVE_CURRENT_USER, TOGGLE_AUTH_MODAL, SET_AUTH_FORM_TYPE } from '../actions/session';
+import { RECEIVE_ERRORS } from '../actions/errors';
 
 const defaultSession = {
   currentUser: null,

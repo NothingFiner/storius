@@ -49,7 +49,7 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
         </div>
       </header>
       <header className="header-nav">
-        <a>top songs</a>
+        <Link to={'/#topSongs'}>top songs</Link>
         <span>|</span>
         { UserNav() }
         <i className="fa fa-facebook" />
