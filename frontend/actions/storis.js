@@ -15,9 +15,8 @@ export const receiveStori = stori => ({
   stori,
 });
 
-export const clearStori = stori => ({
+export const clearStori = () => ({
   type: CLEAR_STORI,
-  stori,
 });
 
 export const fetchStoris = () => dispatch => (
