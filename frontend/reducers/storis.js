@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 import { RECEIVE_ERRORS } from '../actions/errors';
-import { RECEIVE_STORIS, RECEIVE_STORI } from '../actions/storis';
+import { RECEIVE_STORIS, RECEIVE_STORI, CLEAR_STORI } from '../actions/storis';
 
 const defaultStoris = {
   storis: {},
@@ -19,6 +19,9 @@ const StorisReducer = (state = defaultStoris, action) => {
       return newState;
     case RECEIVE_ERRORS:
       newState.errors = action.errors.responseJSON;
+      return newState;
+    case CLEAR_STORI:
+      newState.stori = {};
       return newState;
     default:
       return state;

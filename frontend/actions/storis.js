@@ -3,6 +3,7 @@ import { receiveErrors } from './errors';
 
 export const RECEIVE_STORIS = 'RECEIVE_STORIS';
 export const RECEIVE_STORI = 'RECEIVE_STORI';
+export const CLEAR_STORI = 'CLEAR_STORI';
 
 export const receiveStoris = storis => ({
   type: RECEIVE_STORIS,
@@ -11,6 +12,11 @@ export const receiveStoris = storis => ({
 
 export const receiveStori = stori => ({
   type: RECEIVE_STORI,
+  stori,
+});
+
+export const clearStori = stori => ({
+  type: CLEAR_STORI,
   stori,
 });
 
