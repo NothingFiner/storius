@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     end
     resources :users, only: [:create, :update]
     resource :session, only: [:create, :destroy]
-    resources :annotations, only: [:update, :show]
+    resources :annotations, only: [:update, :show, :destroy]
   end
 end

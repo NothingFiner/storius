@@ -24,6 +24,15 @@ class Api::AnnotationsController < ApplicationController
     render :show
   end
 
+  def destroy
+    @annotation = Annotation.find(params[:id])
+    if @annotation.destroy
+      render json: @annotation.id
+    else
+      render json: @annotation.errors.full_messages, status: 401
+    end
+  end
+  
   private
   def annotation_params
     params.require(:annotation).permit(:start_idx, :length, :content)
