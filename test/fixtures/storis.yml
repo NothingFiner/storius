@@ -6,7 +6,7 @@
 #  title            :string           not null
 #  author           :string           not null
 #  content          :text             not null
-#  artist_image_url :string
+#  image_url        :string
 #  header_image_url :string
 #  tags             :text             default("{}"), is an Array
 #  audio_video      :json             default("{}")
