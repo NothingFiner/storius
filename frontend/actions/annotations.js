@@ -10,8 +10,9 @@ export const receiveAnnotation = annotation => ({
   annotation,
 });
 
-export const toggleAnnotation = () => ({
+export const toggleAnnotation = annotationId => ({
   type: TOGGLE_ANNOTATION,
+  annotationId,
 });
 
 export const toggleEdit = () => ({

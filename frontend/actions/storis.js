@@ -6,6 +6,7 @@ export const RECEIVE_STORIS = 'RECEIVE_STORIS';
 export const RECEIVE_STORI = 'RECEIVE_STORI';
 export const CLEAR_STORI = 'CLEAR_STORI';
 export const REMOVE_ANNOTATION = 'REMOVE_ANNOTATION';
+export const UPDATE_SELECTION = 'UPDATE_SELECTION';
 
 export const receiveStoris = storis => ({
   type: RECEIVE_STORIS,
@@ -29,6 +30,11 @@ export const receiveAnnotation = annotation => ({
 export const removeAnnotation = annotationId => ({
   type: REMOVE_ANNOTATION,
   annotationId,
+});
+
+export const updateSelection = range => ({
+  type: UPDATE_SELECTION,
+  range,
 });
 
 export const fetchStoris = () => dispatch => (
