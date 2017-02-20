@@ -36,6 +36,7 @@ class StoriBody extends React.Component {
   }
 
   handleSelection(range, oldRange) {
+    if (range === null && this.props.showAnnotation ) return;
     if (!range || range === null || range === oldRange) {
       this.props.updateSelection({ index: 0, length: 0 });
       return;
@@ -71,7 +72,7 @@ class StoriBody extends React.Component {
         <section className="stori-content column bg-white">
           <div className="primary">
             <h3>Text for {this.props.stori.title}</h3>
-            <div id="storiText" className="text" />
+            <div style={{ 'user-select': this.props.showAnnotation ? 'none' : 'inherit' }} id="storiText" className="text" />
           </div>
           <div className="secondary margin-top-1rem">
             { this.props.showAnnotation ? <AnnotationContainer top={this.getBtnTop()} /> : this.rightColumn() }
