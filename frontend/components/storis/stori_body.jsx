@@ -44,7 +44,7 @@ class StoriBody extends React.Component {
     if (this.props.length > 0) {
       const top = this.getBtnTop();
       return (
-        <aside className="pos-rel" style={{ top }}>
+        <aside className="annotation-container" style={{ top }}>
           <button
             onClick={() => this.props.toggleAnnotation(null)}
             className="btn btn-square"

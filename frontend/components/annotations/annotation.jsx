@@ -20,8 +20,12 @@ class Annotation extends React.Component {
   render() {
     return (
       <section className="annotation-bar">
-        <div className="arrow" />
-        <aside style={{ top: this.props.top }} className="annotation-container">
+        <div style={{ top: this.props.top }} className="arrow">
+          <svg viewBox="0 0 128 128">
+            <path d="M95 128L39 63.8 95 0" />
+          </svg>
+        </div>
+        <aside style={{ top: this.props.top - 121 }} className="annotation-container">
           <div id="annotationText" />
           <button onClick={this.props.toggleAnnotation} className="btn btn-square">Cancel</button>
         </aside>
