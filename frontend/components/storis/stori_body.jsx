@@ -20,11 +20,15 @@ class StoriBody extends React.Component {
     if (this.props.stori.content !== newProps.stori.content) {
       this.quill.setContents(JSON.parse(newProps.stori.content));
     }
+    if (this.props.length !== newProps.length && newProps.length === 0) {
+      this.quill.setSelection(null);
+    }
   }
 
   getBtnTop() {
     const selectionBounds = this.quill.getBounds(this.props.start_idx, this.props.length);
-    return selectionBounds.top + (selectionBounds.height - 17);
+    const top = selectionBounds.top + selectionBounds.height;
+    return top > 0 ? top : 0;
   }
 
   parseContent() {
@@ -54,7 +58,11 @@ class StoriBody extends React.Component {
         </aside>
       );
     }
-    return (<p>stuff</p>);
+    return (
+      <p className="annotation-label">
+        About {`"${this.props.stori.title}"`}
+      </p>
+    );
   }
 
   render() {
@@ -66,9 +74,6 @@ class StoriBody extends React.Component {
             <div id="storiText" className="text" />
           </div>
           <div className="secondary margin-top-1rem">
-            <p className="annotation-label">
-              About {`"${this.props.stori.title}"`}
-            </p>
             { this.props.showAnnotation ? <AnnotationContainer top={this.getBtnTop()} /> : this.rightColumn() }
           </div>
         </section>

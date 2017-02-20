@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 import { RECEIVE_ERRORS } from '../actions/errors';
-import { RECEIVE_STORIS, RECEIVE_STORI, CLEAR_STORI, REMOVE_ANNOTATION, UPDATE_SELECTION } from '../actions/storis';
+import { RECEIVE_STORIS, RECEIVE_STORI, CLEAR_STORI, REMOVE_ANNOTATION, UPDATE_SELECTION, CLEAR_SELECTION } from '../actions/storis';
 import { RECEIVE_ANNOTATION } from '../actions/annotations';
 
 const defaultStoris = {
@@ -37,6 +37,10 @@ const StorisReducer = (state = defaultStoris, action) => {
     case UPDATE_SELECTION:
       newState.selection.start_idx = action.range.index;
       newState.selection.length = action.range.length;
+      return newState;
+    case CLEAR_SELECTION:
+      newState.selection.start_idx = 0;
+      newState.selection.length = 0;
       return newState;
     default:
       return state;

@@ -7,6 +7,8 @@ class Annotation extends React.Component {
     this.state = {
       text: '',
     };
+
+    this.closeEditor = this.closeEditor.bind(this);
   }
 
   componentDidMount() {
@@ -17,17 +19,24 @@ class Annotation extends React.Component {
     }
   }
 
+  closeEditor() {
+    this.props.toggleAnnotation();
+    this.props.clearSelection();
+  }
+
   render() {
+    const containerTop = (this.props.top - 121) > 0 ? this.props.top - 121 : 0;
+    const arrowTop = this.props.top > 55 ? this.props.top : 55;
     return (
       <section className="annotation-bar">
-        <div style={{ top: this.props.top }} className="arrow">
+        <div style={{ top: arrowTop }} className="arrow">
           <svg viewBox="0 0 128 128">
             <path d="M95 128L39 63.8 95 0" />
           </svg>
         </div>
-        <aside style={{ top: this.props.top - 121 }} className="annotation-container">
+        <aside style={{ top: containerTop }} className="annotation-container">
           <div id="annotationText" />
-          <button onClick={this.props.toggleAnnotation} className="btn btn-square">Cancel</button>
+          <button onClick={this.closeEditor} className="btn btn-square">Cancel</button>
         </aside>
       </section>
     );
@@ -39,6 +48,7 @@ Annotation.propTypes = {
   selectedId: React.PropTypes.number,
   toggleAnnotation: React.PropTypes.func.isRequired,
   top: React.PropTypes.number.isRequired,
+  clearSelection: React.PropTypes.func.isRequired,
 };
 
 Annotation.defaultProps = {
