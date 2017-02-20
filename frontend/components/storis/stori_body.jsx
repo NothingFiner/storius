@@ -33,4 +33,12 @@ class StoriBody extends React.Component {
   }
 }
 
+StoriBody.propTypes = {
+  stori: React.PropTypes.shape({
+    author: React.PropTypes.string,
+    title: React.PropTypes.string,
+    content: React.PropTypes.string,
+  }).isRequired,
+};
+
 export default StoriBody;

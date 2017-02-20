@@ -12,7 +12,7 @@ class Stori extends React.Component {
   }
 
   render() {
-    if (!this.props.stori.content) {
+    if (!this.props.stori.title) {
       return <div className="loader" />;
     }
     return (
