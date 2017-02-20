@@ -19,10 +19,13 @@ class Annotation extends React.Component {
 
   render() {
     return (
-      <aside style={{ top: this.props.top }} className="annotation-container">
-        <div id="annotationText" />
-        <button onClick={this.props.toggleAnnotation} className="btn btn-square">Cancel</button>
-      </aside>
+      <section className="annotation-bar">
+        <div className="arrow" />
+        <aside style={{ top: this.props.top }} className="annotation-container">
+          <div id="annotationText" />
+          <button onClick={this.props.toggleAnnotation} className="btn btn-square">Cancel</button>
+        </aside>
+      </section>
     );
   }
 }

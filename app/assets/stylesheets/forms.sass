@@ -40,7 +40,24 @@
     color: $black
     font-size: inherit
 
+
+.annotation-bar
+
+
 .annotation-container
   position: relative
+  padding-left: 1.4rem
+  padding-top: 1rem
+  &:before
+    background: $brand-purple
+    width: .4rem
+    position: absolute
+    content: ''
+    left: 0
+    bottom: 0
+    top: 1rem
+    display: block
   &> div
     background: $brand-gray
+    height: 176px
+    margin-bottom: 1rem

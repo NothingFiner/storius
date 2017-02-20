@@ -32,13 +32,16 @@ class StoriBody extends React.Component {
   }
 
   handleSelection(range, oldRange) {
-    if (!range) return;
+    if (!range || range === null || range === oldRange) {
+      this.props.updateSelection({ index: 0, length: 0 });
+      return;
+    }
     this.props.updateSelection(range);
   }
 
 
   rightColumn() {
-    if (this.props.start_idx !== null && this.props.length > 0) {
+    if (this.props.length > 0) {
       const top = this.getBtnTop();
       return (
         <aside className="pos-rel" style={{ top }}>
