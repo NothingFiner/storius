@@ -17,6 +17,7 @@ class Annotation extends React.Component {
       this.quill.setContents(JSON.parse(this.props.fetchAnnotation()));
       this.quill.disable();
     }
+    this.quill.focus();
   }
 
   closeEditor() {
