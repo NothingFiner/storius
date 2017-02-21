@@ -75,7 +75,9 @@ class StoriBody extends React.Component {
             <div style={{ userSelect: this.props.showAnnotation ? 'none' : 'inherit' }} id="storiText" className="text" />
           </div>
           <div className="secondary margin-top-1rem">
-            { this.props.showAnnotation ? <AnnotationContainer top={this.getBtnTop()} /> : this.rightColumn() }
+            {
+              this.props.showAnnotation ? <AnnotationContainer top={this.getBtnTop()} /> : this.rightColumn()
+            }
           </div>
         </section>
       </div>
