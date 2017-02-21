@@ -44,18 +44,34 @@ class StoriBody extends React.Component {
     this.props.updateSelection(range);
   }
 
+  annotationButton() {
+    if (this.props.loggedIn) {
+      return (
+        <button
+          onClick={() => this.props.toggleAnnotation(null)}
+          className="btn btn-square"
+        >
+          Add Annotation
+        </button>
+      );
+    }
+    return (
+      <button
+        onClick={this.props.toggleAuthModal}
+        className="btn btn-square"
+      >
+        Sign In to Annotate
+      </button>
+    );
+  }
+
 
   rightColumn() {
     if (this.props.length > 0) {
       const top = this.getBtnTop() + 14;
       return (
         <aside className="annotation-container" style={{ top }}>
-          <button
-            onClick={() => this.props.toggleAnnotation(null)}
-            className="btn btn-square"
-          >
-            Add Annotation
-          </button>
+          {this.annotationButton()}
         </aside>
       );
     }
@@ -76,7 +92,9 @@ class StoriBody extends React.Component {
           </div>
           <div className="secondary margin-top-1rem">
             {
-              this.props.showAnnotation ? <AnnotationContainer top={this.getBtnTop()} /> : this.rightColumn()
+              this.props.showAnnotation
+                ? <AnnotationContainer top={this.getBtnTop()} />
+                : this.rightColumn()
             }
           </div>
         </section>
@@ -96,6 +114,8 @@ StoriBody.propTypes = {
   length: React.PropTypes.number.isRequired,
   showAnnotation: React.PropTypes.bool.isRequired,
   toggleAnnotation: React.PropTypes.func.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
+  toggleAuthModal: React.PropTypes.func.isRequired,
 };
 
 export default StoriBody;
