@@ -40,6 +40,18 @@
     color: $black
     font-size: inherit
 
+.annotationLink
+  transition: background-color .1s, box-shadow .1
+  background-color: $brand-gray
+  padding: .1em 0
+  cursor: pointer
+  &:not(.active)
+    box-shadow: 0.1em 0 0 $brand-gray, -0.1em 0 0 $brand-gray
+  &.active, &#new
+    background: $brand-yellow
+    box-shadow: 0.1em 0 0 $brand-yellow, -0.1em 0 0 $brand-yellow
+
+
 
 .annotation-bar
   position: relative

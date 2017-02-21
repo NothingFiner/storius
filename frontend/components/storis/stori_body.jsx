@@ -1,17 +1,24 @@
 import React from 'react';
 import Quill from 'quill';
+import values from 'lodash';
+import AnnotationBlot from '../../util/annotation_format';
 import AnnotationContainer from '../annotations/annotation_container';
+
+Quill.register(AnnotationBlot);
 
 class StoriBody extends React.Component {
   constructor() {
     super();
 
     this.handleSelection = this.handleSelection.bind(this);
+    this.handleNewAnnotation = this.handleNewAnnotation.bind(this);
+    this.parseAnnotations = this.parseAnnotations.bind(this);
   }
 
   componentDidMount() {
     this.quill = new Quill('#storiText');
-    this.quill.setContents(this.parseContent());
+    this.quill.setContents(JSON.parse(this.props.stori.content));
+    this.parseAnnotations();
     this.quill.disable();
     this.quill.on('selection-change', this.handleSelection);
   }
@@ -19,6 +26,9 @@ class StoriBody extends React.Component {
   componentWillReceiveProps(newProps) {
     if (this.props.stori.content !== newProps.stori.content) {
       this.quill.setContents(JSON.parse(newProps.stori.content));
+    }
+    if (!newProps.showAnnotation) {
+      this.quill.removeFormat(this.props.start_idx, this.props.length, 'annotation', false);
     }
     if (this.props.length !== newProps.length && newProps.length === 0) {
       this.quill.setSelection(null);
@@ -31,24 +41,40 @@ class StoriBody extends React.Component {
     return top > 0 ? top : 0;
   }
 
-  parseContent() {
-    return JSON.parse(this.props.stori.content);
+  parseAnnotations() {
+    values(this.props.stori.annotations).forEach((annotation) => {
+      this.quill.formatText(annotation.start_idx, annotation.length, 'annotation', annotation.id);
+      const lines = document.querySelectorAll(`span[data-annotation-id="${annotation.id}"]`);
+      Array.from(lines).forEach((line) => {
+        line.addEventListener('mouseenter', () => {
+          lines.forEach(l => l.classList.add('active'));
+        });
+        line.addEventListener('mouseleave', () => {
+          lines.forEach(l => l.classList.remove('active'));
+        });
+      });
+    });
   }
 
   handleSelection(range, oldRange) {
     if (range === null && this.props.showAnnotation) return;
-    if (!range || range === null || range === oldRange) {
+    if (!range || range === oldRange) {
       this.props.updateSelection({ index: 0, length: 0 });
       return;
     }
     this.props.updateSelection(range);
   }
 
+  handleNewAnnotation() {
+    this.quill.formatText(this.props.start_idx, this.props.length, 'annotation', 'new');
+    this.props.toggleAnnotation(null);
+  }
+
   annotationButton() {
     if (this.props.loggedIn) {
       return (
         <button
-          onClick={() => this.props.toggleAnnotation(null)}
+          onClick={this.handleNewAnnotation}
           className="btn btn-square"
         >
           Add Annotation
@@ -108,6 +134,7 @@ StoriBody.propTypes = {
     author: React.PropTypes.string,
     title: React.PropTypes.string,
     content: React.PropTypes.string,
+    annotations: React.PropTypes.object,
   }).isRequired,
   updateSelection: React.PropTypes.func.isRequired,
   start_idx: React.PropTypes.number.isRequired,
