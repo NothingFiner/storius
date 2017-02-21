@@ -27,7 +27,7 @@ class Annotation extends React.Component {
 
   render() {
     const containerTop = (this.props.top - 121) > 0 ? this.props.top - 121 : 0;
-    const arrowTop = this.props.top > 55 ? this.props.top : 55;
+    const arrowTop = this.props.top > 50 ? this.props.top + 50 : 60;
     return (
       <section className="annotation-bar">
         <div style={{ top: arrowTop }} className="arrow">

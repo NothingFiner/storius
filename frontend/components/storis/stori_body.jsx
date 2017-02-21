@@ -27,7 +27,7 @@ class StoriBody extends React.Component {
 
   getBtnTop() {
     const selectionBounds = this.quill.getBounds(this.props.start_idx, this.props.length);
-    const top = selectionBounds.top + selectionBounds.height;
+    const top = selectionBounds.bottom - (selectionBounds.height / 2);
     return top > 0 ? top : 0;
   }
 
@@ -36,7 +36,7 @@ class StoriBody extends React.Component {
   }
 
   handleSelection(range, oldRange) {
-    if (range === null && this.props.showAnnotation ) return;
+    if (range === null && this.props.showAnnotation) return;
     if (!range || range === null || range === oldRange) {
       this.props.updateSelection({ index: 0, length: 0 });
       return;
@@ -47,7 +47,7 @@ class StoriBody extends React.Component {
 
   rightColumn() {
     if (this.props.length > 0) {
-      const top = this.getBtnTop();
+      const top = this.getBtnTop() + 14;
       return (
         <aside className="annotation-container" style={{ top }}>
           <button
