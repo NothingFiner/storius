@@ -44,7 +44,6 @@ class Annotation extends React.Component {
         });
     }
     if (this.props.editing !== newProps.editing) {
-      debugger
       this.quill.setContents(JSON.parse(newProps.annotation.content));
       this.quill.enable(newProps.editing);
     }
@@ -85,7 +84,12 @@ class Annotation extends React.Component {
   }
 
   handleEditSubmit() {
-
+    this.props.updateAnnotation({id: this.props.annotation.id, content: this.state.content })
+      .then(
+        () => {
+          this.props.toggleEdit();
+        },
+    );
   }
 
   buttons() {
@@ -142,8 +146,8 @@ Annotation.propTypes = {
   start_idx: React.PropTypes.number.isRequired,
   length: React.PropTypes.number.isRequired,
   editing: React.PropTypes.bool.isRequired,
-  annotation: React.PropTypes.object.isRequired,
   toggleEdit: React.PropTypes.func.isRequired,
+  updateAnnotation: React.PropTypes.func.isRequired,
 };
 
 Annotation.defaultProps = {
