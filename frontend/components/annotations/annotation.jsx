@@ -59,6 +59,13 @@ class Annotation extends React.Component {
     this.props.clearSelection();
   }
 
+  getTop() {
+    const selectionBounds = this.props.storiQuill
+      .getBounds(this.props.annotation.start_idx, this.props.annotation.length);
+    const top = selectionBounds.bottom - (selectionBounds.height / 2);
+    return top > 0 ? top : 0;
+  }
+
   cancelAnnotation(e) {
     e.preventDefault();
     this.props.toggleAnnotation();
@@ -92,12 +99,6 @@ class Annotation extends React.Component {
 
   handleDelete() {
     this.props.deleteAnnotation(this.props.selectedId);
-  }
-
-  getTop() {
-    const selectionBounds = this.props.storiQuill.getBounds(this.props.annotation.start_idx, this.props.annotation.length);
-    const top = selectionBounds.bottom - (selectionBounds.height / 2);
-    return top > 0 ? top : 0;
   }
 
   buttons() {
@@ -175,8 +176,16 @@ Annotation.propTypes = {
   annotation: React.PropTypes.shape({
     id: React.PropTypes.number,
     content: React.PropTypes.string,
+    length: React.PropTypes.number,
+    start_idx: React.PropTypes.number,
   }).isRequired,
   deleteAnnotation: React.PropTypes.func.isRequired,
+  top: React.PropTypes.number.isRequired,
+  storiQuill: React.PropTypes.shape({
+    getBounds: React.PropTypes.func,
+    setSelection: React.PropTypes.func,
+  }).isRequired,
+  errors: React.PropTypes.arrayOf(React.PropType.string).isRequired,
 };
 
 Annotation.defaultProps = {
