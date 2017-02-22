@@ -27,7 +27,7 @@ class StoriBody extends React.Component {
     if (this.props.stori.content !== newProps.stori.content) {
       this.quill.setContents(JSON.parse(newProps.stori.content));
     }
-    if (!isEqual(this.props.stori.annotations, newProps.stori.annotations)) {
+    if (!isEqual(this.props.stori.annotations)) {
       this.parseAnnotations(newProps.stori.annotations);
     }
     if (!newProps.showAnnotation && !newProps.editing) {
@@ -55,7 +55,12 @@ class StoriBody extends React.Component {
         line.addEventListener('mouseleave', () => {
           lines.forEach(l => l.classList.remove('active'));
         });
-        line.addEventListener('click', () => this.props.toggleAnnotation(annotation.id));
+        line.addEventListener('click', () => {
+          if (this.props.selectedId !== null && annotation.id !== this.props.selectedId) {
+            return this.props.selectAnnotation(annotation.id);
+          }
+          return this.props.toggleAnnotation(annotation.id);
+        });
       });
     });
   }
@@ -158,6 +163,11 @@ StoriBody.propTypes = {
   toggleAnnotation: React.PropTypes.func.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
+  selectedId: React.PropTypes.number,
+  selectAnnotation: React.PropTypes.func.isRequired,
 };
 
+StoriBody.defaultProps = {
+  selectedId: null,
+};
 export default StoriBody;

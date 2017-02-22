@@ -4,6 +4,7 @@ import * as APIAnnotationUtil from '../util/annotations_api';
 export const RECEIVE_ANNOTATION = 'RECEIVE_ANNOTATION';
 export const TOGGLE_ANNOTATION = 'TOGGLE_ANNOTATION';
 export const TOGGLE_EDIT = 'TOGGLE_EDIT';
+export const SELECT_ANNOTATION = 'SELECT_ANNOTATION';
 
 export const receiveAnnotation = annotation => ({
   type: RECEIVE_ANNOTATION,
@@ -12,6 +13,11 @@ export const receiveAnnotation = annotation => ({
 
 export const toggleAnnotation = annotationId => ({
   type: TOGGLE_ANNOTATION,
+  annotationId,
+});
+
+export const selectAnnotation = annotationId => ({
+  type: SELECT_ANNOTATION,
   annotationId,
 });
 

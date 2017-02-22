@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 import { RECEIVE_ERRORS } from '../actions/errors';
-import { RECEIVE_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT } from '../actions/annotations';
+import { RECEIVE_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT, SELECT_ANNOTATION } from '../actions/annotations';
 
 const defaultAnnotation = {
   showAnnotation: false,
@@ -24,6 +24,9 @@ const AnnotationsReducer = (state = defaultAnnotation, action) => {
       return newState;
     case TOGGLE_EDIT:
       newState.editing = !state.editing;
+      return newState;
+    case SELECT_ANNOTATION:
+      newState.selectedId = action.annotationId;
       return newState;
     case RECEIVE_ERRORS:
       newState.errors = action.errors.responseJSON;

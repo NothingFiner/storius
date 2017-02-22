@@ -32,6 +32,16 @@ class Annotation extends React.Component {
     this.quill.focus();
   }
 
+  componentWillReceiveProps(newProps) {
+    if (this.props.selectedId !== newProps.selectedId) {
+      this.props.fetchAnnotation(newProps.selectedId)
+        .then((data) => {
+          this.quill.setContents(JSON.parse(data.annotation.content));
+          this.quill.disable();
+        });
+    }
+  }
+
   closeEditor(e) {
     e.preventDefault();
     this.props.toggleAnnotation();
@@ -53,6 +63,17 @@ class Annotation extends React.Component {
       });
   }
 
+  buttons() {
+    if (this.props.selectedId === null) {
+      return (
+        <div>
+          <button className="btn btn-square">Save</button>
+          <button onClick={this.closeEditor} className="btn btn-square">Cancel</button>
+        </div>
+      );
+    }
+  }
+
   render() {
     const containerTop = (this.props.top - 121) > 0 ? this.props.top - 121 : 0;
     const arrowTop = this.props.top > 50 ? this.props.top + 50 : 60;
@@ -64,13 +85,12 @@ class Annotation extends React.Component {
           </svg>
         </div>
         <form
-          onSubmit={this.handleSubmit}
+          onSubmit={this.props.selectedId === null ? this.handleSubmit : this.handleEdit}
           style={{ top: containerTop }}
           className="annotation-container"
         >
           <div id="annotationText" />
-          <button className="btn btn-square">Save</button>
-          <button onClick={this.closeEditor} className="btn btn-square">Cancel</button>
+          { this.buttons() }
         </form>
       </section>
     );
