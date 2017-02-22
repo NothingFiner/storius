@@ -46,6 +46,9 @@ class Annotation extends React.Component {
     if (this.props.editing !== newProps.editing) {
       this.quill.setContents(JSON.parse(newProps.annotation.content));
       this.quill.enable(newProps.editing);
+      if (newProps.editing) {
+        this.quill.focus();
+      }
     }
   }
 
@@ -148,6 +151,9 @@ Annotation.propTypes = {
   editing: React.PropTypes.bool.isRequired,
   toggleEdit: React.PropTypes.func.isRequired,
   updateAnnotation: React.PropTypes.func.isRequired,
+  annotation: React.PropTypes.shape({
+    id: React.PropTypes.number,
+  }).isRequired,
 };
 
 Annotation.defaultProps = {

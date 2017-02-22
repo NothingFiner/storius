@@ -75,6 +75,7 @@
   position: relative
   padding-left: 1.4rem
   padding-top: 1rem
+  min-height: 200px
   &:before
     background: $brand-purple
     width: .4rem
@@ -92,3 +93,8 @@
     outline-offset: -3px
     outline-width: 1px
     padding: .5rem
+    overflow-y: auto
+  .ql-disabled .ql-editor
+    overflow: none
+    background: $white
+    height: 100%
