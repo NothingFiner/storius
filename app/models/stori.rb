@@ -21,5 +21,5 @@ class Stori < ApplicationRecord
   validates :title, uniqueness: { scope: :author, message: 'Title can appear once per author.'}
 
   belongs_to :user
-  has_many :annotations
+  has_many :annotations, dependant: :destroy
 end
