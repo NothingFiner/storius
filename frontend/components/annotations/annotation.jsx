@@ -136,6 +136,7 @@ class Annotation extends React.Component {
     }
     const containerTop = (top - 121) > 0 ? top - 121 : 0;
     const arrowTop = top > 50 ? top + 50 : 60;
+    const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <section className="annotation-bar">
         <div style={{ top: arrowTop }} className="arrow">
@@ -147,6 +148,9 @@ class Annotation extends React.Component {
           style={{ top: containerTop }}
           className="annotation-container"
         >
+          <ul>
+            { errors }
+          </ul>
           <div id="annotationText" />
           { this.buttons() }
         </aside>
