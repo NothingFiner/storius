@@ -149,7 +149,7 @@ class Annotation extends React.Component {
           style={{ top: containerTop }}
           className="annotation-container"
         >
-          <ul>
+          <ul className="errors">
             { errors }
           </ul>
           <div id="annotationText" />
@@ -185,7 +185,7 @@ Annotation.propTypes = {
     getBounds: React.PropTypes.func,
     setSelection: React.PropTypes.func,
   }).isRequired,
-  errors: React.PropTypes.arrayOf(React.PropType.string).isRequired,
+  errors: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 };
 
 Annotation.defaultProps = {

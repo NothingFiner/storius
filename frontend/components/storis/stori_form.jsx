@@ -45,11 +45,15 @@ class StoriForm extends React.Component {
   }
 
   render() {
+    const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <div className="stori-form">
         <section>
           <h1 className="column header-text">Add Stori</h1>
           <div className="column">
+            <ul className="errors">
+              { errors }
+            </ul>
             <form className="width-full" onSubmit={this.handleSubmit}>
               <div className="width-full display-flex-between header-label">
                 <h3>Primary Info</h3>
@@ -87,6 +91,7 @@ StoriForm.propTypes = {
   router: React.PropTypes.shape({
     push: React.PropTypes.func,
   }).isRequired,
+  errors: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 };
 
 export default withRouter(StoriForm);
