@@ -1,6 +1,5 @@
 import * as APIStoriUtil from '../util/stori_api';
 import { receiveErrors } from './errors';
-import { RECEIVE_ANNOTATION } from './annotations';
 
 export const RECEIVE_STORIS = 'RECEIVE_STORIS';
 export const RECEIVE_STORI = 'RECEIVE_STORI';
@@ -8,6 +7,7 @@ export const CLEAR_STORI = 'CLEAR_STORI';
 export const REMOVE_ANNOTATION = 'REMOVE_ANNOTATION';
 export const UPDATE_SELECTION = 'UPDATE_SELECTION';
 export const CLEAR_SELECTION = 'CLEAR_SELECTION';
+export const RECEIVE_STORI_ANNOTATION = 'RECEIVE_STORI_ANNOTATION';
 
 export const receiveStoris = storis => ({
   type: RECEIVE_STORIS,
@@ -23,10 +23,12 @@ export const clearStori = () => ({
   type: CLEAR_STORI,
 });
 
-export const receiveAnnotation = annotation => ({
-  type: RECEIVE_ANNOTATION,
-  annotation,
-});
+export const receiveStoriAnnotation = ({ annotation }) => {
+  return {
+    type: RECEIVE_STORI_ANNOTATION,
+    annotation,
+  };
+};
 
 export const removeAnnotation = annotationId => ({
   type: REMOVE_ANNOTATION,

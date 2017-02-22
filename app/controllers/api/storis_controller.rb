@@ -22,7 +22,6 @@ class Api::StorisController < ApplicationController
 
   def update
     @stori = Stori.find(params[:id])
-    debugger
     if current_user.id == @stori.user_id && @stori.update(stori_params)
       render :show
     else

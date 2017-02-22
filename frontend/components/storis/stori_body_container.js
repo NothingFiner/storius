@@ -11,6 +11,7 @@ const mapStateToProps = ({ session, storis, annotation }) => {
     start_idx: storis.selection.start_idx,
     length: storis.selection.length,
     showAnnotation: annotation.showAnnotation,
+    editing: annotation.editing,
   };
 };
 

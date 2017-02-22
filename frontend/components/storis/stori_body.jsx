@@ -1,6 +1,6 @@
 import React from 'react';
 import Quill from 'quill';
-import values from 'lodash';
+import { values, isEqual } from 'lodash';
 import AnnotationBlot from '../../util/annotation_format';
 import AnnotationContainer from '../annotations/annotation_container';
 
@@ -27,7 +27,11 @@ class StoriBody extends React.Component {
     if (this.props.stori.content !== newProps.stori.content) {
       this.quill.setContents(JSON.parse(newProps.stori.content));
     }
-    if (!newProps.showAnnotation) {
+    if (!isEqual(this.props.stori.annotations, newProps.stori.annotations)) {
+      debugger
+      this.parseAnnotations(newProps.stori.annotations);
+    }
+    if (!newProps.showAnnotation && !newProps.editing) {
       this.quill.removeFormat(this.props.start_idx, this.props.length, 'annotation', false);
     }
     if (this.props.length !== newProps.length && newProps.length === 0) {
@@ -41,8 +45,8 @@ class StoriBody extends React.Component {
     return top > 0 ? top : 0;
   }
 
-  parseAnnotations() {
-    values(this.props.stori.annotations).forEach((annotation) => {
+  parseAnnotations(annotationArray = this.props.stori.annotations) {
+    values(annotationArray).forEach((annotation) => {
       this.quill.formatText(annotation.start_idx, annotation.length, 'annotation', annotation.id);
       const lines = document.querySelectorAll(`span[data-annotation-id="${annotation.id}"]`);
       Array.from(lines).forEach((line) => {
@@ -52,17 +56,29 @@ class StoriBody extends React.Component {
         line.addEventListener('mouseleave', () => {
           lines.forEach(l => l.classList.remove('active'));
         });
+        line.addEventListener('click', () => this.props.toggleAnnotation(annotation.id));
       });
     });
   }
 
   handleSelection(range, oldRange) {
-    if (range === null && this.props.showAnnotation) return;
-    if (!range || range === oldRange) {
+    if ((this.props.showAnnotation)) return;
+    if (!range || range === oldRange ||
+      this.containsAnnotation(this.quill.getContents(range.index, range.length))) {
       this.props.updateSelection({ index: 0, length: 0 });
       return;
     }
     this.props.updateSelection(range);
+  }
+
+  containsAnnotation(selection) {
+    let includesAnnotation = false;
+    selection.forEach((el) => {
+      if (el.attributes && el.attributes.annotation) {
+        includesAnnotation = true;
+      }
+    });
+    return includesAnnotation;
   }
 
   handleNewAnnotation() {

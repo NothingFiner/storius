@@ -32,7 +32,7 @@ class Api::AnnotationsController < ApplicationController
       render json: @annotation.errors.full_messages, status: 401
     end
   end
-  
+
   private
   def annotation_params
     params.require(:annotation).permit(:start_idx, :length, :content)

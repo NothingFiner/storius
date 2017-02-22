@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
-import { fetchAnnotation, toggleAnnotation } from '../../actions/annotations';
-import { clearSelection } from '../../actions/storis';
+import { fetchAnnotation, toggleAnnotation, createAnnotation } from '../../actions/annotations';
+import { clearSelection, receiveStoriAnnotation } from '../../actions/storis';
 import Annotation from './annotation';
 
 const mapStateToProps = ({ session, storis, annotation: { annotation, errors, annotating, editing, selectedId } }) => {
   return {
     currentUser: session.currentUser,
-    start_idx: storis.start_idx,
-    length: storis.length,
+    start_idx: storis.selection.start_idx,
+    length: storis.selection.length,
+    storiId: storis.stori.id,
     annotation,
     errors,
     annotating,
@@ -20,6 +21,8 @@ const mapDispatchToProps = dispatch => ({
   fetchAnnotation: annotationId => dispatch(fetchAnnotation(annotationId)),
   toggleAnnotation: () => dispatch(toggleAnnotation(null)),
   clearSelection: () => dispatch(clearSelection()),
+  createAnnotation: (annotation, storiId) => dispatch(createAnnotation(annotation, storiId)),
+  receiveStoriAnnotation: annotation => dispatch(receiveStoriAnnotation(annotation)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Annotation);
