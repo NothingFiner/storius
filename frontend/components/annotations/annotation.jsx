@@ -69,6 +69,7 @@ class Annotation extends React.Component {
       .then((data) => {
         this.props.receiveStoriAnnotation(data);
         this.quill.disable();
+        this.props.clearSelection();
       });
   }
 
