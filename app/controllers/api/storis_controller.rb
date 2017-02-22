@@ -35,6 +35,7 @@ class Api::StorisController < ApplicationController
       render json: @stori.id
     else
       render json: @stori.errors.full_messages, status: 401
+    end
   end
 
   private

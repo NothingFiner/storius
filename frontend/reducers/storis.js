@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 import { RECEIVE_ERRORS } from '../actions/errors';
-import { RECEIVE_STORIS, RECEIVE_STORI, CLEAR_STORI, REMOVE_STORI_ANNOTATION, UPDATE_SELECTION, CLEAR_SELECTION, RECEIVE_STORI_ANNOTATION } from '../actions/storis';
+import { RECEIVE_STORIS, RECEIVE_STORI, CLEAR_STORI, REMOVE_STORI_ANNOTATION, UPDATE_SELECTION, CLEAR_SELECTION, RECEIVE_STORI_ANNOTATION, REMOVE_STORI } from '../actions/storis';
 
 const defaultStoris = {
   storis: {},
@@ -26,6 +26,10 @@ const StorisReducer = (state = defaultStoris, action) => {
       return newState;
     case CLEAR_STORI:
       newState.stori = {};
+      return newState;
+    case REMOVE_STORI:
+      newState.stori = {};
+      delete newState.storis[action.id];
       return newState;
     case RECEIVE_STORI_ANNOTATION:
       Object.assign(newState.stori.annotations, {

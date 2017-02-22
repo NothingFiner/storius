@@ -8,6 +8,7 @@ export const REMOVE_STORI_ANNOTATION = 'REMOVE_ANNOTATION';
 export const UPDATE_SELECTION = 'UPDATE_SELECTION';
 export const CLEAR_SELECTION = 'CLEAR_SELECTION';
 export const RECEIVE_STORI_ANNOTATION = 'RECEIVE_STORI_ANNOTATION';
+export const REMOVE_STORI = 'REMOVE_STORI';
 
 export const receiveStoris = storis => ({
   type: RECEIVE_STORIS,
@@ -62,4 +63,9 @@ export const createStori = stori => dispatch => (
 export const updateStori = stori => dispatch => (
   APIStoriUtil.updateStori(stori)
     .then(data => dispatch(receiveStori(data)), errors => dispatch(receiveErrors(errors)))
+);
+
+export const deleteStori = storiId => dispatch => (
+  APIStoriUtil.deleteStori(storiId)
+    .then(data => dispatch(receiveErrors(data)), errors => dispatch(receiveErrors(errors)))
 );
