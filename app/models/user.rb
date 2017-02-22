@@ -20,6 +20,7 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   has_many :storis
+  has_many :annotations
 
   attr_reader :password
 

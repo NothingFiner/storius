@@ -17,8 +17,8 @@ class StoriForm extends React.Component {
     this.quill = new Quill('#contentQuill');
     this.quill.on('text-change', () => {
       if (this.quill.getText() !== '\n') {
-        const text = JSON.stringify(this.quill.getContents());
-        this.setState({ content: text });
+        const content = JSON.stringify(this.quill.getContents());
+        this.setState({ content });
       } else {
         this.setState({ content: '' });
       }

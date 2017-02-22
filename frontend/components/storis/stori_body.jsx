@@ -1,17 +1,131 @@
 import React from 'react';
 import Quill from 'quill';
+import { values, isEqual } from 'lodash';
+import AnnotationBlot from '../../util/annotation_format';
+import AnnotationContainer from '../annotations/annotation_container';
+
+Quill.register(AnnotationBlot);
 
 class StoriBody extends React.Component {
+  constructor() {
+    super();
+
+    this.handleSelection = this.handleSelection.bind(this);
+    this.handleNewAnnotation = this.handleNewAnnotation.bind(this);
+    this.parseAnnotations = this.parseAnnotations.bind(this);
+  }
+
   componentDidMount() {
     this.quill = new Quill('#storiText');
     this.quill.setContents(JSON.parse(this.props.stori.content));
+    this.parseAnnotations();
     this.quill.disable();
+    this.quill.on('selection-change', this.handleSelection);
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.props.stori.content !== newProps.stori.content) {
-      this.quill.setContents(JSON.parse(newProps.stori.content));
+    if (!isEqual(this.props.stori.annotations, newProps.stori.annotations)) {
+      this.quill.setContents(JSON.parse(this.props.stori.content));
+      this.parseAnnotations(newProps.stori.annotations);
     }
+    if (!newProps.showAnnotation && !newProps.editing && this.props.selectedId === null) {
+      this.quill.removeFormat(this.props.start_idx, this.props.length, 'annotation', false);
+    }
+    if (this.props.length !== newProps.length && newProps.length === 0) {
+      this.quill.setSelection(null);
+    }
+  }
+
+  getBtnTop() {
+    const selectionBounds = this.quill.getBounds(this.props.start_idx, this.props.length);
+    const top = selectionBounds.bottom - (selectionBounds.height / 2);
+    return top > 0 ? top : 0;
+  }
+
+  parseAnnotations(annotationArray = this.props.stori.annotations) {
+    values(annotationArray).forEach((annotation) => {
+      this.quill.formatText(annotation.start_idx, annotation.length, 'annotation', annotation.id);
+      const lines = document.querySelectorAll(`span[data-annotation-id="${annotation.id}"]`);
+      Array.from(lines).forEach((line) => {
+        line.addEventListener('mouseenter', () => {
+          lines.forEach(l => l.classList.add('active'));
+        });
+        line.addEventListener('mouseleave', () => {
+          lines.forEach(l => l.classList.remove('active'));
+        });
+        line.addEventListener('click', e => {
+          const range = {
+            index: this.props.stori.annotations[annotation.id].start_idx,
+            length: this.props.stori.annotations[annotation.id].length,
+          };
+          e.stopPropagation();
+          this.props.toggleAnnotation(annotation.id);
+        });
+      });
+    });
+  }
+
+  handleSelection(range, oldRange) {
+    if (this.props.showAnnotation) return;
+    if (!range || range === oldRange ||
+      this.containsAnnotation(this.quill.getContents(range.index, range.length))) {
+      this.props.updateSelection({ index: 0, length: 0 });
+      return;
+    }
+    this.props.updateSelection(range);
+  }
+
+  containsAnnotation(selection) {
+    let includesAnnotation = false;
+    selection.forEach((el) => {
+      if (el.attributes && el.attributes.annotation) {
+        includesAnnotation = true;
+      }
+    });
+    return includesAnnotation;
+  }
+
+  handleNewAnnotation() {
+    this.quill.formatText(this.props.start_idx, this.props.length, 'annotation', 'new');
+    this.props.toggleAnnotation(null);
+  }
+
+  annotationButton() {
+    if (this.props.loggedIn) {
+      return (
+        <button
+          onClick={this.handleNewAnnotation}
+          className="btn btn-square"
+        >
+          Add Annotation
+        </button>
+      );
+    }
+    return (
+      <button
+        onClick={this.props.toggleAuthModal}
+        className="btn btn-square"
+      >
+        Sign In to Annotate
+      </button>
+    );
+  }
+
+
+  rightColumn() {
+    if (this.props.length > 0) {
+      const top = this.getBtnTop() + 14;
+      return (
+        <aside className="annotation-btn-container" style={{ top }}>
+          {this.annotationButton()}
+        </aside>
+      );
+    }
+    return (
+      <p className="annotation-label">
+        About {`"${this.props.stori.title}"`}
+      </p>
+    );
   }
 
   render() {
@@ -20,12 +134,14 @@ class StoriBody extends React.Component {
         <section className="stori-content column bg-white">
           <div className="primary">
             <h3>Text for {this.props.stori.title}</h3>
-            <div id="storiText" className="text" />
+            <div style={{ userSelect: this.props.showAnnotation ? 'none' : 'inherit' }} id="storiText" className="text" />
           </div>
           <div className="secondary margin-top-1rem">
-            <p className="annotation-label">
-              About {`"${this.props.stori.title}"`}
-            </p>
+            {
+              this.props.showAnnotation
+                ? <AnnotationContainer storiQuill={this.quill} top={this.getBtnTop()} />
+                : this.rightColumn()
+            }
           </div>
         </section>
       </div>
@@ -33,4 +149,24 @@ class StoriBody extends React.Component {
   }
 }
 
+StoriBody.propTypes = {
+  stori: React.PropTypes.shape({
+    author: React.PropTypes.string,
+    title: React.PropTypes.string,
+    content: React.PropTypes.string,
+    annotations: React.PropTypes.object,
+  }).isRequired,
+  updateSelection: React.PropTypes.func.isRequired,
+  start_idx: React.PropTypes.number.isRequired,
+  length: React.PropTypes.number.isRequired,
+  showAnnotation: React.PropTypes.bool.isRequired,
+  toggleAnnotation: React.PropTypes.func.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
+  toggleAuthModal: React.PropTypes.func.isRequired,
+  selectedId: React.PropTypes.number,
+};
+
+StoriBody.defaultProps = {
+  selectedId: null,
+};
 export default StoriBody;

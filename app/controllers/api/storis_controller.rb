@@ -1,11 +1,12 @@
 class Api::StorisController < ApplicationController
+  before_action :require_logged_in, only: [:create, :update]
   def index
     @storis = Stori.all
     render :index
   end
 
   def show
-    @stori = Stori.find(params[:id])
+    @stori = Stori.includes(:annotations).find(params[:id])
     render :show
   end
 
@@ -21,7 +22,6 @@ class Api::StorisController < ApplicationController
 
   def update
     @stori = Stori.find(params[:id])
-    debugger
     if current_user.id == @stori.user_id && @stori.update(stori_params)
       render :show
     else

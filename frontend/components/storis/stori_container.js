@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Stori from './stori';
-import { fetchStori } from '../../actions/storis';
+import { fetchStori, clearStori } from '../../actions/storis';
 
 const mapStateToProps = ({ storis, session }) => ({
   loggedIn: !!session.currentUser,
@@ -11,6 +11,7 @@ const mapDispatchToProps = (dispatch, { params }) => {
   const storiId = params.id;
   return {
     fetchStori: () => dispatch(fetchStori(storiId)),
+    clearStori: () => dispatch(clearStori()),
   };
 };
 

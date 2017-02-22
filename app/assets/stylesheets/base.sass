@@ -29,6 +29,9 @@ form
   small
     color: $gray
 
+.ReactModal__Body--open
+  overflow: hidden
+
 //molecules
 .text-label
   user-select: none
@@ -42,6 +45,16 @@ form
   font-size: .875rem
   margin-bottom: 1rem
   user-select: none
+
+.loader
+  margin: 0 auto
+  margin-top: 1.25rem
+  border: .35rem solid $gray
+  border-top-color: $brand-md-gray
+  border-radius: 50%
+  width: 3rem
+  height: 3rem
+  animation: spin 2s linear infinite
 
 //atomic helpers
 
@@ -76,3 +89,6 @@ form
 
 .bg-white
   background-color: $white !important
+
+.pos-rel
+  position: relative !important

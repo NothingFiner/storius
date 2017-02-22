@@ -6,7 +6,7 @@
 #  title            :string           not null
 #  author           :string           not null
 #  content          :text             not null
-#  artist_image_url :string
+#  image_url        :string
 #  header_image_url :string
 #  tags             :text             default("{}"), is an Array
 #  audio_video      :json             default("{}")
@@ -17,8 +17,9 @@
 #
 
 class Stori < ApplicationRecord
-  validates :title, :author, :content, :user_id, presence: true
+  validates :title, :author, :content, :user, presence: true
   validates :title, uniqueness: { scope: :author, message: 'Title can appear once per author.'}
 
   belongs_to :user
+  has_many :annotations
 end
