@@ -26,7 +26,9 @@ const AnnotationsReducer = (state = defaultAnnotation, action) => {
       return newState;
     case TOGGLE_ANNOTATION:
       newState.selectedId = action.annotationId;
-      if (newState.selectedId === state.selectedId || state.selectedId === null) {
+      if (
+          !(newState.selectedId !== state.selectedId && newState.showAnnotation)
+          || state.selectedId === null) {
         newState.showAnnotation = !state.showAnnotation;
       }
       newState.annotation = {};
