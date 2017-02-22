@@ -153,6 +153,7 @@ Annotation.propTypes = {
   updateAnnotation: React.PropTypes.func.isRequired,
   annotation: React.PropTypes.shape({
     id: React.PropTypes.number,
+    content: React.PropTypes.string,
   }).isRequired,
   deleteAnnotation: React.PropTypes.func.isRequired,
 };

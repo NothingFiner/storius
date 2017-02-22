@@ -111,7 +111,7 @@ class StoriBody extends React.Component {
     if (this.props.length > 0) {
       const top = this.getBtnTop() + 14;
       return (
-        <aside className="annotation-container" style={{ top }}>
+        <aside className="annotation-btn-container" style={{ top }}>
           {this.annotationButton()}
         </aside>
       );
