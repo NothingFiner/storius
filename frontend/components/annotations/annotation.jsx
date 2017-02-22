@@ -130,7 +130,10 @@ class Annotation extends React.Component {
   }
 
   render() {
-    const top = this.props.annotation.length ? this.getTop() : this.top;
+    let top = this.props.annotation.length ? this.getTop() : this.top;
+    if (this.props.selectedId === null) {
+      top = this.props.top;
+    }
     const containerTop = (top - 121) > 0 ? top - 121 : 0;
     const arrowTop = top > 50 ? top + 50 : 60;
     return (

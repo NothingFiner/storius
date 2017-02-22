@@ -139,7 +139,7 @@ class StoriBody extends React.Component {
           <div className="secondary margin-top-1rem">
             {
               this.props.showAnnotation
-                ? <AnnotationContainer storiQuill={this.quill} />
+                ? <AnnotationContainer storiQuill={this.quill} top={this.getBtnTop()} />
                 : this.rightColumn()
             }
           </div>
