@@ -21,7 +21,6 @@ const mapDispatchToProps = dispatch => ({
   updateSelection: range => dispatch(updateSelection(range)),
   clearSelection: () => dispatch(clearSelection()),
   toggleAuthModal: () => dispatch(toggleAuthModal()),
-  selectAnnotation: annotationId => dispatch(selectAnnotation(annotationId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StoriBody);

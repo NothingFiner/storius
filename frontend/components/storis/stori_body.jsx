@@ -45,6 +45,7 @@ class StoriBody extends React.Component {
   }
 
   parseAnnotations(annotationArray = this.props.stori.annotations) {
+    const selectedId = this.props.selectedId;
     values(annotationArray).forEach((annotation) => {
       this.quill.formatText(annotation.start_idx, annotation.length, 'annotation', annotation.id);
       const lines = document.querySelectorAll(`span[data-annotation-id="${annotation.id}"]`);
@@ -56,9 +57,6 @@ class StoriBody extends React.Component {
           lines.forEach(l => l.classList.remove('active'));
         });
         line.addEventListener('click', () => {
-          if (this.props.selectedId !== null && annotation.id !== this.props.selectedId) {
-            return this.props.selectAnnotation(annotation.id);
-          }
           return this.props.toggleAnnotation(annotation.id);
         });
       });
@@ -164,7 +162,6 @@ StoriBody.propTypes = {
   loggedIn: React.PropTypes.bool.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
   selectedId: React.PropTypes.number,
-  selectAnnotation: React.PropTypes.func.isRequired,
 };
 
 StoriBody.defaultProps = {
