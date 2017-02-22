@@ -29,6 +29,14 @@ class Api::StorisController < ApplicationController
     end
   end
 
+  def destroy
+    @stori = Stori.find(params[:id])
+    if @stori.destroy
+      render json: @stori.id
+    else
+      render json: @stori.errors.full_messages, status: 401
+  end
+
   private
   def stori_params
     params.require(:stori).permit(:title, :author, :content, :metadata, { audio_video: [:soundcloud, :youtube] }, :image_url, :header_image_url, :tags )
