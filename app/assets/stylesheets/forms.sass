@@ -55,7 +55,9 @@
 
 .annotation-bar
   position: relative
+  transition: top .4s
   .arrow
+    transition: top .4s
     animation: fade_slide_from_right .3s .2s backwards
     height: 2.5rem
     width: 1.8rem
@@ -72,6 +74,7 @@
 
 .annotation-container, .annotation-btn-container
   position: relative
+  animation: fade_slide_from_right .1s .1s backwards
   padding-left: 1.4rem
   padding-top: 1rem
   &:before
@@ -86,6 +89,7 @@
 
 .annotation-container
   min-height: 200px
+  transition: top .4s
   .ql-editor
     background: $brand-gray
     height: 176px
