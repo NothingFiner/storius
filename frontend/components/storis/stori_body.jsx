@@ -53,15 +53,20 @@ class StoriBody extends React.Component {
         line.addEventListener('mouseleave', () => {
           lines.forEach(l => l.classList.remove('active'));
         });
-        line.addEventListener('click', () => {
-          return this.props.toggleAnnotation(annotation.id);
+        line.addEventListener('click', e => {
+          const range = {
+            index: this.props.stori.annotations[annotation.id].start_idx,
+            length: this.props.stori.annotations[annotation.id].length,
+          };
+          e.stopPropagation();
+          this.props.toggleAnnotation(annotation.id);
         });
       });
     });
   }
 
   handleSelection(range, oldRange) {
-    if ((this.props.showAnnotation)) return;
+    if (this.props.showAnnotation) return;
     if (!range || range === oldRange ||
       this.containsAnnotation(this.quill.getContents(range.index, range.length))) {
       this.props.updateSelection({ index: 0, length: 0 });
@@ -134,7 +139,7 @@ class StoriBody extends React.Component {
           <div className="secondary margin-top-1rem">
             {
               this.props.showAnnotation
-                ? <AnnotationContainer top={this.getBtnTop()} />
+                ? <AnnotationContainer storiQuill={this.quill} />
                 : this.rightColumn()
             }
           </div>

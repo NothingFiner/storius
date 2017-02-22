@@ -7,7 +7,7 @@ const defaultAnnotation = {
   editing: false,
   annotation: {},
   errors: [],
-  selectedId: null,
+  selectedId: undefined,
 };
 
 const AnnotationsReducer = (state = defaultAnnotation, action) => {

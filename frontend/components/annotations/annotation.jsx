@@ -6,12 +6,14 @@ class Annotation extends React.Component {
     super(props);
     this.state = {
       content: '',
+      top: 0,
     };
 
     this.cancelAnnotation = this.cancelAnnotation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.getTop = this.getTop.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +31,7 @@ class Annotation extends React.Component {
         .then((data) => {
           this.quill.setContents(JSON.parse(data.annotation.content));
           this.quill.disable();
+          this.props.storiQuill.setSelection(null);
         });
     }
     this.quill.focus();
@@ -40,6 +43,7 @@ class Annotation extends React.Component {
         .then((data) => {
           this.quill.setContents(JSON.parse(data.annotation.content));
           this.quill.disable();
+          this.setState({ top: this.getTop() });
         });
     }
     if (this.props.editing !== newProps.editing) {
@@ -49,6 +53,10 @@ class Annotation extends React.Component {
         this.quill.focus();
       }
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearSelection();
   }
 
   cancelAnnotation(e) {
@@ -86,6 +94,12 @@ class Annotation extends React.Component {
     this.props.deleteAnnotation(this.props.selectedId);
   }
 
+  getTop() {
+    const selectionBounds = this.props.storiQuill.getBounds(this.props.annotation.start_idx, this.props.annotation.length);
+    const top = selectionBounds.bottom - (selectionBounds.height / 2);
+    return top > 0 ? top : 0;
+  }
+
   buttons() {
     if (this.props.selectedId === null || this.props.editing) {
       return (
@@ -116,8 +130,9 @@ class Annotation extends React.Component {
   }
 
   render() {
-    const containerTop = (this.props.top - 121) > 0 ? this.props.top - 121 : 0;
-    const arrowTop = this.props.top > 50 ? this.props.top + 50 : 60;
+    const top = this.props.annotation.length ? this.getTop() : this.top;
+    const containerTop = (top - 121) > 0 ? top - 121 : 0;
+    const arrowTop = top > 50 ? top + 50 : 60;
     return (
       <section className="annotation-bar">
         <div style={{ top: arrowTop }} className="arrow">
@@ -141,7 +156,6 @@ Annotation.propTypes = {
   fetchAnnotation: React.PropTypes.func.isRequired,
   selectedId: React.PropTypes.number,
   toggleAnnotation: React.PropTypes.func.isRequired,
-  top: React.PropTypes.number.isRequired,
   clearSelection: React.PropTypes.func.isRequired,
   storiId: React.PropTypes.number.isRequired,
   createAnnotation: React.PropTypes.func.isRequired,

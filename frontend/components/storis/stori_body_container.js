@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import StoriBody from './stori_body';
-import { toggleAnnotation, selectAnnotation } from '../../actions/annotations';
+import { toggleAnnotation } from '../../actions/annotations';
 import { updateSelection, clearSelection } from '../../actions/storis';
 import { toggleAuthModal } from '../../actions/session';
 
