@@ -9,10 +9,9 @@ class Annotation extends React.Component {
     };
 
     this.cancelAnnotation = this.cancelAnnotation.bind(this);
-    // this.cancelEdit = this.cancelEdit.bind(this);
-    // this.startEdit = this.startEdit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -58,19 +57,6 @@ class Annotation extends React.Component {
     this.props.clearSelection();
   }
 
-  // cancelEdit(e) {
-  //   e.preventDefault();
-  //   this.props.toggleEdit();
-  //   this.quill.setContents(JSON.parse(this.props.annotation));
-  //   this.quill.disable();
-  // }
-  //
-  // startEdit(e) {
-  //   e.preventDefault();
-  //   this.props.toggleEdit();
-  //   this.quill.enable();
-  // }
-
   handleSubmit(e) {
     e.preventDefault();
     const annotation = {
@@ -87,7 +73,7 @@ class Annotation extends React.Component {
   }
 
   handleEditSubmit() {
-    this.props.updateAnnotation({id: this.props.annotation.id, content: this.state.content })
+    this.props.updateAnnotation({ id: this.props.annotation.id, content: this.state.content })
       .then(
         () => {
           this.props.toggleEdit();
@@ -95,11 +81,22 @@ class Annotation extends React.Component {
     );
   }
 
+  handleDelete() {
+    this.props.deleteAnnotation(this.props.selectedId);
+  }
+
   buttons() {
     if (this.props.selectedId === null || this.props.editing) {
       return (
         <div>
-          <button className="btn btn-square">Save</button>
+          <button
+            onClick={this.props.selectedId === null
+              ? this.handleSubmit
+              : this.handleEditSubmit}
+            className="btn btn-square"
+          >
+            Save
+          </button>
           <button
             onClick={this.props.editing ? this.props.toggleEdit : this.cancelAnnotation}
             className="btn btn-square"
@@ -110,7 +107,10 @@ class Annotation extends React.Component {
       );
     }
     return (
-      <button onClick={this.props.toggleEdit} className="btn btn-square">Edit</button>
+      <div>
+        <button onClick={this.props.toggleEdit} className="btn btn-square">Edit</button>
+        <button onClick={this.handleDelete} className="btn btn-square">Delete</button>
+      </div>
     );
   }
 
@@ -124,14 +124,13 @@ class Annotation extends React.Component {
             <path d="M95 128L39 63.8 95 0" />
           </svg>
         </div>
-        <form
-          onSubmit={this.props.selectedId === null ? this.handleSubmit : this.handleEditSubmit}
+        <aside
           style={{ top: containerTop }}
           className="annotation-container"
         >
           <div id="annotationText" />
           { this.buttons() }
-        </form>
+        </aside>
       </section>
     );
   }
@@ -154,6 +153,7 @@ Annotation.propTypes = {
   annotation: React.PropTypes.shape({
     id: React.PropTypes.number,
   }).isRequired,
+  deleteAnnotation: React.PropTypes.func.isRequired,
 };
 
 Annotation.defaultProps = {

@@ -4,7 +4,7 @@ import { receiveErrors } from './errors';
 export const RECEIVE_STORIS = 'RECEIVE_STORIS';
 export const RECEIVE_STORI = 'RECEIVE_STORI';
 export const CLEAR_STORI = 'CLEAR_STORI';
-export const REMOVE_ANNOTATION = 'REMOVE_ANNOTATION';
+export const REMOVE_STORI_ANNOTATION = 'REMOVE_ANNOTATION';
 export const UPDATE_SELECTION = 'UPDATE_SELECTION';
 export const CLEAR_SELECTION = 'CLEAR_SELECTION';
 export const RECEIVE_STORI_ANNOTATION = 'RECEIVE_STORI_ANNOTATION';
@@ -30,10 +30,12 @@ export const receiveStoriAnnotation = ({ annotation }) => {
   };
 };
 
-export const removeAnnotation = annotationId => ({
-  type: REMOVE_ANNOTATION,
-  annotationId,
-});
+export const removeStoriAnnotation = ({ annotationId }) => {
+  return {
+    type: REMOVE_STORI_ANNOTATION,
+    annotationId,
+  };
+};
 
 export const updateSelection = range => ({
   type: UPDATE_SELECTION,

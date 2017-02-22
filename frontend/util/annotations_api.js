@@ -20,3 +20,10 @@ export const updateAnnotation = annotation => (
     data: { annotation },
   })
 );
+
+export const deleteAnnotation = annotationId => (
+  $.ajax({
+    method: 'DELETE',
+    url: `api/annotations/${annotationId}`,
+  })
+);

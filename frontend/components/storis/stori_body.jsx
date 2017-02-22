@@ -24,13 +24,11 @@ class StoriBody extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.props.stori.content !== newProps.stori.content) {
-      this.quill.setContents(JSON.parse(newProps.stori.content));
-    }
-    if (!isEqual(this.props.stori.annotations)) {
+    if (!isEqual(this.props.stori.annotations, newProps.stori.annotations)) {
+      this.quill.setContents(JSON.parse(this.props.stori.content));
       this.parseAnnotations(newProps.stori.annotations);
     }
-    if (!newProps.showAnnotation && !newProps.editing) {
+    if (!newProps.showAnnotation && !newProps.editing && this.props.selectedId === null) {
       this.quill.removeFormat(this.props.start_idx, this.props.length, 'annotation', false);
     }
     if (this.props.length !== newProps.length && newProps.length === 0) {
@@ -45,7 +43,6 @@ class StoriBody extends React.Component {
   }
 
   parseAnnotations(annotationArray = this.props.stori.annotations) {
-    const selectedId = this.props.selectedId;
     values(annotationArray).forEach((annotation) => {
       this.quill.formatText(annotation.start_idx, annotation.length, 'annotation', annotation.id);
       const lines = document.querySelectorAll(`span[data-annotation-id="${annotation.id}"]`);

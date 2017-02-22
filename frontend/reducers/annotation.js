@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 import { RECEIVE_ERRORS } from '../actions/errors';
-import { RECEIVE_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT } from '../actions/annotations';
+import { RECEIVE_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT, REMOVE_ANNOTATION } from '../actions/annotations';
 
 const defaultAnnotation = {
   showAnnotation: false,
@@ -15,7 +15,14 @@ const AnnotationsReducer = (state = defaultAnnotation, action) => {
   newState.errors = [];
   switch (action.type) {
     case RECEIVE_ANNOTATION:
+      if (state.selectedId === null) {
+        newState.selectedId = action.annotation.id;
+      }
       newState.annotation = action.annotation;
+      return newState;
+    case REMOVE_ANNOTATION:
+      newState.annotation = {};
+      newState.showAnnotation = false;
       return newState;
     case TOGGLE_ANNOTATION:
       newState.selectedId = action.annotationId;
