@@ -49,6 +49,7 @@ class Annotation extends React.Component {
     this.props.createAnnotation(annotation, this.props.storiId)
       .then((data) => {
         this.props.receiveStoriAnnotation(data);
+        this.quill.disable();
       });
   }
 

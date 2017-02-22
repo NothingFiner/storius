@@ -28,13 +28,12 @@ const StorisReducer = (state = defaultStoris, action) => {
       newState.stori = {};
       return newState;
     case RECEIVE_STORI_ANNOTATION:
-      debugger
       Object.assign(newState.stori.annotations, {
         [action.annotation.id]: {
           id: action.annotation.id,
           start_idx: action.annotation.start_idx,
           length: action.annotation.length,
-        }
+        },
       });
       return newState;
     case REMOVE_ANNOTATION:

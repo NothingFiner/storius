@@ -28,7 +28,6 @@ class StoriBody extends React.Component {
       this.quill.setContents(JSON.parse(newProps.stori.content));
     }
     if (!isEqual(this.props.stori.annotations, newProps.stori.annotations)) {
-      debugger
       this.parseAnnotations(newProps.stori.annotations);
     }
     if (!newProps.showAnnotation && !newProps.editing) {
