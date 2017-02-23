@@ -9,7 +9,9 @@ end
 json.comments do
   @stori.comments.each do |comment|
     json.set! comment.id do
-      json.extract! comment, :id, :content, :user_id
+      json.extract! comment, :id, :content, :user_id, :updated_at
+      json.created_at time_ago_in_words(comment.created_at)
+      json.username comment.user.username
     end
   end
 end

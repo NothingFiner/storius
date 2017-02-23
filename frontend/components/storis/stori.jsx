@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import StoriBodyContainer from './stori_body_container';
-import CommentsContainer from '../comments/comments_container';
+import Comments from '../comments/comments';
 import CommentFormContainer from '../comments/comments_form_container';
 
 class Stori extends React.Component {
@@ -54,9 +54,12 @@ class Stori extends React.Component {
           { this.deleteButton() }
         </section>
         <section className="column bg-white">
-          <div className="primary">
+          <div className="primary margin-bottom-1rem">
             <CommentFormContainer />
-            <CommentsContainer />
+            { this.props.stori
+              ? <Comments comments={this.props.stori.comments} />
+              : null
+            }
           </div>
         </section>
       </div>
@@ -78,7 +81,9 @@ Stori.propTypes = {
     title: React.PropTypes.string,
     author: React.PropTypes.string,
     user_id: React.PropTypes.number,
+    comments: React.PropTypes.object,
   }).isRequired,
+  deleteComment: React.PropTypes.func.isRequired,
 };
 
 Stori.defaultProps = {

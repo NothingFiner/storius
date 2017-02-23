@@ -32,13 +32,15 @@
     border-bottom: 1px solid rgba(154,154,154,.35)
     margin-bottom: 1rem
   .ql-editor
-    height: 400px
+    min-height: 400px
     background: $white
     border: .15rem solid #ccc
     padding: .25rem
     font-weight: 100
     color: $black
     font-size: inherit
+    word-break: break-all
+    hyphens: auto
 
 .annotationLink
   transition: background-color .1s, box-shadow .1
@@ -107,6 +109,9 @@
     word-wrap: normal
     hyphens: auto
 
+.comments-container
+  padding: .75rem
+
 .comment-form
   margin-top: 1rem
   padding: .75rem
@@ -125,7 +130,6 @@
   textarea
     width: 93%
     transition: height .3s
-    border-radius: 0
     overflow: hidden
     resize: none
     height: 2.125rem
@@ -135,3 +139,22 @@
         display: none
       & ~ button
         display: block
+
+.comment
+  padding: .75rem
+  border-top: 1px solid $brand-purple
+  .comment-header, .comment-footer
+    align-items: center
+    & > *
+      margin-right: .75rem
+
+  textarea
+    margin-top: .75rem
+    overflow: hidden
+    resize: none
+    word-break: break-all
+    hyphens: auto
+    width: 100%
+    &[disabled]
+      background: transparent
+      border: none

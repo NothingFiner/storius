@@ -1,11 +1,19 @@
 import React from 'react';
+import { values, sortBy } from 'lodash';
+import CommentItemContainer from './comment_item_container';
 
-const Comments = ({ comments, currentUser, deleteComment }) => {
+const Comments = ({ comments }) => {
+  const commentItems = sortBy(values(comments), 'created_at')
+    .map(comment => <CommentItemContainer key={comment.id} comment={comment} />);
   return (
     <section className="comments-container bg-brand-white">
-      <h1>comments</h1>
+      {commentItems}
     </section>
   );
+};
+
+Comments.propTypes = {
+  comments: React.PropTypes.object.isRequired,
 };
 
 export default Comments;
