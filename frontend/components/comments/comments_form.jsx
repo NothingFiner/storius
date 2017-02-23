@@ -29,13 +29,13 @@ class CommentForm extends React.Component {
     if (!this.props.loggedIn) return null;
     const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
-      <form onSubmit={this.handleSubmit} className="column bg-white">
+      <form onSubmit={this.handleSubmit} className="bg-brand-white comment-form">
         <ul>
           {errors}
         </ul>
-        <label htmlFor="commentContent">New Comment</label>
+        <div className="profile-icon" />
         <textArea onChange={this.handleChange} id="commentContent" value={this.state.content} />
-        <button className="btn btn-square">Add Comment</button>
+        <button className="btn btn-square green">Add Comment</button>
       </form>
     );
   }

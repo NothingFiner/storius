@@ -106,3 +106,32 @@
     word-break: break-all
     word-wrap: normal
     hyphens: auto
+
+.comment-form
+  margin-top: 1rem
+  padding: .75rem
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  justify-content: space-between
+  .profile-icon
+    margin-right: .75rem
+  button
+    transition: display .3s
+    display: none
+    margin-top: .75rem
+    &:active
+      display: block
+  textarea
+    width: 93%
+    transition: height .3s
+    border-radius: 0
+    overflow: hidden
+    resize: none
+    height: 2.125rem
+    &:focus, &:active
+      height: 3.5rem
+      & + .profile-icon
+        display: none
+      & ~ button
+        display: block

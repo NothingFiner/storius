@@ -8,13 +8,16 @@ body
 button
   cursor: pointer
   background: transparent
-input[type="text"], input[type="password"], input[type="email"]
+input[type="text"], input[type="password"], input[type="email"], textarea
   background: $white
-  border: .15rem solid #ccc
+  border: .15rem solid $gray
   padding: .25rem
   font-weight: 100
   color: $black
   font-size: inherit
+  &:focus, &:active
+    box-shadow: $brand-purple 0 0 0.3em inset
+    outline: 0
 a
   cursor: pointer
 h1
@@ -56,6 +59,13 @@ form
   height: 3rem
   animation: spin 2s linear infinite
 
+.profile-icon
+  height: 1.5rem
+  width: 1.5rem
+  border-radius: 50%
+  border: none
+  background: $black
+
 .errors
   color: $brand-red
 
@@ -92,6 +102,9 @@ form
 
 .bg-white
   background-color: $white !important
+
+.bg-brand-white
+  background-color: $brand-white !important
 
 .pos-rel
   position: relative !important
