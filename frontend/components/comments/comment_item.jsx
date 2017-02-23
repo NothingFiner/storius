@@ -30,13 +30,15 @@ class CommentItem extends React.Component {
   render() {
     return (
       <article className="comment">
-        <header className="comment-header display-flex">
-          <div className="profile-icon" />
-          <span>{this.props.comment.username}</span>
+        <header className="comment-header display-flex-between">
+          <div className="display-flex">
+            <div className="profile-icon" />
+            <span>{this.props.comment.username}</span>
+          </div>
+          <small>{this.props.comment.created_at ? `${this.props.comment.created_at} ago` : 'Just now....'}</small>
         </header>
         <textArea disabled value={this.state.content} />
-        <div className="display-flex-between comment-footer">
-          <em>{`${this.props.comment.created_at} ago....` || 'Just now....'}</em>
+        <div className="comment-footer">
           { this.buttons() }
         </div>
       </article>
