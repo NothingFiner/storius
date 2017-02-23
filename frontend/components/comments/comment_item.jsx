@@ -11,7 +11,10 @@ class CommentItem extends React.Component {
   }
 
   isUser() {
-    return this.props.comment.user_id === this.props.currentUser.id;
+    if (this.props.currentUser !== null) {
+      return this.props.comment.user_id === this.props.currentUser.id;
+    }
+    return false;
   }
 
   handleDelete() {

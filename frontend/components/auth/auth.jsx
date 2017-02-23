@@ -10,6 +10,7 @@ const customStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.65)',
+    zIndex: 15,
   },
   content: {
     top: '1rem',
