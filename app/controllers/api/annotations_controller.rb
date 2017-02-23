@@ -21,7 +21,7 @@ class Api::AnnotationsController < ApplicationController
   end
 
   def show
-    @annotation = Annotation.find(params[:id])
+    @annotation = Annotation.includes(:user).find(params[:id])
     render :show
   end
 
