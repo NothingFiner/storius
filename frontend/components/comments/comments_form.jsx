@@ -13,9 +13,7 @@ class CommentForm extends React.Component {
     return (
       <form className="column bg-white">
         <label htmlFor="commentContent">New Comment</label>
-        <textArea id="commentContent">
-          {this.state.content}
-        </textArea>
+        <textArea id="commentContent" value={this.state.content} />
         <button className>Add Comment</button>
       </form>
     );

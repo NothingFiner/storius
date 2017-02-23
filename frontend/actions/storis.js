@@ -24,12 +24,12 @@ export const clearStori = () => ({
   type: CLEAR_STORI,
 });
 
-export const receiveStoriAnnotation = annotation => ({
+export const receiveStoriAnnotation = ({annotation}) => ({
   type: RECEIVE_STORI_ANNOTATION,
   annotation,
 });
 
-export const removeStoriAnnotation = annotationId => ({
+export const removeStoriAnnotation = ({annotationId}) => ({
   type: REMOVE_STORI_ANNOTATION,
   annotationId,
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-redux';
+import { withRouter } from 'react-router';
 import StoriBodyContainer from './stori_body_container';
 import CommentsContainer from '../comments/comments_container';
 import CommentFormContainer from '../comments/comments_form_container';
@@ -81,4 +81,4 @@ Stori.defaultProps = {
   currentUser: null,
 };
 
-export default Stori;
+export default withRouter(Stori);
