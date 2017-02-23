@@ -1,15 +1,38 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import StoriBodyContainer from './stori_body_container';
 
 class Stori extends React.Component {
+  constructor() {
+    super();
+
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchStori();
   }
 
+  componentWillUnmount() {
+    this.props.clearStori();
+  }
+
+  handleDelete() {
+    this.props.deleteStori().then(() => this.props.router.push('/'));
+  }
+
+  deleteButton() {
+    if (this.props.currentUser !== null && this.props.currentUser.id === this.props.stori.user_id) {
+      return (
+        <button onClick={this.handleDelete} className="btn btn-square">Delete</button>
+      );
+    }
+    return null;
+  }
 
   render() {
-    if (!this.props.stori.content) {
-      return <div>Loading</div>;
+    if (!this.props.stori.title) {
+      return <div className="loader" />;
     }
     return (
       <div>
@@ -26,6 +49,9 @@ class Stori extends React.Component {
           </section>
         </header>
         <StoriBodyContainer />
+        <section className="stori-footer bg-white column">
+          { this.deleteButton() }
+        </section>
       </div>
     );
   }
@@ -33,6 +59,8 @@ class Stori extends React.Component {
 
 Stori.propTypes = {
   fetchStori: React.PropTypes.func.isRequired,
+  clearStori: React.PropTypes.func.isRequired,
+  deleteStori: React.PropTypes.func.isRequired,
   stori: React.PropTypes.shape({
     title: React.PropTypes.string,
     author: React.PropTypes.string,

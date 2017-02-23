@@ -27,3 +27,10 @@ export const updateStori = stori => (
     data: { stori },
   })
 );
+
+export const deleteStori = storiId => (
+  $.ajax({
+    method: 'DELETE',
+    url: `api/storis/${storiId}`,
+  })
+);
