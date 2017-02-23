@@ -7,8 +7,8 @@ import AnnotationContainer from '../annotations/annotation_container';
 Quill.register(AnnotationBlot);
 
 class StoriBody extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.handleSelection = this.handleSelection.bind(this);
     this.handleNewAnnotation = this.handleNewAnnotation.bind(this);
@@ -36,7 +36,15 @@ class StoriBody extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearSelection();
+    if (this.props.showAnnotation === true) {
+      this.props.toggleAnnotation(undefined);
+    }
+  }
+
   getBtnTop() {
+    if (this.quill === undefined) return;
     const selectionBounds = this.quill.getBounds(this.props.start_idx, this.props.length);
     const top = selectionBounds.bottom - (selectionBounds.height / 2);
     return top > 0 ? top : 0;
@@ -53,7 +61,7 @@ class StoriBody extends React.Component {
         line.addEventListener('mouseleave', () => {
           lines.forEach(l => l.classList.remove('active'));
         });
-        line.addEventListener('click', e => {
+        line.addEventListener('click', (e) => {
           const range = {
             index: this.props.stori.annotations[annotation.id].start_idx,
             length: this.props.stori.annotations[annotation.id].length,
@@ -113,7 +121,7 @@ class StoriBody extends React.Component {
 
 
   rightColumn() {
-    if (this.props.length > 0) {
+    if (this.props.length > 0 && !this.props.showAnnotation) {
       const top = this.getBtnTop() + 14;
       return (
         <aside className="annotation-btn-container" style={{ top }}>
@@ -164,6 +172,7 @@ StoriBody.propTypes = {
   loggedIn: React.PropTypes.bool.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
   selectedId: React.PropTypes.number,
+  clearSelection: React.PropTypes.func.isRequired,
 };
 
 StoriBody.defaultProps = {

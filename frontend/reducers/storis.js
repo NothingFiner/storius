@@ -5,7 +5,9 @@ import { RECEIVE_STORIS, RECEIVE_STORI, CLEAR_STORI, REMOVE_STORI_ANNOTATION, UP
 const defaultStoris = {
   storis: {},
   errors: [],
-  stori: {},
+  stori: {
+    annotations: {},
+  },
   selection: {
     start_idx: 0,
     length: 0,
@@ -32,6 +34,9 @@ const StorisReducer = (state = defaultStoris, action) => {
       delete newState.storis[action.id];
       return newState;
     case RECEIVE_STORI_ANNOTATION:
+      if (!newState.stori.annotations) {
+        newState.stori.annotations = {};
+      }
       Object.assign(newState.stori.annotations, {
         [action.annotation.id]: {
           id: action.annotation.id,

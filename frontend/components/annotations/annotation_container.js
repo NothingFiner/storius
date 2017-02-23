@@ -3,7 +3,7 @@ import { fetchAnnotation, toggleAnnotation, createAnnotation, toggleEdit, update
 import { clearSelection, receiveStoriAnnotation } from '../../actions/storis';
 import Annotation from './annotation';
 
-const mapStateToProps = ({ session, storis, annotation: { annotation, errors, annotating, editing, selectedId } }) => {
+const mapStateToProps = ({ session, storis, annotation: { annotation, errors, showAnnotation, editing, selectedId } }) => {
   return {
     currentUser: session.currentUser,
     start_idx: storis.selection.start_idx,
@@ -11,7 +11,7 @@ const mapStateToProps = ({ session, storis, annotation: { annotation, errors, an
     storiId: storis.stori.id,
     annotation,
     errors,
-    annotating,
+    showAnnotation,
     editing,
     selectedId,
   };
