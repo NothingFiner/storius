@@ -12,15 +12,15 @@ const customStyles = {
     backgroundColor: 'rgba(0, 0, 0, 0.65)',
   },
   content: {
-    top: '25%',
-    left: '50%',
+    top: '1rem',
+    left: 'calc(50vw - 225px)',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
     background: '#e9e9e9',
     width: '450px',
     borderRadius: '0',
+    animation: 'expand_in .15s cubic-bezier(.25,.46,.45,.94)',
   },
 };
 

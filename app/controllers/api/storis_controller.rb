@@ -1,11 +1,12 @@
 class Api::StorisController < ApplicationController
+  before_action :require_logged_in, only: [:create, :update, :destroy]
   def index
     @storis = Stori.all
     render :index
   end
 
   def show
-    @stori = Stori.find(params[:id])
+    @stori = Stori.includes(:annotations, :comments).find(params[:id])
     render :show
   end
 
@@ -21,11 +22,19 @@ class Api::StorisController < ApplicationController
 
   def update
     @stori = Stori.find(params[:id])
-    debugger
     if current_user.id == @stori.user_id && @stori.update(stori_params)
       render :show
     else
       render json: @stori.errors.full_messages, status: 422
+    end
+  end
+
+  def destroy
+    @stori = Stori.find(params[:id])
+    if @stori.destroy
+      render json: @stori.id
+    else
+      render json: @stori.errors.full_messages, status: 401
     end
   end
 

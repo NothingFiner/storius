@@ -32,10 +32,129 @@
     border-bottom: 1px solid rgba(154,154,154,.35)
     margin-bottom: 1rem
   .ql-editor
-    height: 400px
+    min-height: 400px
     background: $white
     border: .15rem solid #ccc
     padding: .25rem
     font-weight: 100
     color: $black
     font-size: inherit
+    word-break: break-all
+    hyphens: auto
+
+.annotationLink
+  transition: background-color .1s, box-shadow .1
+  background-color: $brand-gray
+  padding: .1em 0
+  cursor: pointer
+  &:not(.active)
+    box-shadow: 0.1em 0 0 $brand-gray, -0.1em 0 0 $brand-gray
+  &.active, &[data-annotation-id="new"]
+    background: $brand-yellow
+    box-shadow: 0.1em 0 0 $brand-yellow, -0.1em 0 0 $brand-yellow
+
+
+
+.annotation-bar
+  position: relative
+  transition: top .4s
+  .arrow
+    transition: top .4s
+    animation: fade_slide_from_right .3s .2s backwards
+    height: 2.5rem
+    width: 1.8rem
+    overflow: hidden
+    margin: -1.25rem -.4rem 0 0
+    position: absolute
+    right: 100%
+    z-index: 1
+    svg
+      height: 100%
+      stroke: $brand-purple
+      stroke-width: 1.25rem
+      fill: $white
+
+.annotation-container, .annotation-btn-container
+  position: relative
+  animation: fade_in .1s .1s backwards
+  padding-left: 1.4rem
+  padding-top: 1rem
+  &:before
+    background: $brand-purple
+    width: .4rem
+    position: absolute
+    content: ''
+    left: 0
+    bottom: 0
+    top: 1rem
+    display: block
+
+.annotation-container
+  min-height: 200px
+  transition: top .4s
+  .ql-editor
+    background: $brand-gray
+    height: 176px
+    margin-bottom: 1rem
+    margin-top: 1rem
+    outline-offset: -3px
+    outline-width: 1px
+    padding: .5rem
+    overflow-y: auto
+  .ql-disabled .ql-editor
+    overflow: none
+    background: $white
+    height: 100%
+    word-break: break-all
+    word-wrap: normal
+    hyphens: auto
+
+.comments-container
+  padding: .75rem
+
+.comment-form
+  margin-top: 1rem
+  padding: .75rem
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  justify-content: space-between
+  .profile-icon
+    margin-right: .75rem
+  button
+    transition: display .3s
+    display: none
+    margin-top: .75rem
+    &:active
+      display: block
+  textarea
+    width: 93%
+    transition: height .3s
+    overflow: hidden
+    resize: none
+    height: 2.125rem
+    &:focus, &:active
+      height: 3.5rem
+      & + .profile-icon
+        display: none
+      & ~ button
+        display: block
+
+.comment
+  padding: .75rem
+  border-top: 1px solid $brand-purple
+  .comment-header, .comment-footer
+    align-items: center
+    & > *
+      margin-right: .75rem
+
+  textarea
+    margin-top: .75rem
+    overflow: hidden
+    resize: none
+    word-break: break-all
+    hyphens: auto
+    width: 100%
+    &[disabled]
+      background: transparent
+      border: none

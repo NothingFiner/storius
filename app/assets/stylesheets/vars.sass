@@ -2,6 +2,36 @@ $rubik: 'Rubik', sans-serif
 $space: 'Space Mono', monospace
 $fira: 'Fira Sans Condensed', sans-serif
 
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@keyframes expand_in
+  0%
+    opacity: 0
+    transform: scale(.8)
+  100%
+    opacity: 1
+    transform: scale(1)
+
+@keyframes fade_slide_from_right
+  0%
+    opacity: 0
+    transform: translateX(1.5rem)
+  100%
+    opacity: 1
+    transform: translateX(0)
+
+@keyframes fade_in
+  0%
+    opacity: 0
+    transform: translateX(.25rem)
+  100%
+    opacity: 1
+    transform: translateX(0)
+
 $brand-yellow: #ffff64
 $brand-blue: #7d8fe8
 $brand-purple: #99a7ee
@@ -12,6 +42,7 @@ $brand-md-gray: #9a9a9a
 $brand-storm-gray: #e6e6e6
 $brand-gray: #e9e9e9
 $brand-white: #f7f7f7
+$green: #0ecb27
 $gray: #ccc
 $black: #000
 $dark-gray: #333

@@ -5,16 +5,21 @@ body
   font-family: $space
   color: $black-font
   background: $brand-white
+main
+  padding-bottom: 3rem
 button
   cursor: pointer
   background: transparent
-input[type="text"], input[type="password"], input[type="email"]
+input[type="text"], input[type="password"], input[type="email"], textarea
   background: $white
-  border: .15rem solid #ccc
+  border: .15rem solid $gray
   padding: .25rem
   font-weight: 100
   color: $black
   font-size: inherit
+  &:focus, &:active
+    box-shadow: $brand-purple 0 0 0.3em inset
+    outline: 0
 a
   cursor: pointer
 h1
@@ -29,6 +34,9 @@ form
   small
     color: $gray
 
+.ReactModal__Body--open
+  overflow: hidden
+
 //molecules
 .text-label
   user-select: none
@@ -42,6 +50,26 @@ form
   font-size: .875rem
   margin-bottom: 1rem
   user-select: none
+
+.loader
+  margin: 0 auto
+  margin-top: 1.25rem
+  border: .35rem solid $gray
+  border-top-color: $brand-md-gray
+  border-radius: 50%
+  width: 3rem
+  height: 3rem
+  animation: spin 2s linear infinite
+
+.profile-icon
+  height: 1.5rem
+  width: 1.5rem
+  border-radius: 50%
+  border: none
+  background: $black
+
+.errors
+  color: $brand-red
 
 //atomic helpers
 
@@ -76,3 +104,9 @@ form
 
 .bg-white
   background-color: $white !important
+
+.bg-brand-white
+  background-color: $brand-white !important
+
+.pos-rel
+  position: relative !important
