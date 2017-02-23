@@ -1,10 +1,12 @@
 class Api::CommentsController < ApplicationController
+  before_action :require_logged_in, only: [:create, :update, :destroy]
   def create
     @comment = Comment.new(comments_params)
+    @comment.user = current_user
     if @comment.save
       render :show
     else
-      @comment.errors.full_messages, status: 422
+      render json: @comment.errors.full_messages, status: 422
     end
   end
 
@@ -13,7 +15,7 @@ class Api::CommentsController < ApplicationController
     if @comment.update(comments_params)
       render :show
     else
-      @comment.errors.full_messages, status: 422
+      render json: @comment.errors.full_messages, status: 422
     end
   end
 
@@ -22,7 +24,8 @@ class Api::CommentsController < ApplicationController
     if @comment.destroy
       render json: @comment.id
     else
-
+      render json: @comment.errors.full_messages, status: 401
+    end
   end
 
   private

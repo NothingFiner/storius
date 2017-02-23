@@ -72,6 +72,7 @@ class StoriBody extends React.Component {
           };
           e.stopPropagation();
           this.props.toggleAnnotation(annotation.id);
+          // window.addEventListener('click', this.closeAnnotation);
         });
       });
     });

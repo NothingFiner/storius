@@ -1,5 +1,5 @@
 class Api::StorisController < ApplicationController
-  before_action :require_logged_in, only: [:create, :update]
+  before_action :require_logged_in, only: [:create, :update, :destroy]
   def index
     @storis = Stori.all
     render :index

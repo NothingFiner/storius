@@ -53,8 +53,8 @@ class Stori extends React.Component {
         <section className="stori-footer bg-white column">
           { this.deleteButton() }
         </section>
-        <CommentsContainer />
         <CommentFormContainer />
+        <CommentsContainer />
       </div>
     );
   }

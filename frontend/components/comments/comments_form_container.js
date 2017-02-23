@@ -5,6 +5,7 @@ import CommentForm from './comments_form';
 const mapStateToProps = ({ session, storis }) => ({
   loggedIn: !!session.currentUser,
   errors: storis.errors,
+  storiId: storis.stori.id,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -6,10 +6,7 @@ import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../actions/comments';
 const defaultStoris = {
   storis: {},
   errors: [],
-  stori: {
-    annotations: {},
-    comments: {},
-  },
+  stori: {},
   selection: {
     start_idx: 0,
     length: 0,
@@ -59,6 +56,9 @@ const StorisReducer = (state = defaultStoris, action) => {
       newState.selection.length = 0;
       return newState;
     case RECEIVE_COMMENT:
+      if (!newState.stori.comments) {
+        newState.stori.comments = {};
+      }
       newState.stori.comments[action.comment.id] = action.comment;
       return newState;
     case REMOVE_COMMENT:

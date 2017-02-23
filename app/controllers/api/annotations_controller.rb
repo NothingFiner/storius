@@ -1,4 +1,5 @@
 class Api::AnnotationsController < ApplicationController
+  before_action :require_logged_in, only: [:create, :update, :destroy]
   def create
     @annotation = Annotation.new(annotation_params)
     @annotation.user = current_user
