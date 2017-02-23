@@ -67,7 +67,7 @@
     margin: -1.25rem -.4rem 0 0
     position: absolute
     right: 100%
-    z-index: 1
+    z-index: 11
     svg
       height: 100%
       stroke: $brand-purple
@@ -92,6 +92,7 @@
 .annotation-container
   min-height: 200px
   transition: top .4s
+  z-index: 10
   header
     font-size: .75rem
     font-family: $rubik
@@ -113,6 +114,18 @@
     word-break: break-all
     word-wrap: normal
     hyphens: auto
+
+#annotationCloser
+  z-index: -5
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+  &.active
+    z-index: 5
 
 .comments-container
   padding: .75rem
