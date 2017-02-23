@@ -149,6 +149,11 @@ class Annotation extends React.Component {
           style={{ top: containerTop }}
           className="annotation-container"
         >
+          <header>
+            Created by
+            <span> {this.props.annotation.username} </span>
+            {this.props.annotation.created_at} ago
+          </header>
           <ul className="errors">
             { errors }
           </ul>
@@ -178,6 +183,8 @@ Annotation.propTypes = {
     content: React.PropTypes.string,
     length: React.PropTypes.number,
     start_idx: React.PropTypes.number,
+    created_at: React.PropTypes.string,
+    username: React.PropTypes.string,
   }).isRequired,
   deleteAnnotation: React.PropTypes.func.isRequired,
   top: React.PropTypes.number.isRequired,
