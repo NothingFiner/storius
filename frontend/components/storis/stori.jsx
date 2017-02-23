@@ -1,6 +1,8 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-redux';
 import StoriBodyContainer from './stori_body_container';
+import CommentsContainer from '../comments/comments_container';
+import CommentFormContainer from '../comments/comments_form_container';
 
 class Stori extends React.Component {
   constructor() {
@@ -39,8 +41,7 @@ class Stori extends React.Component {
         <header className="stori-header">
           <section className="column inner">
             <section className="primary display-flex">
-              <div className="art">
-              </div>
+              <div className="art" />
               <div className="primary-info">
                 <h1>{this.props.stori.title}</h1>
                 <h2>{this.props.stori.author}</h2>
@@ -52,19 +53,32 @@ class Stori extends React.Component {
         <section className="stori-footer bg-white column">
           { this.deleteButton() }
         </section>
+        <CommentsContainer />
+        <CommentFormContainer />
       </div>
     );
   }
 }
 
 Stori.propTypes = {
+  router: React.PropTypes.shape({
+    push: React.PropTypes.func,
+  }).isRequired,
+  currentUser: React.PropTypes.shape({
+    id: React.PropTypes.number,
+  }),
   fetchStori: React.PropTypes.func.isRequired,
   clearStori: React.PropTypes.func.isRequired,
   deleteStori: React.PropTypes.func.isRequired,
   stori: React.PropTypes.shape({
     title: React.PropTypes.string,
     author: React.PropTypes.string,
+    user_id: React.PropTypes.number,
   }).isRequired,
+};
+
+Stori.defaultProps = {
+  currentUser: null,
 };
 
 export default Stori;
