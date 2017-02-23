@@ -22,4 +22,5 @@ class Stori < ApplicationRecord
 
   belongs_to :user
   has_many :annotations, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

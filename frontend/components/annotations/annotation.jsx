@@ -130,6 +130,21 @@ class Annotation extends React.Component {
     );
   }
 
+  header() {
+    if (this.props.selectedId === null) return null;
+    return (
+      <header>
+        Created by
+        <span> {this.props.annotation.username} </span>
+        {
+          this.props.annotation.created_at
+          ? `${this.props.annotation.created_at} ago`
+          : 'just now....'
+        }
+      </header>
+    );
+  }
+
   render() {
     let top = this.props.annotation.length ? this.getTop() : this.top;
     if (this.props.selectedId === null) {
@@ -149,6 +164,7 @@ class Annotation extends React.Component {
           style={{ top: containerTop }}
           className="annotation-container"
         >
+          { this.header() }
           <ul className="errors">
             { errors }
           </ul>
@@ -178,6 +194,8 @@ Annotation.propTypes = {
     content: React.PropTypes.string,
     length: React.PropTypes.number,
     start_idx: React.PropTypes.number,
+    created_at: React.PropTypes.string,
+    username: React.PropTypes.string,
   }).isRequired,
   deleteAnnotation: React.PropTypes.func.isRequired,
   top: React.PropTypes.number.isRequired,

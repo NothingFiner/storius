@@ -32,18 +32,22 @@
     border-bottom: 1px solid rgba(154,154,154,.35)
     margin-bottom: 1rem
   .ql-editor
-    height: 400px
+    min-height: 400px
     background: $white
     border: .15rem solid #ccc
     padding: .25rem
     font-weight: 100
     color: $black
     font-size: inherit
+    word-break: break-all
+    hyphens: auto
 
 .annotationLink
-  transition: background-color .1s, box-shadow .1
+  transition: background-color .1s box-shadow .1
+  position: relative
   background-color: $brand-gray
   padding: .1em 0
+  z-index: 10
   cursor: pointer
   &:not(.active)
     box-shadow: 0.1em 0 0 $brand-gray, -0.1em 0 0 $brand-gray
@@ -65,7 +69,7 @@
     margin: -1.25rem -.4rem 0 0
     position: absolute
     right: 100%
-    z-index: 1
+    z-index: 11
     svg
       height: 100%
       stroke: $brand-purple
@@ -90,6 +94,12 @@
 .annotation-container
   min-height: 200px
   transition: top .4s
+  z-index: 10
+  header
+    font-size: .75rem
+    font-family: $rubik
+    span
+      color: $brand-purple
   .ql-editor
     background: $brand-gray
     height: 176px
@@ -106,3 +116,69 @@
     word-break: break-all
     word-wrap: normal
     hyphens: auto
+
+#annotationCloser
+  z-index: -5
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+  &.active
+    z-index: 5
+
+.comments-container
+  padding: .75rem
+
+.comment-form
+  margin-top: 1rem
+  padding: .75rem
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  justify-content: space-between
+  .profile-icon
+    margin-right: .75rem
+  button
+    transition: display .3s
+    display: none
+    margin-top: .75rem
+    &:active
+      display: block
+  textarea
+    width: 93%
+    transition: height .3s
+    overflow: hidden
+    resize: none
+    height: 2.125rem
+    &:focus, &:active
+      height: 3.5rem
+      & + .profile-icon
+        display: none
+      & ~ button
+        display: block
+
+.comment
+  padding: .75rem
+  border-top: 1px solid $brand-purple
+  .comment-header, .comment-footer
+    align-items: center
+    small
+      font-size: .75em
+      color: $brand-md-gray
+      font-family: $rubik
+    .profile-icon, button
+      margin-right: .75rem
+
+  textarea
+    margin-top: .75rem
+    overflow: hidden
+    resize: none
+    word-break: break-all
+    hyphens: auto
+    width: 100%
+    &[disabled]
+      background: transparent
+      border: none

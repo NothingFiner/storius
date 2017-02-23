@@ -24,19 +24,15 @@ export const clearStori = () => ({
   type: CLEAR_STORI,
 });
 
-export const receiveStoriAnnotation = ({ annotation }) => {
-  return {
-    type: RECEIVE_STORI_ANNOTATION,
-    annotation,
-  };
-};
+export const receiveStoriAnnotation = ({ annotation }) => ({
+  type: RECEIVE_STORI_ANNOTATION,
+  annotation,
+});
 
-export const removeStoriAnnotation = ({ annotationId }) => {
-  return {
-    type: REMOVE_STORI_ANNOTATION,
-    annotationId,
-  };
-};
+export const removeStoriAnnotation = ({ annotationId }) => ({
+  type: REMOVE_STORI_ANNOTATION,
+  annotationId,
+});
 
 export const updateSelection = range => ({
   type: UPDATE_SELECTION,

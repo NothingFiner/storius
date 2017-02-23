@@ -13,9 +13,10 @@ class StoriBody extends React.Component {
     this.handleSelection = this.handleSelection.bind(this);
     this.handleNewAnnotation = this.handleNewAnnotation.bind(this);
     this.parseAnnotations = this.parseAnnotations.bind(this);
+    this.closeAnnotation =  this.closeAnnotation.bind(this);
 
     if (this.props.showAnnotation === true) {
-      this.props.toggleAnnotation(undefined);
+      this.props.toggleAnnotation();
     }
   }
 
@@ -43,7 +44,7 @@ class StoriBody extends React.Component {
   componentWillUnmount() {
     this.props.clearSelection();
     if (this.props.showAnnotation === true) {
-      this.props.toggleAnnotation(undefined);
+      this.props.toggleAnnotation();
     }
   }
 
@@ -65,16 +66,26 @@ class StoriBody extends React.Component {
         line.addEventListener('mouseleave', () => {
           lines.forEach(l => l.classList.remove('active'));
         });
-        line.addEventListener('click', (e) => {
-          const range = {
-            index: this.props.stori.annotations[annotation.id].start_idx,
-            length: this.props.stori.annotations[annotation.id].length,
-          };
-          e.stopPropagation();
-          this.props.toggleAnnotation(annotation.id);
+        line.addEventListener('click', () => {
+          this.props.selectAnnotation(annotation.id);
+          if (!this.props.showAnnotation) {
+            this.props.toggleAnnotation();
+            document.getElementById('annotationCloser')
+              .addEventListener('mousedown', this.closeAnnotation, false);
+            document.getElementById('annotationCloser')
+              .classList.toggle('active');
+          }
         });
       });
     });
+  }
+
+  closeAnnotation() {
+    document.getElementById('annotationCloser')
+      .removeEventListener('mousedown', this.closeAnnotation, false)
+    document.getElementById('annotationCloser')
+      .classList.toggle('active');
+    this.props.toggleAnnotation();
   }
 
   handleSelection(range, oldRange) {
@@ -99,7 +110,8 @@ class StoriBody extends React.Component {
 
   handleNewAnnotation() {
     this.quill.formatText(this.props.start_idx, this.props.length, 'annotation', 'new');
-    this.props.toggleAnnotation(null);
+    this.props.selectAnnotation(null);
+    this.props.toggleAnnotation();
   }
 
   annotationButton() {
@@ -156,6 +168,7 @@ class StoriBody extends React.Component {
             }
           </div>
         </section>
+        <div id="annotationCloser" />
       </div>
     );
   }
@@ -173,6 +186,7 @@ StoriBody.propTypes = {
   length: React.PropTypes.number.isRequired,
   showAnnotation: React.PropTypes.bool.isRequired,
   toggleAnnotation: React.PropTypes.func.isRequired,
+  selectAnnotation: React.PropTypes.func.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
   selectedId: React.PropTypes.number,

@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import StoriBodyContainer from './stori_body_container';
+import Comments from '../comments/comments';
+import CommentFormContainer from '../comments/comments_form_container';
 
 class Stori extends React.Component {
   constructor() {
@@ -39,8 +41,7 @@ class Stori extends React.Component {
         <header className="stori-header">
           <section className="column inner">
             <section className="primary display-flex">
-              <div className="art">
-              </div>
+              <div className="art" />
               <div className="primary-info">
                 <h1>{this.props.stori.title}</h1>
                 <h2>{this.props.stori.author}</h2>
@@ -52,19 +53,41 @@ class Stori extends React.Component {
         <section className="stori-footer bg-white column">
           { this.deleteButton() }
         </section>
+        <section className="column bg-white">
+          <div className="primary margin-bottom-1rem">
+            <CommentFormContainer />
+            { this.props.stori
+              ? <Comments comments={this.props.stori.comments} />
+              : null
+            }
+          </div>
+        </section>
       </div>
     );
   }
 }
 
 Stori.propTypes = {
+  router: React.PropTypes.shape({
+    push: React.PropTypes.func,
+  }).isRequired,
+  currentUser: React.PropTypes.shape({
+    id: React.PropTypes.number,
+  }),
   fetchStori: React.PropTypes.func.isRequired,
   clearStori: React.PropTypes.func.isRequired,
   deleteStori: React.PropTypes.func.isRequired,
   stori: React.PropTypes.shape({
     title: React.PropTypes.string,
     author: React.PropTypes.string,
+    user_id: React.PropTypes.number,
+    comments: React.PropTypes.object,
   }).isRequired,
+  deleteComment: React.PropTypes.func.isRequired,
 };
 
-export default Stori;
+Stori.defaultProps = {
+  currentUser: null,
+};
+
+export default withRouter(Stori);

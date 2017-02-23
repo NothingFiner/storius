@@ -1,12 +1,12 @@
 class Api::StorisController < ApplicationController
-  before_action :require_logged_in, only: [:create, :update]
+  before_action :require_logged_in, only: [:create, :update, :destroy]
   def index
     @storis = Stori.all
     render :index
   end
 
   def show
-    @stori = Stori.includes(:annotations).find(params[:id])
+    @stori = Stori.includes(:annotations, :comments).find(params[:id])
     render :show
   end
 
