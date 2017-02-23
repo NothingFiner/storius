@@ -6,7 +6,7 @@ class Api::StorisController < ApplicationController
   end
 
   def show
-    @stori = Stori.includes(:annotations).find(params[:id])
+    @stori = Stori.includes(:annotations, :comments).find(params[:id])
     render :show
   end
 

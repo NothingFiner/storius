@@ -6,3 +6,10 @@ json.annotations do
     end
   end
 end
+json.comments do
+  @stori.comments.each do |comment|
+    json.set! comment.id do
+      json.extract! comment, :id, :content, :user_id
+    end
+  end
+end
