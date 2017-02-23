@@ -13,6 +13,8 @@
 #
 
 class Annotation < ApplicationRecord
+  include Votable
+
   validates :start_idx, :length, :content, :stori, :user, presence: true
 
   belongs_to :stori
