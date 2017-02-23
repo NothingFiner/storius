@@ -1,6 +1,6 @@
 import { receiveErrors } from './errors';
 import * as APIAnnotationUtil from '../util/annotations_api';
-import { removeStoriAnnotation, updateSelection } from './storis';
+import { removeStoriAnnotation } from './storis';
 
 export const RECEIVE_ANNOTATION = 'RECEIVE_ANNOTATION';
 export const TOGGLE_ANNOTATION = 'TOGGLE_ANNOTATION';
@@ -8,12 +8,10 @@ export const TOGGLE_EDIT = 'TOGGLE_EDIT';
 export const SELECT_ANNOTATION = 'SELECT_ANNOTATION';
 export const REMOVE_ANNOTATION = 'REMOVE_ANNOTATION';
 
-export const receiveAnnotation = annotation => {
-  return {
-    type: RECEIVE_ANNOTATION,
-    annotation,
-  };
-};
+export const receiveAnnotation = annotation => ({
+  type: RECEIVE_ANNOTATION,
+  annotation,
+});
 
 export const toggleAnnotation = annotationId => ({
   type: TOGGLE_ANNOTATION,
