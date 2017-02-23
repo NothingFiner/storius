@@ -43,9 +43,11 @@
     hyphens: auto
 
 .annotationLink
-  transition: background-color .1s, box-shadow .1
+  transition: background-color .1s box-shadow .1
+  position: relative
   background-color: $brand-gray
   padding: .1em 0
+  z-index: 10
   cursor: pointer
   &:not(.active)
     box-shadow: 0.1em 0 0 $brand-gray, -0.1em 0 0 $brand-gray
