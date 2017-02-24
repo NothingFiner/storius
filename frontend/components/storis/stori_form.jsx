@@ -59,7 +59,7 @@ class StoriForm extends React.Component {
                 <h3>Primary Info</h3>
                 <small>*required</small>
               </div>
-              <div className="form-primary primary display-flex flex-column">
+              <div className="form-primary primary flex-column">
                 <label htmlFor="author">By*</label>
                 <input
                   id="author"
