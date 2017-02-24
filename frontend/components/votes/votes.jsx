@@ -12,7 +12,6 @@ const Votes = (props) => {
         className="fa fa-thumbs-o-down"
         onClick={() => props.downvote(props.votableId)}
       />
-
     </div>
   );
 };
@@ -25,7 +24,6 @@ Votes.propTypes = {
 };
 
 Votes.defaultProps = {
-  votes: 0,
   votableId: null,
 };
 

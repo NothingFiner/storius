@@ -172,12 +172,16 @@ class Annotation extends React.Component {
           </ul>
           <div id="annotationText" />
           <footer className="display-flex">
-            <VotesContainer
-              votes={this.props.annotation.votes}
-              userVote={this.props.annotation.userVote}
-              votableId={this.props.annotation.id}
-              type="annotations"
-            />
+            {
+              this.props.selectedId === null
+                ? null
+                : <VotesContainer
+                  votes={this.props.annotation.votes}
+                  userVote={this.props.annotation.userVote}
+                  votableId={this.props.annotation.id}
+                  type="annotations"
+                />
+            }
             { this.buttons() }
           </footer>
         </aside>
