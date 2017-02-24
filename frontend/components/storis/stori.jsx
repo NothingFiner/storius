@@ -90,4 +90,4 @@ Stori.defaultProps = {
   currentUser: null,
 };
 
-export default withRouter(Stori);
+export default Stori;
