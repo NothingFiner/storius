@@ -43,7 +43,11 @@ const AnnotationsReducer = (state = defaultAnnotation, action) => {
       return newState;
     case VOTE_ACTIONS.annotations:
       newState.votes = newState.votes ? newState.votes : 0;
-      newState.votes += action.vote;
+      if (action.vote === 0) {
+        newState.votes -= newState.userVote;
+      } else {
+        newState.votes += action.vote;
+      }
       newState.userVote = action.vote;
       return newState;
     default:

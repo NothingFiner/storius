@@ -25,6 +25,7 @@ Votes.propTypes = {
 
 Votes.defaultProps = {
   votableId: null,
+  votes: 0,
 };
 
 export default Votes;

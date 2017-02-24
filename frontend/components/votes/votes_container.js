@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import Votes from './votes';
 import { postUpvote, postDownvote } from '../../actions/votes';
 
-const mapStateToProps = (state, { votes, userVote, votableId }) => ({
-  votes,
-  userVote,
+const mapStateToProps = ({ annotation }, { votableId }) => ({
+  votes: annotation.votes,
+  userVote: annotation.userVote,
   votableId,
 });
 
