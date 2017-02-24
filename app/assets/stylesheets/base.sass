@@ -76,12 +76,14 @@ form
   display: flex
   justify-content: space-between
   color: $brand-md-gray
-  &.positive
-    .fa-thumbs-up, span
-      color: $green
-  &.negative
-    .fa-thumbs-down, span
-      color: $brand-red
+  &.positive span
+    color: $green
+  &.negative span
+    color: $brand-red
+  &.up .fa-thumbs-up
+    color: $green
+  &.down .fa-thumbs-down
+    color: $brand-red
   & > *
     margin-right: .5rem
   button

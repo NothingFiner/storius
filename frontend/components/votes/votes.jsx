@@ -7,7 +7,11 @@ const Votes = (props) => {
   } else if (props.votes < 0) {
     classNames += ' negative';
   }
-
+  if (props.userVote === 1) {
+    classNames += ' up';
+  } else if (props.userVote === -1) {
+    classNames += ' down';
+  }
   return (
     <div className={classNames}>
       <button
@@ -28,11 +32,12 @@ Votes.propTypes = {
   upvote: React.PropTypes.func.isRequired,
   votableId: React.PropTypes.number,
   votes: React.PropTypes.number,
+  userVote: React.PropTypes.number,
 };
 
 Votes.defaultProps = {
   votableId: null,
   votes: 0,
+  userVote: 0,
 };
-
 export default Votes;

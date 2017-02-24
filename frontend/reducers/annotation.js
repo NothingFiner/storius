@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { RECEIVE_ERRORS } from '../actions/errors';
 import { RECEIVE_ANNOTATION, CLEAR_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT, REMOVE_ANNOTATION, SELECT_ANNOTATION } from '../actions/annotations';
-import { VOTE_ACTIONS } from '../actions/votes';
+import { UPVOTE_ACTIONS, DOWNVOTE_ACTIONS } from '../actions/votes';
 
 const defaultAnnotation = {
   showAnnotation: false,
@@ -41,14 +41,21 @@ const AnnotationsReducer = (state = defaultAnnotation, action) => {
     case CLEAR_ANNOTATION:
       newState.annotation = {};
       return newState;
-    case VOTE_ACTIONS.annotations:
-      newState.votes = newState.votes ? newState.votes : 0;
+    case UPVOTE_ACTIONS.annotations:
       if (action.vote === 0) {
-        newState.votes -= newState.userVote;
+        newState.annotation.votes -= 1;
       } else {
-        newState.votes += action.vote;
+        newState.annotation.votes += (1 - state.annotation.userVote);
       }
-      newState.userVote = action.vote;
+      newState.annotation.userVote = action.vote;
+      return newState;
+    case DOWNVOTE_ACTIONS.annotations:
+      if (action.vote === 0) {
+        newState.annotation.votes += 1;
+      } else {
+        newState.annotation.votes -= (1 + state.annotation.userVote);
+      }
+      newState.annotation.userVote = action.vote;
       return newState;
     default:
       return state;
