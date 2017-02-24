@@ -10,6 +10,7 @@ main
 button
   cursor: pointer
   background: transparent
+  outline: none
 input[type="text"], input[type="password"], input[type="email"], textarea
   background: $white
   border: .15rem solid $gray
@@ -71,6 +72,27 @@ form
 .errors
   color: $brand-red
 
+.vote-buttons
+  display: flex
+  justify-content: space-between
+  color: $brand-md-gray
+  .plus
+    display: none
+  &.positive span
+    color: $green,
+    .plus
+      display: inline
+  &.negative span
+    color: $brand-red
+  &.up .fa-thumbs-up
+    color: $green
+  &.down .fa-thumbs-down
+    color: $brand-red
+  & > *
+    margin-right: .5rem
+  button
+    font-size: 1.25rem
+
 //atomic helpers
 
 .section-row
@@ -90,14 +112,13 @@ form
 
 .display-flex
   display: flex
-
-.display-flex-center
-  display: flex
-  justify-content: center
-
-.display-flex-between
-  display: flex
-  justify-content: space-between
+  align-items: center
+  &-center
+    display: flex
+    justify-content: center
+  &-between
+    display: flex
+    justify-content: space-between
 
 .big-border-top
   border-top: .2em solid $black

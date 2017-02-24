@@ -7,6 +7,7 @@ export const TOGGLE_ANNOTATION = 'TOGGLE_ANNOTATION';
 export const TOGGLE_EDIT = 'TOGGLE_EDIT';
 export const SELECT_ANNOTATION = 'SELECT_ANNOTATION';
 export const REMOVE_ANNOTATION = 'REMOVE_ANNOTATION';
+export const CLEAR_ANNOTATION = 'CLEAR_ANNOTATION';
 
 export const receiveAnnotation = annotation => ({
   type: RECEIVE_ANNOTATION,
@@ -29,6 +30,10 @@ export const toggleEdit = () => ({
 export const removeAnnotation = annotationId => ({
   type: REMOVE_ANNOTATION,
   annotationId,
+});
+
+export const clearAnnotation = () => ({
+  type: CLEAR_ANNOTATION,
 });
 
 export const fetchAnnotation = annotationId => dispatch => (
