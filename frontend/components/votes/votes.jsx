@@ -1,15 +1,22 @@
 import React from 'react';
 
 const Votes = (props) => {
+  let classNames = 'vote-buttons';
+  if (props.votes > 0) {
+    classNames += ' positive';
+  } else if (props.votes < 0) {
+    classNames += ' negative';
+  }
+
   return (
-    <div className="vote-buttons group">
+    <div className={classNames}>
       <button
-        className="fa fa-thumbs-o-up"
+        className="fa fa-thumbs-up"
         onClick={() => props.upvote(props.votableId)}
       />
-      <div>{props.votes}</div>
+      <span>{props.votes}</span>
       <button
-        className="fa fa-thumbs-o-down"
+        className="fa fa-thumbs-down"
         onClick={() => props.downvote(props.votableId)}
       />
     </div>

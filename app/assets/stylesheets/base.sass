@@ -10,6 +10,7 @@ main
 button
   cursor: pointer
   background: transparent
+  outline: none
 input[type="text"], input[type="password"], input[type="email"], textarea
   background: $white
   border: .15rem solid $gray
@@ -70,6 +71,21 @@ form
 
 .errors
   color: $brand-red
+
+.vote-buttons
+  display: flex
+  justify-content: space-between
+  color: $brand-md-gray
+  &.positive
+    .fa-thumbs-up, span
+      color: $green
+  &.negative
+    .fa-thumbs-down, span
+      color: $brand-red
+  & > *
+    margin-right: .5rem
+  button
+    font-size: 1.25rem
 
 //atomic helpers
 
