@@ -1,5 +1,6 @@
 import React from 'react';
 import Quill from 'quill';
+import VotesContainer from '../votes/votes_container';
 
 class Annotation extends React.Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class Annotation extends React.Component {
 
   componentWillUnmount() {
     this.props.clearSelection();
+    this.props.clearAnnotation();
   }
 
   getTop() {
@@ -169,7 +171,15 @@ class Annotation extends React.Component {
             { errors }
           </ul>
           <div id="annotationText" />
-          { this.buttons() }
+          <footer className="display-flex">
+            <VotesContainer
+              votes={this.props.annotation.votes}
+              userVote={this.props.annotation.userVote}
+              votableId={this.props.annotation.id}
+              type="annotations"
+            />
+            { this.buttons() }
+          </footer>
         </aside>
       </section>
     );
@@ -196,6 +206,8 @@ Annotation.propTypes = {
     start_idx: React.PropTypes.number,
     created_at: React.PropTypes.string,
     username: React.PropTypes.string,
+    userVote: React.PropTypes.number,
+    votes: React.PropTypes.number,
   }).isRequired,
   deleteAnnotation: React.PropTypes.func.isRequired,
   top: React.PropTypes.number.isRequired,

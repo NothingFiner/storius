@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchAnnotation, toggleAnnotation, createAnnotation, toggleEdit, updateAnnotation, deleteAnnotation } from '../../actions/annotations';
+import { fetchAnnotation, toggleAnnotation, clearAnnotation, createAnnotation, toggleEdit, updateAnnotation, deleteAnnotation } from '../../actions/annotations';
 import { clearSelection, receiveStoriAnnotation } from '../../actions/storis';
 import Annotation from './annotation';
 
@@ -26,6 +26,7 @@ const mapDispatchToProps = dispatch => ({
   toggleEdit: () => dispatch(toggleEdit()),
   updateAnnotation: annotation => dispatch(updateAnnotation(annotation)),
   deleteAnnotation: annotationId => dispatch(deleteAnnotation(annotationId)),
+  clearAnnotation: () => dispatch(clearAnnotation()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Annotation);

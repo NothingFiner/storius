@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 import { RECEIVE_ERRORS } from '../actions/errors';
-import { RECEIVE_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT, REMOVE_ANNOTATION, SELECT_ANNOTATION } from '../actions/annotations';
+import { RECEIVE_ANNOTATION, CLEAR_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT, REMOVE_ANNOTATION, SELECT_ANNOTATION } from '../actions/annotations';
+import { VOTE_ACTIONS } from '../actions/votes';
 
 const defaultAnnotation = {
   showAnnotation: false,
@@ -9,6 +10,7 @@ const defaultAnnotation = {
   errors: [],
   selectedId: null,
 };
+
 
 const AnnotationsReducer = (state = defaultAnnotation, action) => {
   const newState = merge({}, state);
@@ -35,6 +37,14 @@ const AnnotationsReducer = (state = defaultAnnotation, action) => {
       return newState;
     case RECEIVE_ERRORS:
       newState.errors = action.errors.responseJSON;
+      return newState;
+    case CLEAR_ANNOTATION:
+      newState.annotation = {};
+      return newState;
+    case VOTE_ACTIONS.annotations:
+      newState.votes = newState.votes ? newState.votes : 0;
+      newState.votes += action.vote;
+      newState.userVote = action.vote;
       return newState;
     default:
       return state;
