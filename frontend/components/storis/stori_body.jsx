@@ -69,23 +69,28 @@ class StoriBody extends React.Component {
         line.addEventListener('click', () => {
           this.props.selectAnnotation(annotation.id);
           if (!this.props.showAnnotation) {
-            this.props.toggleAnnotation();
-            document.getElementById('annotationCloser')
-              .addEventListener('mousedown', this.closeAnnotation, false);
-            document.getElementById('annotationCloser')
-              .classList.toggle('active');
+            this.openAnnotation();
           }
         });
       });
     });
   }
 
+  openAnnotation() {
+    this.props.toggleAnnotation();
+    document.getElementById('annotationCloser')
+      .addEventListener('mousedown', this.closeAnnotation, false);
+    document.getElementById('annotationCloser')
+      .classList.toggle('active');
+  }
+
   closeAnnotation() {
     document.getElementById('annotationCloser')
-      .removeEventListener('mousedown', this.closeAnnotation, false)
+      .removeEventListener('mousedown', this.closeAnnotation, false);
     document.getElementById('annotationCloser')
       .classList.toggle('active');
     this.props.toggleAnnotation();
+    this.props.clearSelection();
   }
 
   handleSelection(range, oldRange) {
@@ -111,7 +116,7 @@ class StoriBody extends React.Component {
   handleNewAnnotation() {
     this.quill.formatText(this.props.start_idx, this.props.length, 'annotation', 'new');
     this.props.selectAnnotation(null);
-    this.props.toggleAnnotation();
+    this.openAnnotation();
   }
 
   annotationButton() {
