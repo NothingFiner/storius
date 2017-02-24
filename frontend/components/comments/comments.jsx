@@ -13,7 +13,11 @@ const Comments = ({ comments }) => {
 };
 
 Comments.propTypes = {
-  comments: React.PropTypes.object.isRequired,
+  comments: React.PropTypes.object,
+};
+
+Comments.defaultProps = {
+  comments: {},
 };
 
 export default Comments;

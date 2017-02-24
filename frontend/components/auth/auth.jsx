@@ -10,6 +10,7 @@ const customStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.65)',
+    zIndex: 15,
   },
   content: {
     top: '1rem',
@@ -89,7 +90,7 @@ class AuthModal extends React.Component {
 
 AuthModal.propTypes = {
   formType: React.PropTypes.string.isRequired,
-  errors: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  errors: React.PropTypes.arrayOf(React.PropTypes.string),
   setAuthFormType: React.PropTypes.func.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
   modalIsOpen: React.PropTypes.bool.isRequired,
@@ -105,6 +106,7 @@ AuthModal.propTypes = {
 
 AuthModal.defaultProps = {
   currentUser: null,
+  errors: [],
 };
 
 export default AuthModal;

@@ -11,6 +11,8 @@
 #
 
 class Comment < ApplicationRecord
+  include Votable
+
   validates :user, :stori, :content, presence: true
 
   belongs_to :user

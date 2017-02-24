@@ -17,6 +17,8 @@
 #
 
 class Stori < ApplicationRecord
+  include Votable
+
   validates :title, :author, :content, :user, presence: true
   validates :title, uniqueness: { scope: :author, message: 'Title can appear once per author.'}
 

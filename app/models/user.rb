@@ -21,6 +21,9 @@ class User < ApplicationRecord
 
   has_many :storis
   has_many :annotations
+  has_many :comments
+  has_many :votes, inverse_of: :user
+
 
   attr_reader :password
 

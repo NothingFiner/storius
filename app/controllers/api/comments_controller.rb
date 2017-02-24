@@ -28,8 +28,29 @@ class Api::CommentsController < ApplicationController
     end
   end
 
+  def downvote; vote(-1); end
+  def upvote; vote(1); end
+
   private
   def comments_params
     params.require(:comment).permit(:stori_id, :content)
+  end
+
+  def vote(direction)
+    @comment = Comment.find(params[:id])
+    @vote = Vote.find_by_votable(@comment, current_user.id)
+
+    if @vote
+      if @vote.status === direction
+        @vote.destroy
+        render json: 0
+      else
+        @vote.update(status: direction)
+        render json: direction
+      end
+    else
+      @comment.votes.create!(user_id: current_user.id, status: direction)
+      render json: direction
+    end
   end
 end

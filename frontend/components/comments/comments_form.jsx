@@ -43,9 +43,13 @@ class CommentForm extends React.Component {
 
 CommentForm.propTypes = {
   storiId: React.PropTypes.number.isRequired,
-  errors: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  errors: React.PropTypes.arrayOf(React.PropTypes.string),
   loggedIn: React.PropTypes.bool.isRequired,
   createComment: React.PropTypes.func.isRequired,
+};
+
+CommentForm.defaultProps = {
+  errors: [],
 };
 
 export default CommentForm;
