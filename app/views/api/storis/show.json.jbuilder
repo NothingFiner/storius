@@ -12,6 +12,8 @@ json.comments do
       json.extract! comment, :id, :content, :user_id, :updated_at
       json.created_at time_ago_in_words(comment.created_at)
       json.username comment.user.username
+      json.votes comment.num_votes
+      json.userVote comment.user_vote(current_user.id) if logged_in?
     end
   end
 end

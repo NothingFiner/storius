@@ -76,8 +76,12 @@ form
   display: flex
   justify-content: space-between
   color: $brand-md-gray
+  .plus
+    display: none
   &.positive span
-    color: $green
+    color: $green,
+    .plus
+      display: inline
   &.negative span
     color: $brand-red
   &.up .fa-thumbs-up

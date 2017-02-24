@@ -18,7 +18,12 @@ const Votes = (props) => {
         className="fa fa-thumbs-up"
         onClick={() => props.upvote(props.votableId)}
       />
-      <span>{props.votes}</span>
+      <span>
+        <span className="plus">
+          +
+        </span>
+        {props.votes}
+      </span>
       <button
         className="fa fa-thumbs-down"
         onClick={() => props.downvote(props.votableId)}

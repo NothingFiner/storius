@@ -1,4 +1,5 @@
 import React from 'react';
+import VotesContainer from '../votes/votes_container';
 
 class CommentItem extends React.Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class CommentItem extends React.Component {
         </header>
         <textArea disabled value={this.state.content} />
         <div className="comment-footer">
+          <VotesContainer votableId={this.props.comment.id} type="comments" />
           { this.buttons() }
         </div>
       </article>
