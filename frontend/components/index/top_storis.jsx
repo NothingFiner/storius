@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { values } from 'lodash';
+import { values, sortBy, reverse } from 'lodash';
 
 const TopStoris = ({ storis }) => {
   const StoriItem = (stori, i) => {
@@ -37,7 +37,7 @@ const TopStoris = ({ storis }) => {
     );
   };
   const StoriItems = () => (
-    values(storis).map((stori, i) => (
+    reverse(sortBy(values(storis), 'annotation_count')).map((stori, i) => (
       <li key={stori.id}>
         { StoriItem(stori, i) }
       </li>

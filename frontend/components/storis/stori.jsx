@@ -40,7 +40,7 @@ class Stori extends React.Component {
       <div>
         <header className="stori-header">
           <section className="column inner">
-            <section className="primary display-flex">
+            <section className="primary">
               <div className="art" />
               <div className="primary-info">
                 <h1>{this.props.stori.title}</h1>

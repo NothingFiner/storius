@@ -19,7 +19,8 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
     </div>
   );
   const UserActions = () => (
-    <div>
+    <div className="display-flex">
+      <div style={{ marginRight: '.25rem' }} className="profile-icon" />
       <span>{currentUser.username}</span>
       <span className="header-action" onClick={logout}>Sign Out</span>
     </div>
@@ -52,10 +53,34 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
         <Link to={'/#topSongs'}>top songs</Link>
         <span>|</span>
         { UserNav() }
-        <i className="fa fa-facebook" />
-        <i className="fa fa-twitter" />
-        <i className="fa fa-instagram" />
-        <i className="fa fa-youtube-play" />
+        <a
+          href="https://www.facebook.com/elie.a.finer"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fa fa-facebook" />
+        </a>
+        <a
+          href="https://github.com/NothingFiner/storius"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fa fa-github" />
+        </a>
+        <a
+          href="https://www.instagram.com/hashtag_durbatuluk/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fa fa-instagram" />
+        </a>
+        <a
+          href="https://www.youtube.com/watch?v=2HQaBWziYvY"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fa fa-youtube-play" />
+        </a>
       </header>
     </div>
   );
