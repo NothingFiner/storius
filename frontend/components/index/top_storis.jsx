@@ -29,7 +29,7 @@ const TopStoris = ({ storis }) => {
         <div className="stori-number">
           <h3>{i + 1}</h3>
         </div>
-        <div className="stori-art" />
+        <img className="stori-art" alt="top stori" src={stori.image_url || window.images.storiusTriple} />
         <div className="stori-text">
           { storiText() }
         </div>

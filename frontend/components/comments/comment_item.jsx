@@ -36,7 +36,9 @@ class CommentItem extends React.Component {
       <article className="comment">
         <header className="comment-header display-flex-between">
           <div className="display-flex">
-            <div className="profile-icon" />
+            <div className="profile-icon">
+              <img alt="header-profile" src={window.images.storiusTriple} />
+            </div>
             <span>{this.props.comment.username}</span>
           </div>
           <small>{this.props.comment.created_at ? `${this.props.comment.created_at} ago` : 'Just now....'}</small>

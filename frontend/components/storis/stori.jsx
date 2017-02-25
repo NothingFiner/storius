@@ -32,20 +32,46 @@ class Stori extends React.Component {
     return null;
   }
 
+  audio() {
+    if (this.props.stori.audio_video.bandcamp) {
+      return (
+        <h3>bandcamp</h3>
+      );
+    } else if (this.props.stori.audio_video.soundcloud) {
+      return (
+        <h3>soundcloud</h3>
+      );
+    }
+    return null;
+  }
+
   render() {
     if (!this.props.stori.title) {
       return <div className="loader" />;
     }
+    const headerStyle = {
+      backgroundImage: `url(${this.props.stori.image_url || window.images.storiusYellow})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+    };
     return (
       <div>
-        <header className="stori-header">
+        <header
+          style={headerStyle}
+          className="stori-header"
+        >
           <section className="column inner">
             <section className="primary">
-              <div className="art" />
+              <div className="art">
+                <img alt="stori" src={this.props.stori.image_url || window.images.storiusMono} />
+              </div>
               <div className="primary-info">
                 <h1>{this.props.stori.title}</h1>
                 <h2>{this.props.stori.author}</h2>
               </div>
+            </section>
+            <section className="secondary">
+              { this.audio() }
             </section>
           </section>
         </header>
