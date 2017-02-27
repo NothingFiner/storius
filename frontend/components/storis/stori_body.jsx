@@ -13,7 +13,7 @@ class StoriBody extends React.Component {
     this.handleSelection = this.handleSelection.bind(this);
     this.handleNewAnnotation = this.handleNewAnnotation.bind(this);
     this.parseAnnotations = this.parseAnnotations.bind(this);
-    this.closeAnnotation =  this.closeAnnotation.bind(this);
+    this.closeAnnotation = this.closeAnnotation.bind(this);
 
     if (this.props.showAnnotation === true) {
       this.props.toggleAnnotation();
