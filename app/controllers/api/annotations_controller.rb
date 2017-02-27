@@ -7,7 +7,7 @@ class Api::AnnotationsController < ApplicationController
     if @annotation.save
       render :show
     else
-      render json: @annotation.errors.full_messages, status: 422
+      render json: @annotation.errors, status: 422
     end
   end
 
@@ -16,7 +16,7 @@ class Api::AnnotationsController < ApplicationController
     if @annotation.update(annotation_params)
       render :show
     else
-      render json: @annotation.errors.full_messages, status: 422
+      render json: @annotation.errors, status: 422
     end
   end
 
@@ -30,7 +30,7 @@ class Api::AnnotationsController < ApplicationController
     if @annotation.destroy
       render json: @annotation.id
     else
-      render json: @annotation.errors.full_messages, status: 401
+      render json: @annotation.errors, status: 401
     end
   end
 

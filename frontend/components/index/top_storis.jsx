@@ -29,7 +29,11 @@ const TopStoris = ({ storis }) => {
         <div className="stori-number">
           <h3>{i + 1}</h3>
         </div>
-        <img className="stori-art" alt="top stori" src={stori.image_url || window.images.storiusTriple} />
+        <img
+          className="stori-art"
+          alt="top stori"
+          src={stori.image_url || window.images.storiusTriple}
+        />
         <div className="stori-text">
           { storiText() }
         </div>
@@ -57,5 +61,8 @@ const TopStoris = ({ storis }) => {
   );
 };
 
+TopStoris.propTypes = {
+  storis: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+};
 
 export default TopStoris;

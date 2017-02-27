@@ -1,6 +1,7 @@
 import React from 'react';
 import Quill from 'quill';
 import VotesContainer from '../votes/votes_container';
+import Errors from '../errors/errors';
 
 class Annotation extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Annotation extends React.Component {
   }
 
   componentDidMount() {
+    this.props.clearErrors();
     this.quill = new Quill('#annotationText');
     this.quill.on('text-change', () => {
       if (this.quill.getText() !== '\n') {
@@ -59,6 +61,7 @@ class Annotation extends React.Component {
   componentWillUnmount() {
     this.props.clearSelection();
     this.props.clearAnnotation();
+    this.props.clearErrors();
   }
 
   getTop() {
@@ -154,7 +157,6 @@ class Annotation extends React.Component {
     }
     const containerTop = (top - 121) > 0 ? top - 121 : 0;
     const arrowTop = top > 50 ? top + 50 : 60;
-    const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <section className="annotation-bar">
         <div style={{ top: arrowTop }} className="arrow">
@@ -167,9 +169,7 @@ class Annotation extends React.Component {
           className="annotation-container"
         >
           { this.header() }
-          <ul className="errors">
-            { errors }
-          </ul>
+          <Errors errorsArray={this.props.errors.content} />
           <div id="annotationText" />
           <footer className="display-flex">
             {
@@ -219,7 +219,11 @@ Annotation.propTypes = {
     getBounds: React.PropTypes.func,
     setSelection: React.PropTypes.func,
   }).isRequired,
-  errors: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  errors: React.PropTypes.shape({
+    content: React.PropTypes.array,
+  }).isRequired,
+  clearErrors: React.PropTypes.func.isRequired,
+  clearAnnotation: React.PropTypes.func.isRequired,
 };
 
 Annotation.defaultProps = {

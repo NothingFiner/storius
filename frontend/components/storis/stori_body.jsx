@@ -89,7 +89,9 @@ class StoriBody extends React.Component {
       .removeEventListener('mousedown', this.closeAnnotation, false);
     document.getElementById('annotationCloser')
       .classList.toggle('active');
-    this.props.toggleAnnotation();
+    if (this.props.showAnnotation) {
+      this.props.toggleAnnotation();
+    }
     this.props.clearSelection();
   }
 

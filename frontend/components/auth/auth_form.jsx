@@ -1,4 +1,5 @@
 import React from 'react';
+import Errors from '../errors/errors';
 
 class AuthForm extends React.Component {
   constructor(props) {
@@ -47,6 +48,7 @@ class AuthForm extends React.Component {
     if (this.props.formType === 'signup') {
       return (
         <div className="form-group">
+          <Errors errorsArray={this.props.errors.email} />
           <input
             placeholder="Email"
             className="width-full margin-bottom-1rem"
@@ -66,6 +68,7 @@ class AuthForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
+            <Errors errorsArray={this.props.errors.username} />
             <input
               placeholder="Username"
               className="width-full margin-top-1rem  margin-bottom-1rem"
@@ -77,6 +80,7 @@ class AuthForm extends React.Component {
           </div>
           { this.signupField() }
           <div className="form-group">
+            <Errors errorsArray={this.props.errors.password} />
             <input
               placeholder="Password"
               className="width-full margin-bottom-1rem"
@@ -106,6 +110,11 @@ AuthForm.propTypes = {
   setAuthFormType: React.PropTypes.func.isRequired,
   submitHandler: React.PropTypes.func.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
+  errors: React.PropTypes.shape({
+    username: React.PropTypes.array,
+    email: React.PropTypes.array,
+    password: React.PropTypes.array,
+  }).isRequired,
 };
 
 export default AuthForm;

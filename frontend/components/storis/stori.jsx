@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import StoriBodyContainer from './stori_body_container';
 import Comments from '../comments/comments';
 import CommentFormContainer from '../comments/comments_form_container';
@@ -32,19 +31,6 @@ class Stori extends React.Component {
     return null;
   }
 
-  audio() {
-    if (this.props.stori.audio_video.bandcamp) {
-      return (
-        <h3>bandcamp</h3>
-      );
-    } else if (this.props.stori.audio_video.soundcloud) {
-      return (
-        <h3>soundcloud</h3>
-      );
-    }
-    return null;
-  }
-
   render() {
     if (!this.props.stori.title) {
       return <div className="loader" />;
@@ -69,9 +55,6 @@ class Stori extends React.Component {
                 <h1>{this.props.stori.title}</h1>
                 <h2>{this.props.stori.author}</h2>
               </div>
-            </section>
-            <section className="secondary">
-              { this.audio() }
             </section>
           </section>
         </header>
@@ -108,8 +91,9 @@ Stori.propTypes = {
     author: React.PropTypes.string,
     user_id: React.PropTypes.number,
     comments: React.PropTypes.object,
+    audio_video: React.PropTypes.object,
+    image_url: React.PropTypes.string,
   }).isRequired,
-  deleteComment: React.PropTypes.func.isRequired,
 };
 
 Stori.defaultProps = {

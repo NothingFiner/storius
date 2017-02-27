@@ -1,6 +1,7 @@
 import React from 'react';
 import Quill from 'quill';
 import { withRouter } from 'react-router';
+import Errors from '../errors/errors';
 
 class StoriForm extends React.Component {
   constructor(props) {
@@ -45,15 +46,11 @@ class StoriForm extends React.Component {
   }
 
   render() {
-    const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <div className="stori-form">
         <section>
           <h1 className="column header-text">Add Stori</h1>
           <div className="column">
-            <ul className="errors">
-              { errors }
-            </ul>
             <form className="width-full" onSubmit={this.handleSubmit}>
               <div className="width-full display-flex-between header-label">
                 <h3>Primary Info</h3>
@@ -61,6 +58,7 @@ class StoriForm extends React.Component {
               </div>
               <div className="form-primary primary flex-column">
                 <label htmlFor="author">By*</label>
+                <Errors errorsArray={this.props.errors.author} />
                 <input
                   id="author"
                   placeholder="The primary author, artist, or creator"
@@ -68,8 +66,10 @@ class StoriForm extends React.Component {
                   type="text"
                 />
                 <label htmlFor="title">Title*</label>
+                <Errors errorsArray={this.props.errors.title} />
                 <input id="title" onChange={this.update('title')} placeholder="Title" type="text" />
-                <label>Text*</label>
+                <label htmlFor="contentQuill">Text*</label>
+                <Errors errorsArray={this.props.errors.content} />
                 <div id="contentQuill" />
               </div>
               <div className="column">
@@ -91,7 +91,11 @@ StoriForm.propTypes = {
   router: React.PropTypes.shape({
     push: React.PropTypes.func,
   }).isRequired,
-  errors: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  errors: React.PropTypes.shape({
+    title: React.PropTypes.array,
+    author: React.PropTypes.array,
+    content: React.PropTypes.array,
+  }).isRequired,
 };
 
 export default withRouter(StoriForm);

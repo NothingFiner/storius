@@ -24,6 +24,11 @@ class Index extends React.Component {
 
 Index.propTypes = {
   fetchStoris: React.PropTypes.func.isRequired,
+  storis: React.PropTypes.arrayOf(React.PropTypes.object),
+};
+
+Index.defaultProps = {
+  storis: [],
 };
 
 export default Index;

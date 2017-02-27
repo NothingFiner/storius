@@ -13,7 +13,7 @@ const Comments = ({ comments }) => {
 };
 
 Comments.propTypes = {
-  comments: React.PropTypes.object,
+  comments: React.PropTypes.shape({}),
 };
 
 Comments.defaultProps = {

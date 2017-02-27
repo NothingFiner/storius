@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { createComment } from '../../actions/comments';
 import CommentForm from './comments_form';
 
-const mapStateToProps = ({ session, storis }) => ({
+const mapStateToProps = ({ errors, session, storis }) => ({
   loggedIn: !!session.currentUser,
-  errors: storis.errors,
+  errors,
   storiId: storis.stori.id,
 });
 
