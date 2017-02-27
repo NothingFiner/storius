@@ -92,7 +92,7 @@ Stori.propTypes = {
     user_id: React.PropTypes.number,
     comments: React.PropTypes.object,
     audio_video: React.PropTypes.object,
-    image_url: React.PropTypes,
+    image_url: React.PropTypes.string,
   }).isRequired,
 };
 
