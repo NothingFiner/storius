@@ -55,8 +55,8 @@ class StoriBody extends React.Component {
     return top > 0 ? top : 0;
   }
 
-  parseAnnotations(annotationArray = this.props.stori.annotations) {
-    values(annotationArray).forEach((annotation) => {
+  parseAnnotations(annotations = this.props.stori.annotations) {
+    values(annotations).forEach((annotation) => {
       this.quill.formatText(annotation.start_idx, annotation.length, 'annotation', annotation.id);
       const lines = document.querySelectorAll(`span[data-annotation-id="${annotation.id}"]`);
       Array.from(lines).forEach((line) => {
@@ -67,6 +67,7 @@ class StoriBody extends React.Component {
           lines.forEach(l => l.classList.remove('active'));
         });
         line.addEventListener('click', () => {
+          lines.forEach(l => l.classList.add('open'));
           this.props.selectAnnotation(annotation.id);
           if (!this.props.showAnnotation) {
             this.openAnnotation();
@@ -93,6 +94,7 @@ class StoriBody extends React.Component {
       this.props.toggleAnnotation();
     }
     this.props.clearSelection();
+    this.parseAnnotations();
   }
 
   handleSelection(range, oldRange) {
