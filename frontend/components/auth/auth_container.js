@@ -3,9 +3,9 @@ import Auth from './auth';
 import { toggleAuthModal, setAuthFormType, signup, login } from '../../actions/session';
 
 
-const mapStateToProps = ({ session }) => ({
+const mapStateToProps = ({ errors, session }) => ({
   currentUser: session.currentUser,
-  errors: session.errors,
+  errors,
   modalIsOpen: session.modalIsOpen,
   formType: session.formType,
 });

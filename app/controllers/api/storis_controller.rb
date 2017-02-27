@@ -16,7 +16,7 @@ class Api::StorisController < ApplicationController
     if @stori.save
       render :show
     else
-      render json: @stori.errors.full_messages, status: 422
+      render json: @stori.errors, status: 422
     end
   end
 
@@ -25,7 +25,7 @@ class Api::StorisController < ApplicationController
     if current_user.id == @stori.user_id && @stori.update(stori_params)
       render :show
     else
-      render json: @stori.errors.full_messages, status: 422
+      render json: @stori.errors, status: 422
     end
   end
 
@@ -34,7 +34,7 @@ class Api::StorisController < ApplicationController
     if @stori.destroy
       render json: @stori.id
     else
-      render json: @stori.errors.full_messages, status: 401
+      render json: @stori.errors, status: 401
     end
   end
 

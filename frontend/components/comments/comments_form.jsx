@@ -1,4 +1,5 @@
 import React from 'react';
+import Errors from '../errors/errors';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -27,17 +28,14 @@ class CommentForm extends React.Component {
 
   render() {
     if (!this.props.loggedIn) return null;
-    const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <form onSubmit={this.handleSubmit} className="bg-brand-white comment-form">
-        <ul>
-          {errors}
-        </ul>
         <div className="profile-icon">
           <img alt="header-profile" src={window.images.storiusTriple} />
         </div>
         <textArea onChange={this.handleChange} id="commentContent" value={this.state.content} />
         <button className="btn btn-square green">Add Comment</button>
+        <Errors errorsArray={this.props.errors.content} />
       </form>
     );
   }
@@ -45,7 +43,9 @@ class CommentForm extends React.Component {
 
 CommentForm.propTypes = {
   storiId: React.PropTypes.number.isRequired,
-  errors: React.PropTypes.arrayOf(React.PropTypes.string),
+  errors: React.PropTypes.shape({
+    content: React.PropTypes.array,
+  }).isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
   createComment: React.PropTypes.func.isRequired,
 };

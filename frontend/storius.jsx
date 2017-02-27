@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloadedState = {
       session: {
         currentUser: window.currentUser,
-        errors: [],
         modalIsOpen: false,
         formType: 'login',
       },
+      errors: {},
     };
     store = configureStore(preloadedState);
   } else {

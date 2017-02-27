@@ -50,7 +50,6 @@ class AuthModal extends React.Component {
     const buttonStyle = {
       display: this.props.modalIsOpen ? 'block' : 'none',
     };
-    const errors = this.props.errors.map((error, i) => <li key={`error-${i}`}>{error}</li>);
     return (
       <div>
         <button
@@ -73,14 +72,12 @@ class AuthModal extends React.Component {
             <i className="fa fa-user-circle-o" />
             Guest Login
           </button>
-          <ul className="form-header">
-            { errors }
-          </ul>
           <AuthForm
             formType={this.props.formType}
             setAuthFormType={this.props.setAuthFormType}
             submitHandler={this.submitHandler()}
             toggleAuthModal={this.props.toggleAuthModal}
+            errors={this.props.errors}
           />
         </Modal>
       </div>
@@ -90,7 +87,11 @@ class AuthModal extends React.Component {
 
 AuthModal.propTypes = {
   formType: React.PropTypes.string.isRequired,
-  errors: React.PropTypes.arrayOf(React.PropTypes.string),
+  errors: React.PropTypes.shape({
+    username: React.PropTypes.array,
+    email: React.PropTypes.array,
+    password: React.PropTypes.array,
+  }).isRequired,
   setAuthFormType: React.PropTypes.func.isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
   modalIsOpen: React.PropTypes.bool.isRequired,

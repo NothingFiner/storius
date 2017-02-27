@@ -1,12 +1,10 @@
 import { merge } from 'lodash';
-import { RECEIVE_ERRORS } from '../actions/errors';
 import { RECEIVE_STORIS, RECEIVE_STORI, CLEAR_STORI, REMOVE_STORI_ANNOTATION, UPDATE_SELECTION, CLEAR_SELECTION, RECEIVE_STORI_ANNOTATION, REMOVE_STORI } from '../actions/storis';
 import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../actions/comments';
 import { UPVOTE_ACTIONS, DOWNVOTE_ACTIONS } from '../actions/votes';
 
 const defaultStoris = {
-  storis: {},
-  errors: [],
+  storis: [],
   stori: {},
   selection: {
     start_idx: 0,
@@ -23,15 +21,9 @@ const StorisReducer = (state = defaultStoris, action) => {
     case RECEIVE_STORI:
       newState.stori = action.stori;
       return newState;
-    case RECEIVE_ERRORS:
-      newState.errors = action.errors.responseJSON;
-      return newState;
+    case REMOVE_STORI:
     case CLEAR_STORI:
       newState.stori = {};
-      return newState;
-    case REMOVE_STORI:
-      newState.stori = {};
-      delete newState.storis[action.id];
       return newState;
     case RECEIVE_STORI_ANNOTATION:
       if (!newState.stori.annotations) {

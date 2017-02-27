@@ -6,7 +6,7 @@ class Api::CommentsController < ApplicationController
     if @comment.save
       render :show
     else
-      render json: @comment.errors.full_messages, status: 422
+      render json: @comment.errors, status: 422
     end
   end
 
@@ -15,7 +15,7 @@ class Api::CommentsController < ApplicationController
     if @comment.update(comments_params)
       render :show
     else
-      render json: @comment.errors.full_messages, status: 422
+      render json: @comment.errors, status: 422
     end
   end
 
@@ -24,7 +24,7 @@ class Api::CommentsController < ApplicationController
     if @comment.destroy
       render json: @comment.id
     else
-      render json: @comment.errors.full_messages, status: 401
+      render json: @comment.errors, status: 401
     end
   end
 

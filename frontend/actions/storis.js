@@ -20,6 +20,11 @@ export const receiveStori = stori => ({
   stori,
 });
 
+export const removeStori = storiId => ({
+  type: REMOVE_STORI,
+  storiId,
+});
+
 export const clearStori = () => ({
   type: CLEAR_STORI,
 });
@@ -63,5 +68,5 @@ export const updateStori = stori => dispatch => (
 
 export const deleteStori = storiId => dispatch => (
   APIStoriUtil.deleteStori(storiId)
-    .then(data => dispatch(receiveErrors(data)), errors => dispatch(receiveErrors(errors)))
+    .then(data => dispatch(removeStori(data)), errors => dispatch(receiveErrors(errors)))
 );

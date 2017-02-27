@@ -1,5 +1,4 @@
 import { merge } from 'lodash';
-import { RECEIVE_ERRORS } from '../actions/errors';
 import { RECEIVE_ANNOTATION, CLEAR_ANNOTATION, TOGGLE_ANNOTATION, TOGGLE_EDIT, REMOVE_ANNOTATION, SELECT_ANNOTATION } from '../actions/annotations';
 import { UPVOTE_ACTIONS, DOWNVOTE_ACTIONS } from '../actions/votes';
 
@@ -7,7 +6,6 @@ const defaultAnnotation = {
   showAnnotation: false,
   editing: false,
   annotation: {},
-  errors: [],
   selectedId: null,
 };
 
@@ -34,9 +32,6 @@ const AnnotationsReducer = (state = defaultAnnotation, action) => {
       return newState;
     case TOGGLE_EDIT:
       newState.editing = !state.editing;
-      return newState;
-    case RECEIVE_ERRORS:
-      newState.errors = action.errors.responseJSON;
       return newState;
     case CLEAR_ANNOTATION:
       newState.annotation = {};
