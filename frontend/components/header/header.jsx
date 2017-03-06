@@ -70,18 +70,11 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
           <i className="fa fa-github" />
         </a>
         <a
-          href="https://www.instagram.com/hashtag_durbatuluk/"
+          href="https://www.linkedin.com/in/efiner/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i className="fa fa-instagram" />
-        </a>
-        <a
-          href="https://www.youtube.com/watch?v=2HQaBWziYvY"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fa fa-youtube-play" />
+          <i className="fa fa-linkedin" />
         </a>
       </header>
     </div>
