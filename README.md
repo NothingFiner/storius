@@ -27,6 +27,27 @@ A logged in User can create a Stori by clicking on the 'Add a Stori' link in the
 
 **Viewing Annotations**
 
-In the every Stori's text annotations appear as gray highlights. Any user can click  one of these highlights to bring up the associated annotation.
+In the every Stori's text, annotations appear as gray highlights.
+
+An Annotation's highlighting turns yellow when a user mouses over it.
+
+
+Any user can click  one of these highlights to bring up the associated annotation.
+
+Logged in users can edit and vote on annotations.
 
 **Creating Annotations**
+
+When the annotation panel is not open, users can use the mouse to select the text they wish to annotate.
+
+If they are not logged in they will be directed to log in.
+
+Clicking on the start annotation button will bring up the annotation panel with an 'id' of null, indicating to the application that this is a new annotation. Because of this annotations do not have a dedicated form component.
+
+### Comments
+
+At the bottom of every Stori is a space for comments.
+
+Logged in users can create new comments.
+
+They can also vote on those comments.
