@@ -2,13 +2,13 @@
 #
 # Table name: votes
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer          not null
-#  votable_id :integer          not null
-#  type       :string           not null
-#  status     :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  user_id      :integer          not null
+#  votable_id   :integer          not null
+#  votable_type :string           not null
+#  status       :integer          not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class Vote < ApplicationRecord
