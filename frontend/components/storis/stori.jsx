@@ -11,7 +11,14 @@ class Stori extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchStori();
+    this.props.fetchStori(this.props.storiId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.storiId !== nextProps.storiId) {
+      this.props.clearStori();
+      this.props.fetchStori(nextProps.storiId);
+    }
   }
 
   componentWillUnmount() {
@@ -93,7 +100,9 @@ Stori.propTypes = {
     comments: React.PropTypes.object,
     audio_video: React.PropTypes.object,
     image_url: React.PropTypes.string,
+    id: React.PropTypes.number,
   }).isRequired,
+  storiId: React.PropTypes.number.isRequired,
 };
 
 Stori.defaultProps = {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
+import SearchResults from './search';
 
 
-const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
+const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search, results }) => {
   const openLogin = () => {
     setAuthFormType('login');
     toggleAuthModal();
@@ -12,6 +13,12 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
     setAuthFormType('signup');
     toggleAuthModal();
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    search(e.currentTarget.value);
+  };
+
   const AuthActions = () => (
     <div>
       <span className="header-action" onClick={openLogin}>Log In</span>
@@ -41,7 +48,15 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
   return (
     <div className="header">
       <header className="header-primary">
-        <input className="header-searchbar" type="text" placeholder="SEARCH" />
+        <div className="search-section">
+          <input
+            className="header-searchbar"
+            onChange={handleSearch}
+            type="text"
+            placeholder="SEARCH"
+          />
+          <SearchResults results={results} />
+        </div>
         <div className="logo-link">
           <Link to="/" className="logo-link">
             STORIUS
@@ -83,8 +98,10 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType }) => {
 
 Header.propTypes = {
   logout: React.PropTypes.func.isRequired,
+  results: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   toggleAuthModal: React.PropTypes.func.isRequired,
   setAuthFormType: React.PropTypes.func.isRequired,
+  search: React.PropTypes.func.isRequired,
   currentUser: React.PropTypes.shape({
     id: React.PropTypes.integer,
     username: React.PropTypes.string,

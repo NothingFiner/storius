@@ -11,9 +11,10 @@ const mapStateToProps = ({ storis, session }) => ({
 const mapDispatchToProps = (dispatch, { params }) => {
   const storiId = params.id;
   return {
-    fetchStori: () => dispatch(fetchStori(storiId)),
+    fetchStori: id => dispatch(fetchStori(id)),
     clearStori: () => dispatch(clearStori()),
     deleteStori: () => dispatch(deleteStori(storiId)),
+    storiId,
   };
 };
 
