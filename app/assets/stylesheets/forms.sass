@@ -1,7 +1,19 @@
 .search-section
   .header-searchbar
     border: none !important
+    padding: .4rem 2rem .3rem .5rem
     box-shadow: 0 0 3px #e9e9e9 inset
+    font-weight: 500
+    &::-webkit-input-placeholder
+      color: $black-font
+      font-family: $rubik
+    &:focus::-webkit-input-placeholder
+      color: $brand-md-gray
+    &:focus
+      box-shadow: none
+  &>span
+    margin-left: -1.8rem
+    cursor: pointer
   .searchResults
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)
     display: none
@@ -41,7 +53,7 @@
           font-size: .75rem
           margin-top: .125rem
 
-  .header-searchbar:focus + .searchResults, .searchResults:active
+  .header-searchbar:focus ~ .searchResults, .searchResults:active
     display: block
 
 .form-header

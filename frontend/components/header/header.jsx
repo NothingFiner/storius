@@ -53,8 +53,11 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search,
             className="header-searchbar"
             onChange={handleSearch}
             type="text"
-            placeholder="SEARCH"
+            placeholder="Search Storis"
           />
+          <span>
+            <i className="fa fa-search"/>
+          </span>
           <SearchResults results={results} />
         </div>
         <div className="logo-link">
