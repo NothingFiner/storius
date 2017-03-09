@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentUser: window.currentUser,
         modalIsOpen: false,
         formType: 'login',
+        searchResults: [],
       },
       errors: {},
     };

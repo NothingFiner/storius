@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223231342) do
+ActiveRecord::Schema.define(version: 20170309170930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
+  enable_extension "unaccent"
 
   create_table "annotations", force: :cascade do |t|
     t.integer  "start_idx",  null: false
@@ -35,6 +37,15 @@ ActiveRecord::Schema.define(version: 20170223231342) do
     t.datetime "updated_at", null: false
     t.index ["stori_id"], name: "index_comments_on_stori_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text     "content"
+    t.string   "searchable_type"
+    t.integer  "searchable_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
   end
 
   create_table "storis", force: :cascade do |t|
@@ -63,6 +74,7 @@ ActiveRecord::Schema.define(version: 20170223231342) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.text     "bio"
+    t.string   "image_url"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
