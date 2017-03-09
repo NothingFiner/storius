@@ -18,6 +18,9 @@
 
 class Stori < ApplicationRecord
   include Votable
+  include PgSearch
+
+  multisearchable :against => [:title, :author]
 
   validates :title, :author, :content, :user, presence: true
   validates :title, uniqueness: { scope: :author, message: 'Title can appear once per author.'}
