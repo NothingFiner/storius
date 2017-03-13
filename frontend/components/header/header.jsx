@@ -70,16 +70,9 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search,
         </div>
       </header>
       <header className="header-nav">
-        <Link to={'/#topSongs'}>top songs</Link>
+        <Link to={'/#topStoris'}>top storis</Link>
         <span>|</span>
         { UserNav() }
-        <a
-          href="https://www.facebook.com/elie.a.finer"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fa fa-facebook" />
-        </a>
         <a
           href="https://github.com/NothingFiner/storius"
           target="_blank"
