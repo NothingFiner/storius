@@ -28,7 +28,7 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search,
   const UserActions = () => (
     <div className="display-flex">
       <div style={{ marginRight: '.25rem' }} className="profile-icon">
-        <img alt="header-profile" src={window.images.storiusTriple} />
+        <img alt="header-profile" src={currentUser.photo_url} />
       </div>
       <span>{currentUser.username}</span>
       <span className="header-action" onClick={logout}>Sign Out</span>
