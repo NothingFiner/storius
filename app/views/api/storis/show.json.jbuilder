@@ -1,4 +1,5 @@
 json.extract! @stori, :id, :user_id, :title, :author, :content, :image_url, :metadata, :audio_video, :tags
+json.photo_url @stori.photo.url
 json.annotations do
   @stori.annotations.each do |annotation|
     json.set! annotation.id do
