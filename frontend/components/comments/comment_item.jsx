@@ -37,7 +37,7 @@ class CommentItem extends React.Component {
         <header className="comment-header display-flex-between">
           <div className="display-flex">
             <div className="profile-icon">
-              <img alt="header-profile" src={window.images.storiusTriple} />
+              <img alt="header-profile" src={window.comment.photo_url} />
             </div>
             <span>{this.props.comment.username}</span>
           </div>

@@ -43,7 +43,7 @@ class Stori extends React.Component {
       return <div className="loader" />;
     }
     const headerStyle = {
-      backgroundImage: `url(${this.props.stori.image_url || window.images.storiusYellow})`,
+      backgroundImage: `url(${this.props.stori.photo_url})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
     };
@@ -56,7 +56,7 @@ class Stori extends React.Component {
           <section className="column inner">
             <section className="primary">
               <div className="art">
-                <img alt="stori" src={this.props.stori.image_url || window.images.storiusMono} />
+                <img alt="stori" src={this.props.stori.photo_url} />
               </div>
               <div className="primary-info">
                 <h1>{this.props.stori.title}</h1>
