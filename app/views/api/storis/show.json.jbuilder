@@ -15,6 +15,7 @@ json.comments do
       json.username comment.user.username
       json.votes comment.num_votes
       json.userVote comment.user_vote(current_user.id) if logged_in?
+      json.photo_url comment.user.photo.url
     end
   end
 end

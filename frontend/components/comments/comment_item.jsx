@@ -32,12 +32,13 @@ class CommentItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.comment);
     return (
       <article className="comment">
         <header className="comment-header display-flex-between">
           <div className="display-flex">
             <div className="profile-icon">
-              <img alt="header-profile" src={window.comment.photo_url} />
+              <img alt="header-profile" src={this.props.comment.photo_url} />
             </div>
             <span>{this.props.comment.username}</span>
           </div>
