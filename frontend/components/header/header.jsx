@@ -3,15 +3,15 @@ import { Link } from 'react-router';
 import SearchResults from './search';
 
 
-const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search, results }) => {
+const Header = ({ currentUser, logout, toggleModal, setAuthFormType, search, results }) => {
   const openLogin = () => {
     setAuthFormType('login');
-    toggleAuthModal();
+    toggleModal();
   };
 
   const openSignup = () => {
     setAuthFormType('signup');
-    toggleAuthModal();
+    toggleModal();
   };
 
   const handleSearch = (e) => {
@@ -95,7 +95,7 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search,
 Header.propTypes = {
   logout: React.PropTypes.func.isRequired,
   results: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  toggleAuthModal: React.PropTypes.func.isRequired,
+  toggleModal: React.PropTypes.func.isRequired,
   setAuthFormType: React.PropTypes.func.isRequired,
   search: React.PropTypes.func.isRequired,
   currentUser: React.PropTypes.shape({

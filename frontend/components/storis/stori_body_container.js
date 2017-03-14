@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import StoriBody from './stori_body';
 import { toggleAnnotation, selectAnnotation } from '../../actions/annotations';
 import { updateSelection, clearSelection } from '../../actions/storis';
-import { toggleAuthModal } from '../../actions/session';
+import { toggleModal } from '../../actions/session';
 
 const mapStateToProps = ({ session, storis, annotation }) => {
   return {
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
   toggleAnnotation: () => dispatch(toggleAnnotation()),
   updateSelection: range => dispatch(updateSelection(range)),
   clearSelection: () => dispatch(clearSelection()),
-  toggleAuthModal: () => dispatch(toggleAuthModal()),
+  toggleModal: () => dispatch(toggleModal()),
   selectAnnotation: annotationId => dispatch(selectAnnotation(annotationId)),
 });
 

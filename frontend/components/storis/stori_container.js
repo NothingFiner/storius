@@ -3,7 +3,6 @@ import Stori from './stori';
 import { fetchStori, clearStori, deleteStori } from '../../actions/storis';
 
 const mapStateToProps = ({ storis, session }) => ({
-  loggedIn: !!session.currentUser,
   currentUser: session.currentUser,
   stori: storis.stori,
 });

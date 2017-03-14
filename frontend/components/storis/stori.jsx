@@ -71,7 +71,9 @@ class Stori extends React.Component {
         </section>
         <section className="column bg-white">
           <div className="primary margin-bottom-1rem">
-            <CommentFormContainer />
+            {
+              this.props.currentUser !== null ? <CommentFormContainer /> : null
+            }
             { this.props.stori
               ? <Comments comments={this.props.stori.comments} />
               : null
@@ -99,7 +101,7 @@ Stori.propTypes = {
     user_id: React.PropTypes.number,
     comments: React.PropTypes.object,
     audio_video: React.PropTypes.object,
-    image_url: React.PropTypes.string,
+    photo_url: React.PropTypes.string,
     id: React.PropTypes.number,
   }).isRequired,
   storiId: React.PropTypes.number.isRequired,

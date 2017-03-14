@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { logout, toggleAuthModal, setAuthFormType } from '../../actions/session';
+import { logout, toggleModal, setAuthFormType } from '../../actions/session';
 import { getSearchResults } from '../../actions/searches';
 import Header from './header';
 
@@ -12,7 +12,7 @@ const mapStateToProps = ({ session }) => ({
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  toggleAuthModal: () => dispatch(toggleAuthModal()),
+  toggleModal: () => dispatch(toggleModal()),
   setAuthFormType: formType => dispatch(setAuthFormType(formType)),
   search: query => dispatch(getSearchResults(query)),
 });

@@ -136,7 +136,7 @@ class StoriBody extends React.Component {
     }
     return (
       <button
-        onClick={this.props.toggleAuthModal}
+        onClick={this.props.toggleModal}
         className="btn btn-square"
       >
         Sign In to Annotate
@@ -197,7 +197,7 @@ StoriBody.propTypes = {
   toggleAnnotation: React.PropTypes.func.isRequired,
   selectAnnotation: React.PropTypes.func.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
-  toggleAuthModal: React.PropTypes.func.isRequired,
+  toggleModal: React.PropTypes.func.isRequired,
   selectedId: React.PropTypes.number,
   clearSelection: React.PropTypes.func.isRequired,
 };
