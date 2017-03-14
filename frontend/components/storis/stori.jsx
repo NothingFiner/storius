@@ -38,6 +38,17 @@ class Stori extends React.Component {
     return null;
   }
 
+  editButton() {
+    if (this.props.currentUser !== null) {
+      return (
+        <button className="btn-edit" onClick={this.props.toggleModal}>
+          <i className="fa fa-pencil" />
+        </button>
+      );
+    }
+    return null;
+  }
+
   render() {
     if (!this.props.stori.title) {
       return <div className="loader" />;
@@ -57,6 +68,7 @@ class Stori extends React.Component {
             <section className="primary">
               <div className="art">
                 <img alt="stori" src={this.props.stori.photo_url} />
+                { this.editButton() }
               </div>
               <div className="primary-info">
                 <h1>{this.props.stori.title}</h1>
@@ -105,6 +117,7 @@ Stori.propTypes = {
     id: React.PropTypes.number,
   }).isRequired,
   storiId: React.PropTypes.number.isRequired,
+  toggleModal: React.PropTypes.func.isRequired,
 };
 
 Stori.defaultProps = {

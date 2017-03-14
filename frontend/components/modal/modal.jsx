@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import AuthFormContainer from './auth_form_container';
+import EditStoriContainer from './edit_stori_container';
 
 const customStyles = {
   overlay: {
@@ -33,7 +34,7 @@ class FormModal extends React.Component {
   }
 
   render() {
-    if (this.props.currentUser !== null) {
+    if (this.props.currentUser !== null && !this.props.storiShow) {
       return null;
     }
     const buttonStyle = {
@@ -53,7 +54,7 @@ class FormModal extends React.Component {
           style={customStyles}
           contentLabel="Storiu Modal"
         >
-          <AuthFormContainer />
+          {this.props.currentUser === null ? <AuthFormContainer /> : <EditStoriContainer />}
         </Modal>
       </div>
     );
@@ -69,6 +70,7 @@ FormModal.propTypes = {
     email: React.PropTypes.string,
     bio: React.PropTypes.string,
   }),
+  storiShow: React.PropTypes.bool.isRequired,
 };
 
 FormModal.defaultProps = {
