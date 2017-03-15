@@ -50,18 +50,20 @@ class EditStoriForm extends React.Component {
   render() {
     return (
       <div>
-        <h3>Edit Stori Details</h3>
+        <h3 className="form-header">Edit Stori Details</h3>
         <form onSubmit={this.handleSubmit}>
-          <input type="file" onChange={this.updatePhoto} />
-          <label htmlFor="writer">Writing Credits</label>
-          <input id="writer" onChange={this.update('writer')} placeholder="Writers" type="text" value={this.state.writer}/>
-          <label htmlFor="production">Production Credits</label>
-          <input id="production" onChange={this.update('production')} placeholder="Producers" type="text" value={this.state.production} />
-          <label htmlFor="editor">Editing Credits</label>
-          <input id="editor" onChange={this.update('editor')} placeholder="Editors" type="text" value={this.state.editor}/>
-          <label htmlFor="youtube">Youtube URL</label>
-          <input id="youtube" onChange={this.update('youtube')} placeholder="youtube.com/watch?v=2HQaBWziYvY" type="text" value={this.state.youtube} />
-          <button className="btn btn-square">Save</button>
+          <div className="form-primary primary flex-column margin-top-1rem">
+            <input type="file" onChange={this.updatePhoto} />
+            <label htmlFor="writer">Writing Credits</label>
+            <input id="writer" onChange={this.update('writer')} placeholder="Writers" type="text" value={this.state.writer}/>
+            <label htmlFor="production">Production Credits</label>
+            <input id="production" onChange={this.update('production')} placeholder="Producers" type="text" value={this.state.production} />
+            <label htmlFor="editor">Editing Credits</label>
+            <input id="editor" onChange={this.update('editor')} placeholder="Editors" type="text" value={this.state.editor}/>
+            <label htmlFor="youtube">Youtube URL</label>
+            <input id="youtube" onChange={this.update('youtube')} placeholder="youtube.com/watch?v=2HQaBWziYvY" type="text" value={this.state.youtube} />
+          </div>
+          <button className="btn btn-square margin-top-1rem">Save</button>
         </form>
       </div>
     );
