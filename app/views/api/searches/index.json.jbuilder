@@ -3,6 +3,6 @@ json.array! @results do |result|
   if result.searchable_type == 'Stori'
     json.title result.searchable.title
     json.author result.searchable.author
-    json.image_url result.searchable.image_url
+    json.photo_url result.searchable.photo.url
   end
 end

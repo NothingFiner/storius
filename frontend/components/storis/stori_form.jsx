@@ -26,6 +26,9 @@ class StoriForm extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   update(field) {
     return e => this.setState({
@@ -96,6 +99,7 @@ StoriForm.propTypes = {
     author: React.PropTypes.array,
     content: React.PropTypes.array,
   }).isRequired,
+  clearErrors: React.PropTypes.func.isRequired,
 };
 
 export default withRouter(StoriForm);

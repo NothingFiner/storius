@@ -32,7 +32,6 @@ class CommentItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.comment);
     return (
       <article className="comment">
         <header className="comment-header display-flex-between">
@@ -61,6 +60,7 @@ CommentItem.propTypes = {
     user_id: React.PropTypes.number,
     id: React.PropTypes.id,
     username: React.PropTypes.string,
+    photo_url: React.PropTypes.string,
   }).isRequired,
   currentUser: React.PropTypes.shape({
     id: React.PropTypes.number,

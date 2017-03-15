@@ -25,7 +25,7 @@ const Search = ({ results }) => {
                 <li key={`${storiResult.searchable_type}-${storiResult.searchable_id}`}>
                   <Link to={`storis/${storiResult.searchable_id}`}>
                     <div>
-                      <img alt={`result-art-${storiResult.title}`} src={storiResult.image_url} />
+                      <img alt={`result-art-${storiResult.title}`} src={storiResult.photo_url} />
                     </div>
                     <div>
                       {storiResult.title}
