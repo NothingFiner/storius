@@ -10,6 +10,10 @@ class StoriForm extends React.Component {
       content: '',
       title: '',
       author: '',
+      youtube: '',
+      writer: '',
+      production: '',
+      editor: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -42,6 +46,14 @@ class StoriForm extends React.Component {
       author: this.state.author,
       title: this.state.title,
       content: this.state.content,
+      metadata: {
+        editor: this.state.editor,
+        writer: this.state.writer,
+        production: this.state.production,
+      },
+      audio_video: {
+        youtube: this.state.youtube,
+      },
     };
     this.props.createStori(stori).then(data => (
        this.props.router.push(`storis/${data.stori.id}`)
@@ -75,10 +87,20 @@ class StoriForm extends React.Component {
                 <Errors errorsArray={this.props.errors.content} />
                 <div id="contentQuill" />
               </div>
-              <div className="column">
-                <h3 className="width-full display-flex-between header-label">
-                  Additional Metadata
+              <div className="width-full display-flex-between header-label">
+                <h3>
+                  Additional Info
                 </h3>
+              </div>
+              <div className="form-primary primary flex-column">
+                <label htmlFor="writer">Writing Credits</label>
+                <input id="writer" onChange={this.update('writer')} placeholder="Writers" type="text" />
+                <label htmlFor="production">Production Credits</label>
+                <input id="production" onChange={this.update('production')} placeholder="Producers" type="text" />
+                <label htmlFor="editor">Editing Credits</label>
+                <input id="editor" onChange={this.update('editor')} placeholder="Editors" type="text" />
+                <label htmlFor="youtube">Youtube URL</label>
+                <input id="youtube" onChange={this.update('youtube')} placeholder="youtube.com/watch?v=2HQaBWziYvY" type="text" />
               </div>
               <button className="btn btn-dark">Submit</button>
             </form>

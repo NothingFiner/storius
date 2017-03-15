@@ -1,6 +1,8 @@
 import React from 'react';
 import Quill from 'quill';
 import { values, isEqual } from 'lodash';
+import getYouTubeID from 'get-youtube-id';
+import YouTube from 'react-youtube';
 import AnnotationBlot from '../../util/annotation_format';
 import AnnotationContainer from '../annotations/annotation_container';
 
@@ -144,6 +146,22 @@ class StoriBody extends React.Component {
     );
   }
 
+  youtubeEmbed() {
+    if (this.props.stori.audio_video.youtube) {
+      const videoId = getYouTubeID(this.props.stori.audio_video.youtube);
+      const opts = {
+        width: '400',
+      };
+      return (
+        <YouTube
+          videoId={videoId}
+          opts={opts}
+        />
+      );
+    }
+    return null;
+  }
+
 
   rightColumn() {
     if (this.props.length > 0 && !this.props.showAnnotation) {
@@ -157,6 +175,7 @@ class StoriBody extends React.Component {
     return (
       <p className="annotation-label">
         About {`"${this.props.stori.title}"`}
+        { this.youtubeEmbed() }
       </p>
     );
   }
