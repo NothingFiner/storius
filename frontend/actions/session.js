@@ -2,7 +2,7 @@ import * as APISessionUtil from '../util/session_api';
 import { receiveErrors } from './errors';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
-export const TOGGLE_AUTH_MODAL = 'TOGGLE_AUTH_MODAL';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const SET_AUTH_FORM_TYPE = 'SET_AUTH_FORM_TYPE';
 
 export const receiveCurrentUser = currentUser => ({
@@ -10,8 +10,8 @@ export const receiveCurrentUser = currentUser => ({
   currentUser,
 });
 
-export const toggleAuthModal = () => ({
-  type: TOGGLE_AUTH_MODAL,
+export const toggleModal = () => ({
+  type: TOGGLE_MODAL,
 });
 
 export const setAuthFormType = formType => ({

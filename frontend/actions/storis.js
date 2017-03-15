@@ -61,8 +61,8 @@ export const createStori = stori => dispatch => (
     .then(data => dispatch(receiveStori(data)), errors => dispatch(receiveErrors(errors)))
 );
 
-export const updateStori = stori => dispatch => (
-  APIStoriUtil.updateStori(stori)
+export const updateStori = (stori, id) => dispatch => (
+  APIStoriUtil.updateStori(stori, id)
     .then(data => dispatch(receiveStori(data)), errors => dispatch(receiveErrors(errors)))
 );
 

@@ -1,4 +1,5 @@
 json.extract! @stori, :id, :user_id, :title, :author, :content, :image_url, :metadata, :audio_video, :tags
+json.photo_url @stori.photo.url
 json.annotations do
   @stori.annotations.each do |annotation|
     json.set! annotation.id do
@@ -14,6 +15,7 @@ json.comments do
       json.username comment.user.username
       json.votes comment.num_votes
       json.userVote comment.user_vote(current_user.id) if logged_in?
+      json.photo_url comment.user.photo.url
     end
   end
 end

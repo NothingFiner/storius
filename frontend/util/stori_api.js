@@ -20,13 +20,15 @@ export const createStori = stori => (
   })
 );
 
-export const updateStori = stori => (
-  $.ajax({
+export const updateStori = (stori, id) => {
+  return $.ajax({
     method: 'PATCH',
-    url: `api/storis/${stori.id}`,
-    data: { stori },
-  })
-);
+    url: `api/storis/${id}`,
+    contentType: false,
+    processData: false,
+    data: stori,
+  });
+};
 
 export const deleteStori = storiId => (
   $.ajax({

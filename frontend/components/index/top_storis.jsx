@@ -32,7 +32,7 @@ const TopStoris = ({ storis }) => {
         <img
           className="stori-art"
           alt="top stori"
-          src={stori.image_url || window.images.storiusTriple}
+          src={stori.photo_url}
         />
         <div className="stori-text">
           { storiText() }

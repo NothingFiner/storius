@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { RECEIVE_CURRENT_USER, TOGGLE_AUTH_MODAL, SET_AUTH_FORM_TYPE } from '../actions/session';
+import { RECEIVE_CURRENT_USER, TOGGLE_MODAL, SET_AUTH_FORM_TYPE } from '../actions/session';
 import { RECEIVE_SEARCH_RESULTS } from '../actions/searches';
 
 const defaultSession = {
@@ -15,7 +15,7 @@ const SessionReducer = (state = defaultSession, action) => {
     case RECEIVE_CURRENT_USER:
       newState.currentUser = action.currentUser;
       return newState;
-    case TOGGLE_AUTH_MODAL:
+    case TOGGLE_MODAL:
       newState.modalIsOpen = !state.modalIsOpen;
       return newState;
     case SET_AUTH_FORM_TYPE:

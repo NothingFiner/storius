@@ -3,15 +3,15 @@ import { Link } from 'react-router';
 import SearchResults from './search';
 
 
-const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search, results }) => {
+const Header = ({ currentUser, logout, toggleModal, setAuthFormType, search, results }) => {
   const openLogin = () => {
     setAuthFormType('login');
-    toggleAuthModal();
+    toggleModal();
   };
 
   const openSignup = () => {
     setAuthFormType('signup');
-    toggleAuthModal();
+    toggleModal();
   };
 
   const handleSearch = (e) => {
@@ -28,7 +28,7 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search,
   const UserActions = () => (
     <div className="display-flex">
       <div style={{ marginRight: '.25rem' }} className="profile-icon">
-        <img alt="header-profile" src={window.images.storiusTriple} />
+        <img alt="header-profile" src={currentUser.photo_url} />
       </div>
       <span>{currentUser.username}</span>
       <span className="header-action" onClick={logout}>Sign Out</span>
@@ -70,16 +70,9 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search,
         </div>
       </header>
       <header className="header-nav">
-        <Link to={'/#topSongs'}>top songs</Link>
+        <Link to={'/#topStoris'}>top storis</Link>
         <span>|</span>
         { UserNav() }
-        <a
-          href="https://www.facebook.com/elie.a.finer"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fa fa-facebook" />
-        </a>
         <a
           href="https://github.com/NothingFiner/storius"
           target="_blank"
@@ -102,7 +95,7 @@ const Header = ({ currentUser, logout, toggleAuthModal, setAuthFormType, search,
 Header.propTypes = {
   logout: React.PropTypes.func.isRequired,
   results: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  toggleAuthModal: React.PropTypes.func.isRequired,
+  toggleModal: React.PropTypes.func.isRequired,
   setAuthFormType: React.PropTypes.func.isRequired,
   search: React.PropTypes.func.isRequired,
   currentUser: React.PropTypes.shape({

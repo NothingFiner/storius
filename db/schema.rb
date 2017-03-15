@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309170930) do
+ActiveRecord::Schema.define(version: 20170313193632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,17 +49,21 @@ ActiveRecord::Schema.define(version: 20170309170930) do
   end
 
   create_table "storis", force: :cascade do |t|
-    t.string   "title",                         null: false
-    t.string   "author",                        null: false
-    t.text     "content",                       null: false
+    t.string   "title",                           null: false
+    t.string   "author",                          null: false
+    t.text     "content",                         null: false
     t.string   "image_url"
     t.string   "header_image_url"
-    t.text     "tags",             default: [],              array: true
-    t.json     "audio_video",      default: {}
-    t.json     "metadata",         default: {}
-    t.integer  "user_id",                       null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.text     "tags",               default: [],              array: true
+    t.json     "audio_video",        default: {}
+    t.json     "metadata",           default: {}
+    t.integer  "user_id",                         null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
     t.index ["author"], name: "index_storis_on_author", using: :btree
     t.index ["title", "author"], name: "index_storis_on_title_and_author", unique: true, using: :btree
     t.index ["title"], name: "index_storis_on_title", using: :btree
@@ -67,14 +71,18 @@ ActiveRecord::Schema.define(version: 20170309170930) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",        null: false
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "username",           null: false
+    t.string   "email",              null: false
+    t.string   "password_digest",    null: false
+    t.string   "session_token",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.text     "bio"
     t.string   "image_url"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree

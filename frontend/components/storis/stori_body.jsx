@@ -1,6 +1,8 @@
 import React from 'react';
 import Quill from 'quill';
 import { values, isEqual } from 'lodash';
+import getYouTubeID from 'get-youtube-id';
+import YouTube from 'react-youtube';
 import AnnotationBlot from '../../util/annotation_format';
 import AnnotationContainer from '../annotations/annotation_container';
 
@@ -136,12 +138,28 @@ class StoriBody extends React.Component {
     }
     return (
       <button
-        onClick={this.props.toggleAuthModal}
+        onClick={this.props.toggleModal}
         className="btn btn-square"
       >
         Sign In to Annotate
       </button>
     );
+  }
+
+  youtubeEmbed() {
+    if (this.props.stori.audio_video.youtube) {
+      const videoId = getYouTubeID(this.props.stori.audio_video.youtube);
+      const opts = {
+        width: '400',
+      };
+      return (
+        <YouTube
+          videoId={videoId}
+          opts={opts}
+        />
+      );
+    }
+    return null;
   }
 
 
@@ -157,6 +175,7 @@ class StoriBody extends React.Component {
     return (
       <p className="annotation-label">
         About {`"${this.props.stori.title}"`}
+        { this.youtubeEmbed() }
       </p>
     );
   }
@@ -197,7 +216,7 @@ StoriBody.propTypes = {
   toggleAnnotation: React.PropTypes.func.isRequired,
   selectAnnotation: React.PropTypes.func.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
-  toggleAuthModal: React.PropTypes.func.isRequired,
+  toggleModal: React.PropTypes.func.isRequired,
   selectedId: React.PropTypes.number,
   clearSelection: React.PropTypes.func.isRequired,
 };

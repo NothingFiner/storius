@@ -11,7 +11,12 @@ class AuthForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.loginGuest = this.loginGuest.bind(this);
     this.switchForm = this.switchForm.bind(this);
+  }
+
+  submitHandler() {
+    return this.props.formType === 'login' ? this.props.login : this.props.signup;
   }
 
   handleSubmit(e) {
@@ -20,8 +25,8 @@ class AuthForm extends React.Component {
     if (this.isSignup()) {
       user.email = this.state.email;
     }
-    this.props.submitHandler(user).then(() => {
-      this.props.toggleAuthModal();
+    this.submitHandler()(user).then(() => {
+      this.props.toggleModal();
     });
   }
 
@@ -29,6 +34,12 @@ class AuthForm extends React.Component {
     return e => this.setState({
       [field]: e.currentTarget.value,
     });
+  }
+
+
+  loginGuest() {
+    const guest = { username: 'guest', password: 'elierules' };
+    this.props.login(guest).then(this.props.toggleModal());
   }
 
   otherAuth() {
@@ -66,6 +77,14 @@ class AuthForm extends React.Component {
   render() {
     return (
       <div>
+        <h3 className="form-header">{ this.props.formType === 'login' ? 'LOG IN TO ' : 'SIGN UP FOR ' }STORIUS</h3>
+        <button
+          onClick={this.loginGuest}
+          className="margin-top-1rem btn btn-square btn-auth"
+        >
+          <i className="fa fa-user-circle-o" />
+          Guest Login
+        </button>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <Errors errorsArray={this.props.errors.username} />
@@ -108,13 +127,14 @@ class AuthForm extends React.Component {
 AuthForm.propTypes = {
   formType: React.PropTypes.string.isRequired,
   setAuthFormType: React.PropTypes.func.isRequired,
-  submitHandler: React.PropTypes.func.isRequired,
-  toggleAuthModal: React.PropTypes.func.isRequired,
+  toggleModal: React.PropTypes.func.isRequired,
   errors: React.PropTypes.shape({
     username: React.PropTypes.array,
     email: React.PropTypes.array,
     password: React.PropTypes.array,
   }).isRequired,
+  login: React.PropTypes.func.isRequired,
+  signup: React.PropTypes.func.isRequired,
 };
 
 export default AuthForm;

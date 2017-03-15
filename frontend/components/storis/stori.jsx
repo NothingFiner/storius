@@ -38,12 +38,23 @@ class Stori extends React.Component {
     return null;
   }
 
+  editButton() {
+    if (this.props.currentUser !== null) {
+      return (
+        <button className="btn-edit" onClick={this.props.toggleModal}>
+          <i className="fa fa-pencil" />
+        </button>
+      );
+    }
+    return null;
+  }
+
   render() {
     if (!this.props.stori.title) {
       return <div className="loader" />;
     }
     const headerStyle = {
-      backgroundImage: `url(${this.props.stori.image_url || window.images.storiusYellow})`,
+      backgroundImage: `url(${this.props.stori.photo_url})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
     };
@@ -56,7 +67,8 @@ class Stori extends React.Component {
           <section className="column inner">
             <section className="primary">
               <div className="art">
-                <img alt="stori" src={this.props.stori.image_url || window.images.storiusMono} />
+                <img alt="stori" src={this.props.stori.photo_url} />
+                { this.editButton() }
               </div>
               <div className="primary-info">
                 <h1>{this.props.stori.title}</h1>
@@ -71,7 +83,9 @@ class Stori extends React.Component {
         </section>
         <section className="column bg-white">
           <div className="primary margin-bottom-1rem">
-            <CommentFormContainer />
+            {
+              this.props.currentUser !== null ? <CommentFormContainer /> : null
+            }
             { this.props.stori
               ? <Comments comments={this.props.stori.comments} />
               : null
@@ -99,10 +113,11 @@ Stori.propTypes = {
     user_id: React.PropTypes.number,
     comments: React.PropTypes.object,
     audio_video: React.PropTypes.object,
-    image_url: React.PropTypes.string,
+    photo_url: React.PropTypes.string,
     id: React.PropTypes.number,
   }).isRequired,
   storiId: React.PropTypes.number.isRequired,
+  toggleModal: React.PropTypes.func.isRequired,
 };
 
 Stori.defaultProps = {

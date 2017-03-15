@@ -31,7 +31,7 @@ class CommentForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} className="bg-brand-white comment-form">
         <div className="profile-icon">
-          <img alt="header-profile" src={window.images.storiusTriple} />
+          <img alt="header-profile" src={this.props.avatar} />
         </div>
         <textArea onChange={this.handleChange} id="commentContent" value={this.state.content} />
         <button className="btn btn-square green">Add Comment</button>

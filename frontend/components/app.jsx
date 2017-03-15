@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderContainer from './header/header_container';
-import AuthContainer from './auth/auth_container';
+import ModalContainer from './modal/modal_container';
 
 const App = ({ children }) => (
   <div>
@@ -8,7 +8,7 @@ const App = ({ children }) => (
     <main>
       {children}
     </main>
-    <AuthContainer />
+    <ModalContainer />
   </div>
 );
 
