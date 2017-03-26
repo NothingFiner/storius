@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import SearchResults from './search';
 
-
+let delayTimer;
 const Header = ({ currentUser, logout, toggleModal, setAuthFormType, search, results }) => {
   const openLogin = () => {
     setAuthFormType('login');
@@ -14,9 +14,10 @@ const Header = ({ currentUser, logout, toggleModal, setAuthFormType, search, res
     toggleModal();
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    search(e.currentTarget.value);
+  const handleSearch = () => {
+    const query = document.getElementById('search').value;
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(() => search(query), 200);
   };
 
   const AuthActions = () => (
@@ -50,13 +51,14 @@ const Header = ({ currentUser, logout, toggleModal, setAuthFormType, search, res
       <header className="header-primary">
         <div className="search-section">
           <input
+            id="search"
             className="header-searchbar"
-            onChange={handleSearch}
+            onKeyUp={handleSearch}
             type="text"
             placeholder="Search Storis"
           />
           <span>
-            <i className="fa fa-search"/>
+            <i className="fa fa-search" />
           </span>
           <SearchResults results={results} />
         </div>
