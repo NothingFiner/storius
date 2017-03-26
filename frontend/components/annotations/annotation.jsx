@@ -59,6 +59,9 @@ class Annotation extends React.Component {
   }
 
   componentWillUnmount() {
+    if (this.props.editing === true) {
+      this.props.toggleEdit();
+    }
     this.props.clearSelection();
     this.props.clearAnnotation();
     this.props.clearErrors();
