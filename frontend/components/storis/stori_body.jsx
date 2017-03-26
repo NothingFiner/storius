@@ -5,6 +5,7 @@ import getYouTubeID from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import AnnotationBlot from '../../util/annotation_format';
 import AnnotationContainer from '../annotations/annotation_container';
+import AboutStori from './about_stori';
 
 Quill.register(AnnotationBlot);
 
@@ -175,6 +176,7 @@ class StoriBody extends React.Component {
     return (
       <p className="annotation-label">
         About {`"${this.props.stori.title}"`}
+        <AboutStori about={this.props.stori.metadata.about} />
         { this.youtubeEmbed() }
       </p>
     );
@@ -208,6 +210,8 @@ StoriBody.propTypes = {
     title: React.PropTypes.string,
     content: React.PropTypes.string,
     annotations: React.PropTypes.object,
+    metadata: React.PropTypes.object,
+    audio_video: React.PropTypes.object,
   }).isRequired,
   updateSelection: React.PropTypes.func.isRequired,
   start_idx: React.PropTypes.number.isRequired,
