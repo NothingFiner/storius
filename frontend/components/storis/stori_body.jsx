@@ -174,11 +174,13 @@ class StoriBody extends React.Component {
       );
     }
     return (
-      <p className="annotation-label">
-        About {`"${this.props.stori.title}"`}
-        <AboutStori about={this.props.stori.metadata.about} />
+      <div>
+        <p className="annotation-label">
+          About {`"${this.props.stori.title}"`}
+        </p>
+        <AboutStori about={this.props.stori.metadata.about} update={this.props.updateStori} />
         { this.youtubeEmbed() }
-      </p>
+      </div>
     );
   }
 
@@ -223,6 +225,7 @@ StoriBody.propTypes = {
   toggleModal: React.PropTypes.func.isRequired,
   selectedId: React.PropTypes.number,
   clearSelection: React.PropTypes.func.isRequired,
+  updateStori: React.PropTypes.func.isRequired,
 };
 
 StoriBody.defaultProps = {
