@@ -255,3 +255,19 @@
     &:not([disabled])
       background: $brand-gray
       min-height: 11rem
+.ql-container .ql-editor
+  border: .15rem solid transparent
+  padding: .25rem
+  margin-bottom: 1rem
+.ql-container:not(.ql-disabled) .ql-editor
+  border-color: $brand-gray
+  &:focus, &:active
+    box-shadow: $brand-purple 0 0 0.3em inset
+    outline: 0
+
+.ql-clipboard
+  left: -100000px
+  height: 1px
+  overflow-y: hidden
+  position: absolute
+  top: 50%

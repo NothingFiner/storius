@@ -13,10 +13,20 @@ class StoriBody extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      editLyrics: false,
+    };
+
     this.handleSelection = this.handleSelection.bind(this);
     this.handleNewAnnotation = this.handleNewAnnotation.bind(this);
     this.parseAnnotations = this.parseAnnotations.bind(this);
     this.closeAnnotation = this.closeAnnotation.bind(this);
+
+    if (this.props.stori.annotations === undefined) {
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.cancelLyrics = this.cancelLyrics.bind(this);
+      this.editLyrics = this.editLyrics.bind(this);
+    }
 
     if (this.props.showAnnotation === true) {
       this.props.toggleAnnotation();
@@ -70,6 +80,7 @@ class StoriBody extends React.Component {
           lines.forEach(l => l.classList.remove('active'));
         });
         line.addEventListener('click', () => {
+          document.querySelectorAll('.open').forEach(l => l.classList.remove('open'));
           lines.forEach(l => l.classList.add('open'));
           this.props.selectAnnotation(annotation.id);
           if (!this.props.showAnnotation) {
@@ -101,7 +112,7 @@ class StoriBody extends React.Component {
   }
 
   handleSelection(range, oldRange) {
-    if (this.props.showAnnotation) return;
+    if (this.props.showAnnotation || this.state.editLyrics) return;
     if (!range || range === oldRange ||
       this.containsAnnotation(this.quill.getContents(range.index, range.length))) {
       this.props.updateSelection({ index: 0, length: 0 });
@@ -184,12 +195,58 @@ class StoriBody extends React.Component {
     );
   }
 
+  handleSubmit() {
+    const stori = new FormData();
+    stori.append('stori[content]', JSON.stringify(this.quill.getContents()));
+    this.props.updateStori(stori).then(() => {
+      this.quill.disable();
+    });
+  }
+
+  cancelLyrics() {
+    this.setState({ editLyrics: false });
+    this.quill.setContents(JSON.parse(this.props.stori.content));
+    this.quill.disable();
+  }
+
+  editLyrics() {
+    this.setState({ editLyrics: true });
+    this.quill.enable();
+    this.quill.focus();
+  }
+
+
+  storiTextHeader() {
+    if (this.props.loggedIn && this.props.stori.annotations === undefined) {
+      if (this.state.editLyrics) {
+        return (
+          <div>
+            <button className="btn btn-square green" onClick={this.handleSubmit}>
+              Save
+            </button>
+            <button className="btn btn-square" onClick={this.cancelLyrics}>
+              Cancel
+            </button>
+          </div>
+        );
+      }
+      return (
+        <button className="btn btn-square" onClick={this.editLyrics}>Edit Lyrics</button>
+      );
+    }
+    return (
+      <h3>Text for {this.props.stori.title}</h3>
+    );
+  }
+
   render() {
     return (
       <div>
         <section className="stori-content column bg-white">
           <div className="primary">
-            <h3>Text for {this.props.stori.title}</h3>
+            <header>
+              {this.storiTextHeader()}
+            </header>
             <div style={{ userSelect: this.props.showAnnotation ? 'none' : 'inherit' }} id="storiText" className="text" />
           </div>
           <div className="secondary margin-top-1rem">
