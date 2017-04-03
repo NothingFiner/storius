@@ -5,9 +5,18 @@ class AboutStori extends React.Component {
     super(props);
     this.state = {
       about: this.props.about,
+      editing: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.openEdit = this.openEdit.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.editing && !prevState.editing) {
+      this.aboutText.focus();
+    }
   }
 
   handleChange(e) {
@@ -20,15 +29,61 @@ class AboutStori extends React.Component {
     this.props.update(stori);
   }
 
-  render() {
+  handleCancel() {
+    this.setState({ about: this.props.about, editing: false });
+  }
+
+  openEdit() {
+    this.setState({ editing: true });
+  }
+
+  cancelButton() {
     return (
-      <div>
+      <button className="btn btn-square" onClick={this.handleCancel}>Cancel</button>
+    );
+  }
+
+  buttons() {
+    if (this.state.editing) {
+      return (
+        <div>
+          <button className="btn btn-square green" onClick={this.handleSubmit}>
+            {this.state.about === '' ? 'Submit' : 'Save'}
+          </button>
+          {this.cancelButton()}
+        </div>
+      );
+    } else if (this.state.about !== '') {
+      return (
+        <button className="btn btn-square" onClick={this.openEdit}>
+          Edit
+        </button>
+      );
+    }
+    return null;
+  }
+
+  AboutTextArea() {
+    if (this.state.editing || this.state.about !== '') {
+      return (
         <textArea
           value={this.state.about}
-          placeholder="tell us about this song"
           onChange={this.handleChange}
+          disabled={!this.state.editing}
+          ref={(textArea) => { this.aboutText = textArea; }}
         />
-      <button className="btn btn-square" onClick={this.handleSubmit}>Update</button>
+      );
+    }
+    return (
+      <input type="text" onClick={this.openEdit} placeholder="Tell us about this Stori" />
+    );
+  }
+
+  render() {
+    return (
+      <div className="about-box">
+        {this.AboutTextArea()}
+        {this.buttons()}
       </div>
     );
   }
