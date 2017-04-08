@@ -66,26 +66,26 @@ class AboutStori extends React.Component {
   }
 
   AboutTextArea() {
-    if (this.state.editing || this.state.about !== '') {
-      return (
-        <textArea
-          value={this.state.about}
-          onChange={this.handleChange}
-          disabled={!this.state.editing}
-          ref={(textArea) => { this.aboutText = textArea; }}
-        />
-      );
-    }
     return (
-      <input type="text" onClick={this.openEdit} placeholder="Tell us about this Stori" />
+      <textArea
+        value={this.state.about}
+        onChange={this.handleChange}
+        disabled={!this.state.editing}
+        ref={(textArea) => { this.aboutText = textArea; }}
+      />
     );
   }
 
   aboutDisplay() {
+    if (this.state.editing || this.state.about !== '') {
+      return (
+        <div className="about-display">
+          {this.state.about}
+        </div>
+      );
+    }
     return (
-      <div className="about-display">
-        {this.state.about}
-      </div>
+      <input type="text" onClick={this.openEdit} placeholder="Tell us about this Stori" />
     );
   }
 
