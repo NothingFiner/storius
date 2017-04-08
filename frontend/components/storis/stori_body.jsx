@@ -200,6 +200,7 @@ class StoriBody extends React.Component {
     stori.append('stori[content]', JSON.stringify(this.quill.getContents()));
     this.props.updateStori(stori).then(() => {
       this.quill.disable();
+      this.setState({ editLyrics: false });
     });
   }
 

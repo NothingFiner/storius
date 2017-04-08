@@ -26,7 +26,9 @@ class AboutStori extends React.Component {
   handleSubmit() {
     const stori = new FormData();
     stori.append('stori[metadata][about]', this.state.about);
-    this.props.update(stori);
+    this.props.update(stori).then(
+      () => this.setState({ editing: false }),
+    );
   }
 
   handleCancel() {
