@@ -79,10 +79,18 @@ class AboutStori extends React.Component {
     );
   }
 
+  aboutDisplay() {
+    return (
+      <div className="about-display">
+        {this.state.about}
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="about-box">
-        {this.AboutTextArea()}
+        {this.state.editing ? this.AboutTextArea() : this.aboutDisplay()}
         {this.buttons()}
       </div>
     );

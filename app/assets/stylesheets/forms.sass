@@ -244,14 +244,20 @@
       background: transparent
       border: none
 
+
+
 .about-box
   margin-bottom: 2.25rem
-  textarea, input
+  textarea, input, div
     width: 100%
-  textarea
+  .about-display
+    margin-bottom: 1rem
+  textarea, .about-display
     resize: none
     word-break: break-all
     hyphens: auto
+    word-wrap: normal
+  textarea
     &:not([disabled])
       background: $brand-gray
       min-height: 11rem
