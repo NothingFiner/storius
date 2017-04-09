@@ -70,14 +70,13 @@ class AboutStori extends React.Component {
       <textArea
         value={this.state.about}
         onChange={this.handleChange}
-        disabled={!this.state.editing}
         ref={(textArea) => { this.aboutText = textArea; }}
       />
     );
   }
 
   aboutDisplay() {
-    if (this.state.editing || this.state.about !== '') {
+    if (this.state.about !== '') {
       return (
         <div className="about-display">
           {this.state.about}
