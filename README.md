@@ -5,7 +5,7 @@
 
 [Storius Live][live]
 
-[live]: https://storius.herokuapp.com/#/
+[live]: http://storius.tech
 
 Storius is an app where users can access and contribute crowd-sourced annotations on any sort of text. It utilizes a Ruby on Rails backend with a PostgreSQL database. The front end is composed of React.js with a Redux architectural framework.  
 
