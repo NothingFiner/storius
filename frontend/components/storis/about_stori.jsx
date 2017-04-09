@@ -26,7 +26,9 @@ class AboutStori extends React.Component {
   handleSubmit() {
     const stori = new FormData();
     stori.append('stori[metadata][about]', this.state.about);
-    this.props.update(stori);
+    this.props.update(stori).then(
+      () => this.setState({ editing: false }),
+    );
   }
 
   handleCancel() {
@@ -53,7 +55,7 @@ class AboutStori extends React.Component {
           {this.cancelButton()}
         </div>
       );
-    } else if (this.state.about !== '') {
+    } else if (this.state.about !== '' && this.props.loggedIn) {
       return (
         <button className="btn btn-square" onClick={this.openEdit}>
           Edit
@@ -64,25 +66,34 @@ class AboutStori extends React.Component {
   }
 
   AboutTextArea() {
-    if (this.state.editing || this.state.about !== '') {
+    return (
+      <textArea
+        value={this.state.about}
+        onChange={this.handleChange}
+        ref={(textArea) => { this.aboutText = textArea; }}
+      />
+    );
+  }
+
+  aboutDisplay() {
+    if (this.state.about !== '') {
       return (
-        <textArea
-          value={this.state.about}
-          onChange={this.handleChange}
-          disabled={!this.state.editing}
-          ref={(textArea) => { this.aboutText = textArea; }}
-        />
+        <div className="about-display">
+          {this.state.about}
+        </div>
+      );
+    } else if (this.props.loggedIn) {
+      return (
+        <input type="text" onClick={this.openEdit} placeholder="Tell us about this Stori" />
       );
     }
-    return (
-      <input type="text" onClick={this.openEdit} placeholder="Tell us about this Stori" />
-    );
+    return null;
   }
 
   render() {
     return (
       <div className="about-box">
-        {this.AboutTextArea()}
+        {this.state.editing ? this.AboutTextArea() : this.aboutDisplay()}
         {this.buttons()}
       </div>
     );
@@ -92,6 +103,7 @@ class AboutStori extends React.Component {
 AboutStori.propTypes = {
   about: React.PropTypes.string,
   update: React.PropTypes.func.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
 };
 
 AboutStori.defaultProps = {

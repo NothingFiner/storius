@@ -226,6 +226,7 @@
   .comment-header, .comment-footer
     display: flex
     align-items: center
+    justify-content: space-between
     small
       font-size: .75em
       color: $brand-md-gray
@@ -233,25 +234,31 @@
     .profile-icon, button
       margin-right: .75rem
 
-  textarea
+  textarea, .comment-display
     margin-top: .75rem
     overflow: hidden
     resize: none
     word-break: break-all
     hyphens: auto
     width: 100%
-    &[disabled]
-      background: transparent
-      border: none
+  .comment-display
+    background: transparent
+    border: none
+
+
 
 .about-box
   margin-bottom: 2.25rem
-  textarea, input
+  textarea, input, div
     width: 100%
-  textarea
+  .about-display
+    margin-bottom: 1rem
+  textarea, .about-display
     resize: none
     word-break: break-all
     hyphens: auto
+    word-wrap: normal
+  textarea
     &:not([disabled])
       background: $brand-gray
       min-height: 11rem

@@ -6,9 +6,14 @@ class CommentItem extends React.Component {
     super(props);
     this.state = {
       content: this.props.comment.content,
+      editing: false,
     };
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.editContent = this.editContent.bind(this);
   }
 
   isUser() {
@@ -18,17 +23,69 @@ class CommentItem extends React.Component {
     return false;
   }
 
+  handleChange(e) {
+    this.setState({ content: e.currentTarget.value });
+  }
+
   handleDelete() {
     this.props.deleteComment(this.props.comment.id);
   }
 
+  handleSubmit() {
+    const comment = {
+      content: this.state.content,
+      id: this.props.comment.id,
+    };
+    this.props.updateComment(comment)
+      .then(
+        () => {
+          this.setState({ editing: false });
+        },
+      );
+  }
+
+  handleCancel() {
+    this.setState({
+      content: this.props.comment.content,
+      editing: false,
+    });
+  }
+
+  editContent() {
+    this.setState({ editing: true });
+  }
+
   buttons() {
     if (this.isUser()) {
+      if (this.state.editing) {
+        return (
+          <div>
+            <button onClick={this.handleSubmit} className="btn btn-square green">Save</button>
+            <button onClick={this.handleCancel} className="btn btn-square">Cancel</button>
+          </div>
+        )
+      }
       return (
-        <button className="btn btn-square" onClick={this.handleDelete}>Delete</button>
+        <div>
+          <button className="btn btn-square" onClick={this.editContent}>Edit</button>
+          <button className="btn btn-square" onClick={this.handleDelete}>Delete</button>
+        </div>
       );
     }
     return null;
+  }
+
+  commentBody() {
+    if (this.state.editing) {
+      return (
+        <textArea value={this.state.content} onChange={this.handleChange} />
+      );
+    }
+    return (
+      <div className="comment-display">
+        {this.state.content}
+      </div>
+    );
   }
 
   render() {
@@ -43,7 +100,7 @@ class CommentItem extends React.Component {
           </div>
           <small>{this.props.comment.created_at ? `${this.props.comment.created_at} ago` : 'Just now....'}</small>
         </header>
-        <textArea disabled value={this.state.content} />
+        {this.commentBody()}
         <div className="comment-footer">
           <VotesContainer votableId={this.props.comment.id} type="comments" />
           { this.buttons() }
@@ -66,6 +123,7 @@ CommentItem.propTypes = {
     id: React.PropTypes.number,
   }),
   deleteComment: React.PropTypes.func.isRequired,
+  updateComment: React.PropTypes.func.isRequired,
 };
 
 CommentItem.defaultProps = {
