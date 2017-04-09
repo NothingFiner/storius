@@ -232,7 +232,7 @@ class StoriBody extends React.Component {
         );
       }
       return (
-        <button className="btn btn-square" onClick={this.editLyrics}>Edit Lyrics</button>
+        <button className="btn btn-square" onClick={this.editLyrics}>Edit Text</button>
       );
     }
     return (
