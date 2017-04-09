@@ -55,7 +55,7 @@ class AboutStori extends React.Component {
           {this.cancelButton()}
         </div>
       );
-    } else if (this.state.about !== '') {
+    } else if (this.state.about !== '' && this.props.loggedIn) {
       return (
         <button className="btn btn-square" onClick={this.openEdit}>
           Edit
@@ -82,10 +82,12 @@ class AboutStori extends React.Component {
           {this.state.about}
         </div>
       );
+    } else if (this.props.loggedIn) {
+      return (
+        <input type="text" onClick={this.openEdit} placeholder="Tell us about this Stori" />
+      );
     }
-    return (
-      <input type="text" onClick={this.openEdit} placeholder="Tell us about this Stori" />
-    );
+    return null;
   }
 
   render() {
@@ -101,6 +103,7 @@ class AboutStori extends React.Component {
 AboutStori.propTypes = {
   about: React.PropTypes.string,
   update: React.PropTypes.func.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
 };
 
 AboutStori.defaultProps = {

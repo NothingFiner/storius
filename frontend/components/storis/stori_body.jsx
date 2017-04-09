@@ -189,7 +189,11 @@ class StoriBody extends React.Component {
         <p className="annotation-label">
           About {`"${this.props.stori.title}"`}
         </p>
-        <AboutStori about={this.props.stori.metadata.about} update={this.props.updateStori} />
+        <AboutStori
+          about={this.props.stori.metadata.about}
+          update={this.props.updateStori}
+          loggedIn={this.props.loggedIn}
+        />
         { this.youtubeEmbed() }
       </div>
     );
