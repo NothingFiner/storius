@@ -14,7 +14,7 @@ class StoriBody extends React.Component {
     super(props);
 
     this.state = {
-      editLyrics: false,
+      editText: false,
     };
 
     this.handleSelection = this.handleSelection.bind(this);
@@ -24,8 +24,8 @@ class StoriBody extends React.Component {
 
     if (this.props.stori.annotations === undefined) {
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.cancelLyrics = this.cancelLyrics.bind(this);
-      this.editLyrics = this.editLyrics.bind(this);
+      this.cancelText = this.cancelText.bind(this);
+      this.editText = this.editText.bind(this);
     }
 
     if (this.props.showAnnotation === true) {
@@ -112,7 +112,7 @@ class StoriBody extends React.Component {
   }
 
   handleSelection(range, oldRange) {
-    if (this.props.showAnnotation || this.state.editLyrics) return;
+    if (this.props.showAnnotation || this.state.editText) return;
     if (!range || range === oldRange ||
       this.containsAnnotation(this.quill.getContents(range.index, range.length))) {
       this.props.updateSelection({ index: 0, length: 0 });
@@ -200,18 +200,18 @@ class StoriBody extends React.Component {
     stori.append('stori[content]', JSON.stringify(this.quill.getContents()));
     this.props.updateStori(stori).then(() => {
       this.quill.disable();
-      this.setState({ editLyrics: false });
+      this.setState({ editText: false });
     });
   }
 
-  cancelLyrics() {
-    this.setState({ editLyrics: false });
+  cancelText() {
+    this.setState({ editText: false });
     this.quill.setContents(JSON.parse(this.props.stori.content));
     this.quill.disable();
   }
 
-  editLyrics() {
-    this.setState({ editLyrics: true });
+  editText() {
+    this.setState({ editText: true });
     this.quill.enable();
     this.quill.focus();
   }
@@ -219,20 +219,20 @@ class StoriBody extends React.Component {
 
   storiTextHeader() {
     if (this.props.loggedIn && this.props.stori.annotations === undefined) {
-      if (this.state.editLyrics) {
+      if (this.state.editText) {
         return (
           <div>
             <button className="btn btn-square green" onClick={this.handleSubmit}>
               Save
             </button>
-            <button className="btn btn-square" onClick={this.cancelLyrics}>
+            <button className="btn btn-square" onClick={this.cancelText}>
               Cancel
             </button>
           </div>
         );
       }
       return (
-        <button className="btn btn-square" onClick={this.editLyrics}>Edit Text</button>
+        <button className="btn btn-square" onClick={this.editText}>Edit Text</button>
       );
     }
     return (
