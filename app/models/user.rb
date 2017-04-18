@@ -32,7 +32,6 @@ class User < ApplicationRecord
   has_many :comments
   has_many :votes, inverse_of: :user
 
-
   attr_reader :password
 
   def self.find_by_credentials(username, password)

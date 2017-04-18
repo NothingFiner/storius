@@ -29,8 +29,11 @@ column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
 content         | text      | not null
+<<<<<<< HEAD
 char_start      | integer   | not null, unique
 char_end        | integer   | not null
+=======
+>>>>>>> 69166e690f2bb29df0f6d14668341653c170e3e7
 stori_id        | integer   | not null, indexed, foreign key(storis)
 user_id         | integer   | not null, indexed, foreign key(users)
 
