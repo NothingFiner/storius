@@ -11,7 +11,7 @@ Storius is an app where users can access and contribute crowd-sourced annotation
 
 ## Features & Implementation
 
-![Image of login window](docs/screenshots/login.png)
+![Image of login window](docs/screenshots/login.PNG)
 
 ### Storis
 
@@ -19,47 +19,47 @@ Storis are the basic objects on which the other components of the application bu
 
 **Viewing Storis**
 
-![image of top storis](docs/screenshots/top_storis.png)
+![image of top storis](docs/screenshots/top_storis.PNG)
 
 Users can view Storis by clicking on the associated Stori link on the index page.
 
-![image of search result dropdown](docs/screenshots/search_view.png)
+![image of search result dropdown](docs/screenshots/search_view.PNG)
 
 Storis can also be accessed by clicking a link in the search results dropdown.
 
 **Creating Storis**
 
-![image of stori form](docs/screenshots/form.png)
+![image of stori form](docs/screenshots/form.PNG)
 
 A logged in User can create a Stori by clicking on the 'Add a Stori' link in the header. They will then be brought to a form that will allow them to enter the required Stori fields.
 
 **Updating Storis**
 
-![image of edit text button](docs/screenshots/edit_text.png)
+![image of edit text button](docs/screenshots/edit_text.PNG)
 
 Users can edit text for a Stori while there are no annotations.
 
-![image of text being edited](docs/screenshots/editing_text.png)
+![image of text being edited](docs/screenshots/editing_text.PNG)
 
-![image of edit detail button](docs/screenshots/edit_detail_button.png)
+![image of edit detail button](docs/screenshots/edit_detail_button.PNG)
 
 By clicking on the circular purple Edit Detail button, users can bring up a window that lets them edit the details of a Stori.
 
-![image of edit detail window](docs/screenshots/edit_details.png)
+![image of edit detail window](docs/screenshots/edit_details.PNG)
 
 They may also paste in a link to a stori's youtube video, which will embed that video on the page.
 
-![image of embedded youtube video](docs/screenshots/embed.png)
+![image of embedded youtube video](docs/screenshots/embed.PNG)
 
-![image of about prompt](docs/screenshots/empty_about.png)
+![image of about prompt](docs/screenshots/empty_about.PNG)
 
 Storis can also have an about section, added by a logged in user.
 
-![image of about textArea](docs/screenshots/edit_about.png)
+![image of about textArea](docs/screenshots/edit_about.PNG)
 
 Any visitor to the site can view the Stori about text.
 
-![image of stori about text](docs/screenshots/display_about.png)
+![image of stori about text](docs/screenshots/display_about.PNG)
 
 
 ### Annotations
@@ -70,7 +70,7 @@ In the every Stori's text, annotations appear as gray highlights.
 
 An Annotation's highlighting turns yellow when a user mouses over it.
 
-![image of annotation](docs/screenshots/stori_view.png)
+![image of annotation](docs/screenshots/stori_view.PNG)
 
 Any user can click  one of these highlights to bring up the associated annotation.
 
@@ -79,12 +79,12 @@ Logged in users can edit and vote on annotations.
 
 **Creating Annotations**
 
-![image of highlighted text](docs/screenshots/highlighted.png)
+![image of highlighted text](docs/screenshots/highlighted.PNG)
 When the annotation panel is not open, users can use the mouse to select the text they wish to annotate.
 
 If they are not logged in they will be directed to log in.
 
-![image of annotation window](docs/screenshots/annotation_window.png)
+![image of annotation window](docs/screenshots/annotation_window.PNG)
 
 Clicking on the start annotation button will bring up the annotation panel with an 'id' of null, indicating to the application that this is a new annotation. This allows annotations to be created, edited, and displayed by the same page element.
 
@@ -92,10 +92,10 @@ Clicking on the start annotation button will bring up the annotation panel with 
 
 At the bottom of every Stori is a space for comments.
 
-![image of comment form](docs/screenshots/comment_form.png)
+![image of comment form](docs/screenshots/comment_form.PNG)
 
 Logged in users can create new comments.
 
-![image of some comments](docs/screenshots/edit_comments.png)
+![image of some comments](docs/screenshots/edit_comments.PNG)
 
 They can also vote on those comments, and vote and edit comments they created.
